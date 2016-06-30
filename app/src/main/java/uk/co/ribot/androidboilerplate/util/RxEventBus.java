@@ -4,7 +4,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import rx.Observable;
-import rx.functions.Func1;
 import rx.subjects.PublishSubject;
 
 /**
@@ -38,19 +37,9 @@ public class RxEventBus {
      * Observable that only emits events of a specific class.
      * Use this if you only want to subscribe to one type of events.
      */
+    @SuppressWarnings("unchecked")
     public <T> Observable<T> filteredObservable(final Class<T> eventClass) {
-        return mBusSubject.filter(new Func1<Object, Boolean>() {
-            @Override
-            public Boolean call(Object event) {
-                return eventClass.isInstance(event);
-            }
-        }).map(new Func1<Object, T>() {
-            //Safe to cast because of the previous filter
-            @SuppressWarnings("unchecked")
-            @Override
-            public T call(Object event) {
-                return (T) event;
-            }
-        });
+        return mBusSubject.filter(eventClass::isInstance)
+                .map(event -> (T) event);
     }
 }

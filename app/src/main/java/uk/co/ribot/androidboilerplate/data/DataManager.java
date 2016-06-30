@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import rx.Observable;
-import rx.functions.Func1;
 import uk.co.ribot.androidboilerplate.data.local.DatabaseHelper;
 import uk.co.ribot.androidboilerplate.data.local.PreferencesHelper;
 import uk.co.ribot.androidboilerplate.data.model.Ribot;
@@ -33,12 +32,7 @@ public class DataManager {
 
     public Observable<Ribot> syncRibots() {
         return mRibotsService.getRibots()
-                .concatMap(new Func1<List<Ribot>, Observable<Ribot>>() {
-                    @Override
-                    public Observable<Ribot> call(List<Ribot> ribots) {
-                        return mDatabaseHelper.setRibots(ribots);
-                    }
-                });
+                .concatMap(mDatabaseHelper::setRibots);
     }
 
     public Observable<List<Ribot>> getRibots() {
