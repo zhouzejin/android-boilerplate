@@ -1,12 +1,11 @@
 /**
- * Set up Checkstyle, Findbugs and PMD to perform extensive code analysis.
+ * Set up Checkstyle and PMD to perform extensive code analysis.
  *
  * Gradle tasks added:
  * - checkstyle
- * - findbugs
  * - pmd
  *
- * The three tasks above are added as dependencies of the check task so running check will
+ * The tasks above are added as dependencies of the check task so running check will
  * run all of them.
  */
 
