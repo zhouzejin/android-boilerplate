@@ -82,6 +82,16 @@ android {
         }
     }
 
+    // APK Splits
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'armeabi', 'x86' // 'x86', 'armeabi-v7a', 'mips'
+            universalApk true
+        }
+    }
+
     //Needed because of this https://github.com/square/okio/issues/58
     lintOptions {
         warning 'InvalidPackage'
