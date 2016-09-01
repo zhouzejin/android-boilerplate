@@ -18,3 +18,18 @@ allprojects {
         maven { url 'https://maven.fabric.io/public' }
     }
 }
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+project.ext {
+    compileSdkVersion = 24
+    buildToolsVersion = "24.0.0"
+
+    applicationId = "uk.co.ribot.androidboilerplate"
+    minSdkVersion = 16
+    targetSdkVersion = 24
+    versionCode = 1000
+    versionName = "0.1.0"
+}
