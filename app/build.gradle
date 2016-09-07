@@ -114,7 +114,7 @@ dependencies {
     final RETROFIT_VERSION = '2.1.0'
     final OKHTTP_VERSION = '3.4.0'
 
-    final SQLBRITE_VERSION = '0.7.0'
+    final SQLBRITE_VERSION = '0.5.0'
     final AUTO_VALUE_VERSION = '1.2'
 
     final GLIDE_VERSION = '3.7.0'
@@ -205,8 +205,8 @@ dependencies {
 
     provided "com.google.auto.value:auto-value:$AUTO_VALUE_VERSION"
     apt      "com.google.auto.value:auto-value:$AUTO_VALUE_VERSION"
-    apt      'com.ryanharter.auto.value:auto-value-parcel:0.2.4-rc2'
-    apt      'com.ryanharter.auto.value:auto-value-gson:0.4.2'
+    apt      'com.ryanharter.auto.value:auto-value-parcel:0.2.3-rc2'
+    apt      'com.ryanharter.auto.value:auto-value-gson:0.3.2-rc1'
     apt      'com.squareup:javapoet:1.7.0' // https://github.com/rharter/auto-value-parcel/issues/64
 
 
