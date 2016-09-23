@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.data.model.bean;
+package uk.co.ribot.androidboilerplate.data.model.pojo;
 
 import android.os.Parcelable;
 

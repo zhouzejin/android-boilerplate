@@ -14,6 +14,10 @@ import com.sunny.sql.SubjectModel;
 
 import java.util.List;
 
+import uk.co.ribot.androidboilerplate.data.model.pojo.Image;
+import uk.co.ribot.androidboilerplate.data.model.pojo.Person;
+import uk.co.ribot.androidboilerplate.data.model.pojo.Rating;
+
 /**
  * Created by Zhou Zejin on 2016/9/21.
  */
