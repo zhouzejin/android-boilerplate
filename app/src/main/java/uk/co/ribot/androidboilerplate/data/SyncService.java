@@ -14,7 +14,7 @@ import rx.Subscription;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 import uk.co.ribot.androidboilerplate.BoilerplateApplication;
-import uk.co.ribot.androidboilerplate.data.model.Ribot;
+import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.util.AndroidComponentUtil;
 import uk.co.ribot.androidboilerplate.util.NetworkUtil;
 
@@ -49,9 +49,9 @@ public class SyncService extends Service {
         }
 
         if (mSubscription != null && !mSubscription.isUnsubscribed()) mSubscription.unsubscribe();
-        mSubscription = mDataManager.syncRibots()
+        mSubscription = mDataManager.syncSubjects()
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Ribot>() {
+                .subscribe(new Observer<Subject>() {
                     @Override
                     public void onCompleted() {
                         Timber.i("Synced successfully!");
@@ -66,7 +66,7 @@ public class SyncService extends Service {
                     }
 
                     @Override
-                    public void onNext(Ribot ribot) {
+                    public void onNext(Subject subject) {
                     }
                 });
 

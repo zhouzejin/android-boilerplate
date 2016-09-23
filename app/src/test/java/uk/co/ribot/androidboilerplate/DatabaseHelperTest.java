@@ -14,7 +14,6 @@ import java.util.List;
 
 import rx.observers.TestSubscriber;
 import uk.co.ribot.androidboilerplate.data.local.DbOpenHelper;
-import uk.co.ribot.androidboilerplate.data.model.Ribot;
 import uk.co.ribot.androidboilerplate.test.common.TestDataFactory;
 import uk.co.ribot.androidboilerplate.util.DefaultConfig;
 import uk.co.ribot.androidboilerplate.util.RxSchedulersOverrideRule;

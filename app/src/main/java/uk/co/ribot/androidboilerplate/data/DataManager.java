@@ -9,20 +9,21 @@ import rx.Observable;
 import rx.functions.Func1;
 import uk.co.ribot.androidboilerplate.data.local.DatabaseHelper;
 import uk.co.ribot.androidboilerplate.data.local.PreferencesHelper;
-import uk.co.ribot.androidboilerplate.data.model.Ribot;
-import uk.co.ribot.androidboilerplate.data.remote.RibotsService;
+import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
+import uk.co.ribot.androidboilerplate.data.model.entity.InTheatersEntity;
+import uk.co.ribot.androidboilerplate.data.remote.SubjectsService;
 
 @Singleton
 public class DataManager {
 
-    private final RibotsService mRibotsService;
+    private final SubjectsService mSubjectsService;
     private final DatabaseHelper mDatabaseHelper;
     private final PreferencesHelper mPreferencesHelper;
 
     @Inject
-    public DataManager(RibotsService ribotsService, PreferencesHelper preferencesHelper,
+    public DataManager(SubjectsService subjectsService, PreferencesHelper preferencesHelper,
                        DatabaseHelper databaseHelper) {
-        mRibotsService = ribotsService;
+        mSubjectsService = subjectsService;
         mPreferencesHelper = preferencesHelper;
         mDatabaseHelper = databaseHelper;
     }
@@ -31,18 +32,18 @@ public class DataManager {
         return mPreferencesHelper;
     }
 
-    public Observable<Ribot> syncRibots() {
-        return mRibotsService.getRibots()
-                .concatMap(new Func1<List<Ribot>, Observable<Ribot>>() {
+    public Observable<Subject> syncSubjects() {
+        return mSubjectsService.getSubjects()
+                .concatMap(new Func1<InTheatersEntity, Observable<? extends Subject>>() {
                     @Override
-                    public Observable<Ribot> call(List<Ribot> ribots) {
-                        return mDatabaseHelper.setRibots(ribots);
+                    public Observable<? extends Subject> call(InTheatersEntity inTheatersEntity) {
+                        return mDatabaseHelper.setSubjects(inTheatersEntity.subjects());
                     }
                 });
     }
 
-    public Observable<List<Ribot>> getRibots() {
-        return mDatabaseHelper.getRibots().distinct();
+    public Observable<List<Subject>> getSubjects() {
+        return mDatabaseHelper.getSubjects().distinct();
     }
 
 }
