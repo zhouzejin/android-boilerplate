@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.sqldelight.ColumnAdapter;
+import com.squareup.sqldelight.RowMapper;
 import com.sunny.sql.SubjectModel;
 
 import java.util.List;
@@ -37,12 +38,13 @@ public abstract class Subject implements SubjectModel, Parcelable, Comparable<Su
         }
     };
 
-    private static final ColumnAdapter GENRES_ADAPTER = new ColumnAdapter<List<String>> () {
+    private static final ColumnAdapter GENRES_ADAPTER = new ColumnAdapter<List<String>>() {
         @Override
         public List<String> map(Cursor cursor, int columnIndex) {
             return new Gson().fromJson(
-                   cursor.getColumnName(columnIndex),
-                    new TypeToken<List<String>>(){}.getType());
+                    cursor.getColumnName(columnIndex),
+                    new TypeToken<List<String>>() {
+                    }.getType());
         }
 
         @Override
@@ -51,12 +53,13 @@ public abstract class Subject implements SubjectModel, Parcelable, Comparable<Su
         }
     };
 
-    private static final ColumnAdapter PERSONS_ADAPTER = new ColumnAdapter<List<Person>> () {
+    private static final ColumnAdapter PERSONS_ADAPTER = new ColumnAdapter<List<Person>>() {
         @Override
         public List<Person> map(Cursor cursor, int columnIndex) {
             return new Gson().fromJson(
                     cursor.getColumnName(columnIndex),
-                    new TypeToken<List<String>>(){}.getType());
+                    new TypeToken<List<String>>() {
+                    }.getType());
         }
 
         @Override
@@ -96,20 +99,34 @@ public abstract class Subject implements SubjectModel, Parcelable, Comparable<Su
             PERSONS_ADAPTER,
             IMAGE_ADAPTER);
 
+    public static final RowMapper<Subject> MAPPER = FACTORY.select_allMapper();
+
     @AutoValue.Builder
     public abstract static class Builder {
         public abstract Builder id(String id);
+
         public abstract Builder rating(Rating rating);
+
         public abstract Builder genres(List<String> genres);
+
         public abstract Builder title(String title);
+
         public abstract Builder casts(List<Person> casts);
+
         public abstract Builder collect_count(int collect_count);
+
         public abstract Builder original_title(String original_title);
+
         public abstract Builder subtype(String subtype);
+
         public abstract Builder directors(List<Person> directors);
+
         public abstract Builder year(String year);
+
         public abstract Builder images(Image images);
-        public abstract Builder alt(String  alt);
+
+        public abstract Builder alt(String alt);
+
         public abstract Subject build();
     }
 

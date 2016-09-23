@@ -15,7 +15,7 @@ import javax.inject.Singleton;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func1;
-import uk.co.ribot.androidboilerplate.data.model.Ribot;
+import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 
 @Singleton
 public class DatabaseHelper {
@@ -31,19 +31,19 @@ public class DatabaseHelper {
         return mDb;
     }
 
-    public Observable<Ribot> setRibots(final Collection<Ribot> newRibots) {
-        return Observable.create(new Observable.OnSubscribe<Ribot>() {
+    public Observable<Subject> setSubjects(final Collection<Subject> newSubjects) {
+        return Observable.create(new Observable.OnSubscribe<Subject>() {
             @Override
-            public void call(Subscriber<? super Ribot> subscriber) {
+            public void call(Subscriber<? super Subject> subscriber) {
                 if (subscriber.isUnsubscribed()) return;
                 BriteDatabase.Transaction transaction = mDb.newTransaction();
                 try {
-                    mDb.delete(Db.RibotProfileTable.TABLE_NAME, null);
-                    for (Ribot ribot : newRibots) {
-                        long result = mDb.insert(Db.RibotProfileTable.TABLE_NAME,
-                                Db.RibotProfileTable.toContentValues(ribot.profile()),
+                    mDb.delete(Subject.TABLE_NAME, null);
+                    for (Subject subject : newSubjects) {
+                        long result = mDb.insert(Subject.TABLE_NAME,
+                                Subject.FACTORY.marshal(subject).asContentValues(),
                                 SQLiteDatabase.CONFLICT_REPLACE);
-                        if (result >= 0) subscriber.onNext(ribot);
+                        if (result >= 0) subscriber.onNext(subject);
                     }
                     transaction.markSuccessful();
                     subscriber.onCompleted();
@@ -54,13 +54,13 @@ public class DatabaseHelper {
         });
     }
 
-    public Observable<List<Ribot>> getRibots() {
-        return mDb.createQuery(Db.RibotProfileTable.TABLE_NAME,
-                "SELECT * FROM " + Db.RibotProfileTable.TABLE_NAME)
-                .mapToList(new Func1<Cursor, Ribot>() {
+    public Observable<List<Subject>> getSubjects() {
+        return mDb.createQuery(Subject.TABLE_NAME,
+                Subject.SELECT_ALL)
+                .mapToList(new Func1<Cursor, Subject>() {
                     @Override
-                    public Ribot call(Cursor cursor) {
-                        return Ribot.create(Db.RibotProfileTable.parseCursor(cursor));
+                    public Subject call(Cursor cursor) {
+                        return Subject.MAPPER.map(cursor);
                     }
                 });
     }

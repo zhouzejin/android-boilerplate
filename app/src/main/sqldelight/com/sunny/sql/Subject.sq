@@ -18,3 +18,10 @@ CREATE TABLE subject (
     images TEXT AS Image NOT NULL,
     alt TEXT NOT NULL
 );
+
+-- Further SQL statements are proceeded by an identifier.
+-- This will be used to name the constant in the generated Java code.
+
+select_all:
+SELECT *
+FROM subject;
