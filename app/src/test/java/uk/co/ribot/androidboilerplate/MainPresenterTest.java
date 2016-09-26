@@ -13,6 +13,7 @@ import java.util.List;
 
 import rx.Observable;
 import uk.co.ribot.androidboilerplate.data.DataManager;
+import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.test.common.TestDataFactory;
 import uk.co.ribot.androidboilerplate.ui.main.MainMvpView;
 import uk.co.ribot.androidboilerplate.ui.main.MainPresenter;
@@ -45,37 +46,37 @@ public class MainPresenterTest {
     }
 
     @Test
-    public void loadRibotsReturnsRibots() {
-        List<Ribot> ribots = TestDataFactory.makeListRibots(10);
-        when(mMockDataManager.getRibots())
-                .thenReturn(Observable.just(ribots));
+    public void loadSubjectsReturnsSubjects() {
+        List<Subject> subjects = TestDataFactory.makeListSubject(10);
+        when(mMockDataManager.getSubjects())
+                .thenReturn(Observable.just(subjects));
 
-        mMainPresenter.loadRibots();
-        verify(mMockMainMvpView).showRibots(ribots);
-        verify(mMockMainMvpView, never()).showRibotsEmpty();
+        mMainPresenter.loadSubjects();
+        verify(mMockMainMvpView).showSubjects(subjects);
+        verify(mMockMainMvpView, never()).showSubjectsEmpty();
         verify(mMockMainMvpView, never()).showError();
     }
 
     @Test
-    public void loadRibotsReturnsEmptyList() {
-        when(mMockDataManager.getRibots())
-                .thenReturn(Observable.just(Collections.<Ribot>emptyList()));
+    public void loadSubjectsReturnsEmptyList() {
+        when(mMockDataManager.getSubjects())
+                .thenReturn(Observable.just(Collections.<Subject>emptyList()));
 
-        mMainPresenter.loadRibots();
-        verify(mMockMainMvpView).showRibotsEmpty();
-        verify(mMockMainMvpView, never()).showRibots(anyListOf(Ribot.class));
+        mMainPresenter.loadSubjects();
+        verify(mMockMainMvpView).showSubjectsEmpty();
+        verify(mMockMainMvpView, never()).showSubjects(anyListOf(Subject.class));
         verify(mMockMainMvpView, never()).showError();
     }
 
     @Test
-    public void loadRibotsFails() {
-        when(mMockDataManager.getRibots())
-                .thenReturn(Observable.<List<Ribot>>error(new RuntimeException()));
+    public void loadSubjectsFails() {
+        when(mMockDataManager.getSubjects())
+                .thenReturn(Observable.<List<Subject>>error(new RuntimeException()));
 
-        mMainPresenter.loadRibots();
+        mMainPresenter.loadSubjects();
         verify(mMockMainMvpView).showError();
-        verify(mMockMainMvpView, never()).showRibotsEmpty();
-        verify(mMockMainMvpView, never()).showRibots(anyListOf(Ribot.class));
+        verify(mMockMainMvpView, never()).showSubjectsEmpty();
+        verify(mMockMainMvpView, never()).showSubjects(anyListOf(Subject.class));
     }
 
 }

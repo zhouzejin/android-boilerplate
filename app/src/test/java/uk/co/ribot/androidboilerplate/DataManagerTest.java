@@ -10,9 +10,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import rx.Observable;
+import rx.functions.Func1;
 import rx.observers.TestSubscriber;
 import uk.co.ribot.androidboilerplate.data.DataManager;
+import uk.co.ribot.androidboilerplate.data.local.DatabaseHelper;
 import uk.co.ribot.androidboilerplate.data.local.PreferencesHelper;
+import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
+import uk.co.ribot.androidboilerplate.data.model.entity.InTheatersEntity;
+import uk.co.ribot.androidboilerplate.data.remote.SubjectsService;
 import uk.co.ribot.androidboilerplate.test.common.TestDataFactory;
 
 import static org.mockito.Matchers.anyListOf;
@@ -33,56 +38,68 @@ public class DataManagerTest {
 
     @Mock DatabaseHelper mMockDatabaseHelper;
     @Mock PreferencesHelper mMockPreferencesHelper;
-    @Mock RibotsService mMockRibotsService;
+    @Mock SubjectsService mMockSubjectsService;
     private DataManager mDataManager;
 
     @Before
     public void setUp() {
-        mDataManager = new DataManager(mMockRibotsService, mMockPreferencesHelper,
+        mDataManager = new DataManager(
+                mMockSubjectsService,
+                mMockPreferencesHelper,
                 mMockDatabaseHelper);
     }
 
     @Test
-    public void syncRibotsEmitsValues() {
-        List<Ribot> ribots = Arrays.asList(TestDataFactory.makeRibot("r1"),
-                TestDataFactory.makeRibot("r2"));
-        stubSyncRibotsHelperCalls(ribots);
+    public void syncSubjectsEmitsValues() {
+        List<Subject> subjects = Arrays.asList(
+                TestDataFactory.makeSubject(TestDataFactory.randomUuid()),
+                TestDataFactory.makeSubject(TestDataFactory.randomUuid()));
+        stubSyncSubjectsHelperCalls(subjects);
 
-        TestSubscriber<Ribot> result = new TestSubscriber<>();
-        mDataManager.syncRibots().subscribe(result);
+        TestSubscriber<Subject> result = new TestSubscriber<>();
+        mDataManager.syncSubjects().subscribe(result);
         result.assertNoErrors();
-        result.assertReceivedOnNext(ribots);
+        result.assertReceivedOnNext(subjects);
     }
 
     @Test
-    public void syncRibotsCallsApiAndDatabase() {
-        List<Ribot> ribots = Arrays.asList(TestDataFactory.makeRibot("r1"),
-                TestDataFactory.makeRibot("r2"));
-        stubSyncRibotsHelperCalls(ribots);
+    public void syncSubjectsCallsApiAndDatabase() {
+        List<Subject> subjects = Arrays.asList(
+                TestDataFactory.makeSubject(TestDataFactory.randomUuid()),
+                TestDataFactory.makeSubject(TestDataFactory.randomUuid()));
+        stubSyncSubjectsHelperCalls(subjects);
 
-        mDataManager.syncRibots().subscribe();
+        mDataManager.syncSubjects().subscribe();
         // Verify right calls to helper methods
-        verify(mMockRibotsService).getRibots();
-        verify(mMockDatabaseHelper).setRibots(ribots);
+        verify(mMockSubjectsService).getSubjects();
+        verify(mMockDatabaseHelper).setSubjects(subjects);
     }
 
     @Test
-    public void syncRibotsDoesNotCallDatabaseWhenApiFails() {
-        when(mMockRibotsService.getRibots())
-                .thenReturn(Observable.<List<Ribot>>error(new RuntimeException()));
+    public void syncSubjectsDoesNotCallDatabaseWhenApiFails() {
+        when(mMockSubjectsService.getSubjects().map(new Func1<InTheatersEntity, List<Subject>>() {
+            @Override
+            public List<Subject> call(InTheatersEntity inTheatersEntity) {
+                return inTheatersEntity.subjects();
+            }
+        })).thenReturn(Observable.<List<Subject>>error(new RuntimeException()));
 
-        mDataManager.syncRibots().subscribe(new TestSubscriber<Ribot>());
+        mDataManager.syncSubjects().subscribe(new TestSubscriber<Subject>());
         // Verify right calls to helper methods
-        verify(mMockRibotsService).getRibots();
-        verify(mMockDatabaseHelper, never()).setRibots(anyListOf(Ribot.class));
+        verify(mMockSubjectsService).getSubjects();
+        verify(mMockDatabaseHelper, never()).setSubjects(anyListOf(Subject.class));
     }
 
-    private void stubSyncRibotsHelperCalls(List<Ribot> ribots) {
-        // Stub calls to the ribot service and database helper.
-        when(mMockRibotsService.getRibots())
-                .thenReturn(Observable.just(ribots));
-        when(mMockDatabaseHelper.setRibots(ribots))
-                .thenReturn(Observable.from(ribots));
+    private void stubSyncSubjectsHelperCalls(List<Subject> subjects) {
+        // Stub calls to the subject service and database helper.
+        when(mMockSubjectsService.getSubjects().map(new Func1<InTheatersEntity, List<Subject>>() {
+            @Override
+            public List<Subject> call(InTheatersEntity inTheatersEntity) {
+                return inTheatersEntity.subjects();
+            }
+        })).thenReturn(Observable.just(subjects));
+        when(mMockDatabaseHelper.setSubjects(subjects))
+                .thenReturn(Observable.from(subjects));
     }
 
 }

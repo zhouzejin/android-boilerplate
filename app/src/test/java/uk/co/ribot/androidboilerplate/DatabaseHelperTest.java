@@ -13,7 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import rx.observers.TestSubscriber;
+import uk.co.ribot.androidboilerplate.data.local.DatabaseHelper;
 import uk.co.ribot.androidboilerplate.data.local.DbOpenHelper;
+import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.test.common.TestDataFactory;
 import uk.co.ribot.androidboilerplate.util.DefaultConfig;
 import uk.co.ribot.androidboilerplate.util.RxSchedulersOverrideRule;
@@ -35,36 +37,35 @@ public class DatabaseHelperTest {
 
     @Test
     public void setRibots() {
-        Ribot ribot1 = TestDataFactory.makeRibot("r1");
-        Ribot ribot2 = TestDataFactory.makeRibot("r2");
-        List<Ribot> ribots = Arrays.asList(ribot1, ribot2);
+        Subject subject1 = TestDataFactory.makeSubject(TestDataFactory.randomUuid());
+        Subject subject2 = TestDataFactory.makeSubject(TestDataFactory.randomUuid());
+        List<Subject> subjects = Arrays.asList(subject1, subject2);
 
-        TestSubscriber<Ribot> result = new TestSubscriber<>();
-        mDatabaseHelper.setRibots(ribots).subscribe(result);
+        TestSubscriber<Subject> result = new TestSubscriber<>();
+        mDatabaseHelper.setSubjects(subjects).subscribe(result);
         result.assertNoErrors();
-        result.assertReceivedOnNext(ribots);
+        result.assertReceivedOnNext(subjects);
 
-        Cursor cursor = mDatabaseHelper.getBriteDb()
-                .query("SELECT * FROM " + Db.RibotProfileTable.TABLE_NAME);
+        Cursor cursor = mDatabaseHelper.getBriteDb().query(Subject.SELECT_ALL);
         assertEquals(2, cursor.getCount());
-        for (Ribot ribot : ribots) {
+        for (Subject subject : subjects) {
             cursor.moveToNext();
-            assertEquals(ribot.profile(), Db.RibotProfileTable.parseCursor(cursor));
+            assertEquals(subject, Subject.MAPPER.map(cursor));
         }
     }
 
     @Test
     public void getRibots() {
-        Ribot ribot1 = TestDataFactory.makeRibot("r1");
-        Ribot ribot2 = TestDataFactory.makeRibot("r2");
-        List<Ribot> ribots = Arrays.asList(ribot1, ribot2);
+        Subject subject1 = TestDataFactory.makeSubject(TestDataFactory.randomUuid());
+        Subject subject2 = TestDataFactory.makeSubject(TestDataFactory.randomUuid());
+        List<Subject> subjects = Arrays.asList(subject1, subject2);
 
-        mDatabaseHelper.setRibots(ribots).subscribe();
+        mDatabaseHelper.setSubjects(subjects).subscribe();
 
-        TestSubscriber<List<Ribot>> result = new TestSubscriber<>();
-        mDatabaseHelper.getRibots().subscribe(result);
+        TestSubscriber<List<Subject>> result = new TestSubscriber<>();
+        mDatabaseHelper.getSubjects().subscribe(result);
         result.assertNoErrors();
-        result.assertValue(ribots);
+        result.assertValue(subjects);
     }
 
 }

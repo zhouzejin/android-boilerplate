@@ -101,6 +101,10 @@ public abstract class Subject implements SubjectModel, Parcelable, Comparable<Su
 
     public static final RowMapper<Subject> MAPPER = FACTORY.select_allMapper();
 
+    public static Builder builder() {
+        return new AutoValue_Subject.Builder();
+    }
+
     @AutoValue.Builder
     public abstract static class Builder {
         public abstract Builder id(String id);
@@ -128,10 +132,6 @@ public abstract class Subject implements SubjectModel, Parcelable, Comparable<Su
         public abstract Builder alt(String alt);
 
         public abstract Subject build();
-    }
-
-    public static Builder builder() {
-        return new AutoValue_Subject.Builder();
     }
 
     public static TypeAdapter<Subject> typeAdapter(Gson gson) {

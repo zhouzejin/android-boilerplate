@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import java.util.List;
 
 import rx.Observable;
+import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.test.common.TestComponentRule;
 import uk.co.ribot.androidboilerplate.test.common.TestDataFactory;
 import uk.co.ribot.androidboilerplate.ui.main.MainActivity;
@@ -49,22 +50,21 @@ public class MainActivityTest {
     public final TestRule chain = RuleChain.outerRule(component).around(main);
 
     @Test
-    public void listOfRibotsShows() {
-        List<Ribot> testDataRibots = TestDataFactory.makeListRibots(20);
-        when(component.getMockDataManager().getRibots())
-                .thenReturn(Observable.just(testDataRibots));
+    public void listOfSubjectsShows() {
+        List<Subject> testDataSubjects = TestDataFactory.makeListSubject(20);
+        when(component.getMockDataManager().getSubjects())
+                .thenReturn(Observable.just(testDataSubjects));
 
         main.launchActivity(null);
 
         int position = 0;
-        for (Ribot ribot : testDataRibots) {
+        for (Subject subject : testDataSubjects) {
             onView(withId(R.id.recycler_view))
                     .perform(RecyclerViewActions.scrollToPosition(position));
-            String name = String.format("%s %s", ribot.profile().name().first(),
-                    ribot.profile().name().last());
-            onView(withText(name))
+            String genres = subject.genres().toString();
+            onView(withText(genres))
                     .check(matches(isDisplayed()));
-            onView(withText(ribot.profile().email()))
+            onView(withText(subject.title()))
                     .check(matches(isDisplayed()));
             position++;
         }
