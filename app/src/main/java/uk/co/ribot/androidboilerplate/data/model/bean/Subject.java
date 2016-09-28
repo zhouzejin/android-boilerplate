@@ -7,8 +7,10 @@ import android.support.annotation.NonNull;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
+import com.ryanharter.auto.value.gson.AutoValueGsonTypeAdapterFactory;
 import com.squareup.sqldelight.ColumnAdapter;
 import com.squareup.sqldelight.RowMapper;
 import com.sunny.sql.SubjectModel;
@@ -26,57 +28,58 @@ import uk.co.ribot.androidboilerplate.data.model.pojo.Rating;
 @AutoValue
 public abstract class Subject implements SubjectModel, Parcelable, Comparable<Subject> {
 
+    private static final Gson gson = new GsonBuilder()
+            .registerTypeAdapterFactory(new AutoValueGsonTypeAdapterFactory())
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            .create();
+
     private static final ColumnAdapter RATING_ADAPTER = new ColumnAdapter<Rating>() {
         @Override
         public Rating map(Cursor cursor, int columnIndex) {
-            return new Gson().fromJson(cursor.getColumnName(columnIndex), Rating.class);
+            return gson.fromJson(cursor.getString(columnIndex), Rating.class);
         }
 
         @Override
         public void marshal(ContentValues values, String key, Rating value) {
-            values.put(key, new Gson().toJson(value));
+            values.put(key, gson.toJson(value));
         }
     };
 
     private static final ColumnAdapter GENRES_ADAPTER = new ColumnAdapter<List<String>>() {
         @Override
         public List<String> map(Cursor cursor, int columnIndex) {
-            return new Gson().fromJson(
-                    cursor.getColumnName(columnIndex),
-                    new TypeToken<List<String>>() {
-                    }.getType());
+            return gson.fromJson(cursor.getString(columnIndex),
+                    new TypeToken<List<String>>() {}.getType());
         }
 
         @Override
         public void marshal(ContentValues values, String key, List<String> value) {
-            values.put(key, new Gson().toJson(value));
+            values.put(key, gson.toJson(value));
         }
     };
 
     private static final ColumnAdapter PERSONS_ADAPTER = new ColumnAdapter<List<Person>>() {
         @Override
         public List<Person> map(Cursor cursor, int columnIndex) {
-            return new Gson().fromJson(
-                    cursor.getColumnName(columnIndex),
-                    new TypeToken<List<String>>() {
-                    }.getType());
+            return gson.fromJson(cursor.getString(columnIndex),
+                    new TypeToken<List<Person>>() {}.getType());
         }
 
         @Override
         public void marshal(ContentValues values, String key, List<Person> value) {
-            values.put(key, new Gson().toJson(value));
+            values.put(key, gson.toJson(value));
         }
     };
 
     private static final ColumnAdapter IMAGE_ADAPTER = new ColumnAdapter<Image>() {
         @Override
         public Image map(Cursor cursor, int columnIndex) {
-            return new Gson().fromJson(cursor.getColumnName(columnIndex), Image.class);
+            return gson.fromJson(cursor.getString(columnIndex), Image.class);
         }
 
         @Override
         public void marshal(ContentValues values, String key, Image value) {
-            values.put(key, new Gson().toJson(value));
+            values.put(key, gson.toJson(value));
         }
     };
 

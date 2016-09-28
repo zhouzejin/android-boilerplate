@@ -13,9 +13,9 @@ import uk.co.ribot.androidboilerplate.data.model.entity.InTheatersEntity;
 
 public interface SubjectsService {
 
-    String ENDPOINT = "https://api.douban.com/v2";
+    String ENDPOINT = "https://api.douban.com/v2/";
 
-    @GET("/movie/in_theaters")
+    @GET("movie/in_theaters")
     Observable<InTheatersEntity> getSubjects();
 
     /******** Helper class that sets up a new services *******/
