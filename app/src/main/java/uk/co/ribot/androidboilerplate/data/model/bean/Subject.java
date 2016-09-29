@@ -10,7 +10,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
-import com.ryanharter.auto.value.gson.AutoValueGsonTypeAdapterFactory;
 import com.squareup.sqldelight.ColumnAdapter;
 import com.squareup.sqldelight.RowMapper;
 import com.sunny.sql.SubjectModel;
@@ -20,6 +19,7 @@ import java.util.List;
 import uk.co.ribot.androidboilerplate.data.model.pojo.Image;
 import uk.co.ribot.androidboilerplate.data.model.pojo.Person;
 import uk.co.ribot.androidboilerplate.data.model.pojo.Rating;
+import uk.co.ribot.androidboilerplate.util.MyGsonTypeAdapterFactory;
 
 /**
  * Created by Zhou Zejin on 2016/9/21.
@@ -29,7 +29,7 @@ import uk.co.ribot.androidboilerplate.data.model.pojo.Rating;
 public abstract class Subject implements SubjectModel, Parcelable, Comparable<Subject> {
 
     private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapterFactory(new AutoValueGsonTypeAdapterFactory())
+            .registerTypeAdapterFactory(MyGsonTypeAdapterFactory.create())
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
             .create();
 

@@ -2,7 +2,6 @@ package uk.co.ribot.androidboilerplate.data.remote;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.ryanharter.auto.value.gson.AutoValueGsonTypeAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +14,7 @@ import retrofit2.http.GET;
 import rx.Observable;
 import uk.co.ribot.androidboilerplate.BuildConfig;
 import uk.co.ribot.androidboilerplate.data.model.entity.InTheatersEntity;
+import uk.co.ribot.androidboilerplate.util.MyGsonTypeAdapterFactory;
 
 public interface SubjectsService {
 
@@ -29,7 +29,7 @@ public interface SubjectsService {
 
         public static SubjectsService newSubjectsService() {
             Gson gson = new GsonBuilder()
-                    .registerTypeAdapterFactory(new AutoValueGsonTypeAdapterFactory())
+                    .registerTypeAdapterFactory(MyGsonTypeAdapterFactory.create())
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                     .create();
 
