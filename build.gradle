@@ -5,14 +5,18 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.0'
         classpath 'com.squareup.sqldelight:gradle-plugin:0.4.4'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    }
+
+    allprojects {
+        repositories {
+            jcenter()
+}
     }
 }
 
-allprojects {
-    repositories {
-        jcenter()
-    }
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.1'
+    distributionUrl = distributionUrl.replace("bin", "all")
 }
 
 task clean(type: Delete) {
@@ -21,7 +25,7 @@ task clean(type: Delete) {
 
 project.ext {
     compileSdkVersion = 24
-    buildToolsVersion = "24.0.0"
+    buildToolsVersion = "24.0.2"
 
     applicationId = "uk.co.ribot.androidboilerplate"
     minSdkVersion = 16
