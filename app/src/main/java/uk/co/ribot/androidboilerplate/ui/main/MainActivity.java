@@ -3,35 +3,17 @@ package uk.co.ribot.androidboilerplate.ui.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
-import java.util.Collections;
-import java.util.List;
-
-import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import uk.co.ribot.androidboilerplate.R;
 import uk.co.ribot.androidboilerplate.data.SyncService;
-import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
+import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
 import uk.co.ribot.androidboilerplate.ui.base.BaseActivity;
-import uk.co.ribot.androidboilerplate.util.DialogFactory;
+import uk.co.ribot.androidboilerplate.util.ActivityUtils;
 
-public class MainActivity extends BaseActivity implements MainMvpView {
+public class MainActivity extends BaseActivity {
 
     private static final String EXTRA_TRIGGER_SYNC_FLAG =
             "uk.co.ribot.androidboilerplate.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
-
-    @Inject
-    MainPresenter mMainPresenter;
-    @Inject
-    SubjectsAdapter mSubjectsAdapter;
-
-    @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
 
     /**
      * Return an Intent to start this Activity.
@@ -47,14 +29,18 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityComponent().inject(this);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
 
-        mRecyclerView.setAdapter(mSubjectsAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mMainPresenter.attachView(this);
-        mMainPresenter.loadSubjects();
+        MainFragment mainFragment = (MainFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.contentFrame);
+        if (mainFragment == null) {
+            // Create the fragment
+            mainFragment = MainFragment.newInstance();
+            ActivityUtils.addFragmentToActivity(
+                    getSupportFragmentManager(), mainFragment, R.id.contentFrame);
+        }
+        // Inject instance for fragment
+        configPersistentComponent().mainComponent(new ActivityModule(this)).inject(mainFragment);
 
         if (getIntent().getBooleanExtra(EXTRA_TRIGGER_SYNC_FLAG, true)) {
             startService(SyncService.getStartIntent(this));
@@ -64,31 +50,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        mMainPresenter.detachView();
-    }
-
-    /*****
-     * MVP View methods implementation
-     *****/
-
-    @Override
-    public void showSubjects(List<Subject> subjects) {
-        mSubjectsAdapter.setSubjects(subjects);
-        mSubjectsAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void showError() {
-        DialogFactory.createGenericErrorDialog(this, getString(R.string.error_loading_subjects))
-                .show();
-    }
-
-    @Override
-    public void showSubjectsEmpty() {
-        mSubjectsAdapter.setSubjects(Collections.<Subject>emptyList());
-        mSubjectsAdapter.notifyDataSetChanged();
-        Toast.makeText(this, R.string.empty_subjects, Toast.LENGTH_LONG).show();
     }
 
 }

@@ -16,6 +16,6 @@ import uk.co.ribot.androidboilerplate.ui.base.BaseActivity;
 @Component(dependencies = ApplicationComponent.class)
 public interface ConfigPersistentComponent {
 
-    ActivityComponent activityComponent(ActivityModule activityModule);
+    MainComponent mainComponent(ActivityModule activityModule);
 
 }

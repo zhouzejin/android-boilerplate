@@ -9,10 +9,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import timber.log.Timber;
 import uk.co.ribot.androidboilerplate.BoilerplateApplication;
-import uk.co.ribot.androidboilerplate.injection.component.ActivityComponent;
 import uk.co.ribot.androidboilerplate.injection.component.ConfigPersistentComponent;
 import uk.co.ribot.androidboilerplate.injection.component.DaggerConfigPersistentComponent;
-import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
 
 /**
  * Abstract activity that every other Activity in this application must implement. It handles
@@ -25,7 +23,7 @@ public class BaseActivity extends AppCompatActivity {
     private static final AtomicLong NEXT_ID = new AtomicLong(0);
     private static final Map<Long, ConfigPersistentComponent> sComponentsMap = new HashMap<>();
 
-    private ActivityComponent mActivityComponent;
+    private ConfigPersistentComponent mConfigPersistentComponent;
     private long mActivityId;
 
     @Override
@@ -36,18 +34,16 @@ public class BaseActivity extends AppCompatActivity {
         // being called after a configuration change.
         mActivityId = savedInstanceState != null ?
                 savedInstanceState.getLong(KEY_ACTIVITY_ID) : NEXT_ID.getAndIncrement();
-        ConfigPersistentComponent configPersistentComponent;
         if (!sComponentsMap.containsKey(mActivityId)) {
             Timber.i("Creating new ConfigPersistentComponent id=%d", mActivityId);
-            configPersistentComponent = DaggerConfigPersistentComponent.builder()
+            mConfigPersistentComponent = DaggerConfigPersistentComponent.builder()
                     .applicationComponent(BoilerplateApplication.get(this).getComponent())
                     .build();
-            sComponentsMap.put(mActivityId, configPersistentComponent);
+            sComponentsMap.put(mActivityId, mConfigPersistentComponent);
         } else {
             Timber.i("Reusing ConfigPersistentComponent id=%d", mActivityId);
-            configPersistentComponent = sComponentsMap.get(mActivityId);
+            mConfigPersistentComponent = sComponentsMap.get(mActivityId);
         }
-        mActivityComponent = configPersistentComponent.activityComponent(new ActivityModule(this));
     }
 
     @Override
@@ -65,8 +61,8 @@ public class BaseActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public ActivityComponent activityComponent() {
-        return mActivityComponent;
+    public ConfigPersistentComponent configPersistentComponent() {
+        return mConfigPersistentComponent;
     }
 
 }
