@@ -19,7 +19,7 @@ import java.util.List;
 import uk.co.ribot.androidboilerplate.data.model.pojo.Image;
 import uk.co.ribot.androidboilerplate.data.model.pojo.Person;
 import uk.co.ribot.androidboilerplate.data.model.pojo.Rating;
-import uk.co.ribot.androidboilerplate.util.MyGsonTypeAdapterFactory;
+import uk.co.ribot.androidboilerplate.utils.factory.MyGsonTypeAdapterFactory;
 
 /**
  * Created by Zhou Zejin on 2016/9/21.

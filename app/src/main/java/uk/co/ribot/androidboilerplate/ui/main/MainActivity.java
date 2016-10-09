@@ -8,7 +8,7 @@ import uk.co.ribot.androidboilerplate.R;
 import uk.co.ribot.androidboilerplate.data.SyncService;
 import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
 import uk.co.ribot.androidboilerplate.ui.base.BaseActivity;
-import uk.co.ribot.androidboilerplate.util.ActivityUtils;
+import uk.co.ribot.androidboilerplate.utils.ActivityUtil;
 
 public class MainActivity extends BaseActivity {
 
@@ -36,7 +36,7 @@ public class MainActivity extends BaseActivity {
         if (mainFragment == null) {
             // Create the fragment
             mainFragment = MainFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(
+            ActivityUtil.addFragmentToActivity(
                     getSupportFragmentManager(), mainFragment, R.id.contentFrame);
         }
         // Inject instance for fragment

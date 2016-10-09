@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.co.ribot.androidboilerplate.util;
+package uk.co.ribot.androidboilerplate.utils;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -24,7 +24,7 @@ import android.support.v4.app.FragmentTransaction;
 /**
  * This provides methods to help Activities load their UI.
  */
-public class ActivityUtils {
+public class ActivityUtil {
 
     /**
      * The {@code fragment} is added to the container view with id {@code frameId}. The operation is

@@ -15,8 +15,8 @@ import rx.schedulers.Schedulers;
 import timber.log.Timber;
 import uk.co.ribot.androidboilerplate.BoilerplateApplication;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
-import uk.co.ribot.androidboilerplate.util.AndroidComponentUtil;
-import uk.co.ribot.androidboilerplate.util.NetworkUtil;
+import uk.co.ribot.androidboilerplate.utils.AndroidComponentUtil;
+import uk.co.ribot.androidboilerplate.utils.NetworkUtil;
 
 public class SyncService extends Service {
 

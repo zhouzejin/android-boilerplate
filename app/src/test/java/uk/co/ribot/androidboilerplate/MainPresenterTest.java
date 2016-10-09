@@ -17,7 +17,7 @@ import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.test.common.TestDataFactory;
 import uk.co.ribot.androidboilerplate.ui.main.MainMvpView;
 import uk.co.ribot.androidboilerplate.ui.main.MainPresenter;
-import uk.co.ribot.androidboilerplate.util.RxSchedulersOverrideRule;
+import uk.co.ribot.androidboilerplate.utils.RxSchedulersOverrideRule;
 
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Mockito.never;

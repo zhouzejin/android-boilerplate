@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.util;
+package uk.co.ribot.androidboilerplate.utils.singleton;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

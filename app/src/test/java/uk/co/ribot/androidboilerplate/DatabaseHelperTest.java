@@ -17,8 +17,8 @@ import uk.co.ribot.androidboilerplate.data.local.DatabaseHelper;
 import uk.co.ribot.androidboilerplate.data.local.DbOpenHelper;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.test.common.TestDataFactory;
-import uk.co.ribot.androidboilerplate.util.DefaultConfig;
-import uk.co.ribot.androidboilerplate.util.RxSchedulersOverrideRule;
+import uk.co.ribot.androidboilerplate.utils.DefaultConfig;
+import uk.co.ribot.androidboilerplate.utils.RxSchedulersOverrideRule;
 
 import static junit.framework.Assert.assertEquals;
 

@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.util;
+package uk.co.ribot.androidboilerplate.utils.factory;
 
 import com.google.gson.TypeAdapterFactory;
 import com.ryanharter.auto.value.gson.GsonTypeAdapterFactory;

@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.util;
+package uk.co.ribot.androidboilerplate.utils;
 
 import rx.Subscription;
 

@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.util;
+package uk.co.ribot.androidboilerplate.utils;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;

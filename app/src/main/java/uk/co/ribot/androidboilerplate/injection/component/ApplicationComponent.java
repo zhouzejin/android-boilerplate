@@ -13,7 +13,7 @@ import uk.co.ribot.androidboilerplate.data.local.PreferencesHelper;
 import uk.co.ribot.androidboilerplate.data.remote.SubjectsService;
 import uk.co.ribot.androidboilerplate.injection.ApplicationContext;
 import uk.co.ribot.androidboilerplate.injection.module.ApplicationModule;
-import uk.co.ribot.androidboilerplate.util.RxEventBus;
+import uk.co.ribot.androidboilerplate.utils.singleton.RxEventBus;
 
 @Singleton
 @Component(modules = ApplicationModule.class)

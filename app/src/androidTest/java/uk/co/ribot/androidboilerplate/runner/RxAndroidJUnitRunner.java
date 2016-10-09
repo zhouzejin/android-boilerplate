@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.test.espresso.Espresso;
 
 import rx.plugins.RxJavaPlugins;
-import uk.co.ribot.androidboilerplate.util.RxIdlingExecutionHook;
-import uk.co.ribot.androidboilerplate.util.RxIdlingResource;
+import uk.co.ribot.androidboilerplate.utils.RxIdlingExecutionHook;
+import uk.co.ribot.androidboilerplate.utils.RxIdlingResource;
 
 /**
  * Runner that registers a Espresso Indling resource that handles waiting for

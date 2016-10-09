@@ -14,7 +14,7 @@ import retrofit2.http.GET;
 import rx.Observable;
 import uk.co.ribot.androidboilerplate.BuildConfig;
 import uk.co.ribot.androidboilerplate.data.model.entity.InTheatersEntity;
-import uk.co.ribot.androidboilerplate.util.MyGsonTypeAdapterFactory;
+import uk.co.ribot.androidboilerplate.utils.factory.MyGsonTypeAdapterFactory;
 
 public interface SubjectsService {
 

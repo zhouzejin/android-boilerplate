@@ -1,10 +1,11 @@
-package uk.co.ribot.androidboilerplate.util;
+package uk.co.ribot.androidboilerplate.utils;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 import rx.observers.TestSubscriber;
+import uk.co.ribot.androidboilerplate.utils.singleton.RxEventBus;
 
 public class RxEventBusTest {
 
