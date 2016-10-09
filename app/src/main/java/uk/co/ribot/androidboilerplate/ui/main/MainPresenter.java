@@ -8,11 +8,11 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import timber.log.Timber;
 import uk.co.ribot.androidboilerplate.data.DataManager;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.injection.ConfigPersistent;
 import uk.co.ribot.androidboilerplate.ui.base.BasePresenter;
+import uk.co.ribot.androidboilerplate.utils.LogUtil;
 import uk.co.ribot.androidboilerplate.utils.RxUtil;
 
 @ConfigPersistent
@@ -50,7 +50,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Timber.e(e, "There was an error loading the subjects.");
+                        LogUtil.e(e, "There was an error loading the subjects.");
                         getMvpView().showError();
                     }
 

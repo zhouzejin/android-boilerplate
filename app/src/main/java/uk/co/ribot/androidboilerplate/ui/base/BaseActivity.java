@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-import timber.log.Timber;
 import uk.co.ribot.androidboilerplate.BoilerplateApplication;
 import uk.co.ribot.androidboilerplate.injection.component.ConfigPersistentComponent;
 import uk.co.ribot.androidboilerplate.injection.component.DaggerConfigPersistentComponent;
+import uk.co.ribot.androidboilerplate.utils.LogUtil;
 
 /**
  * Abstract activity that every other Activity in this application must implement. It handles
@@ -35,13 +35,13 @@ public class BaseActivity extends AppCompatActivity {
         mActivityId = savedInstanceState != null ?
                 savedInstanceState.getLong(KEY_ACTIVITY_ID) : NEXT_ID.getAndIncrement();
         if (!sComponentsMap.containsKey(mActivityId)) {
-            Timber.i("Creating new ConfigPersistentComponent id=%d", mActivityId);
+            LogUtil.i("Creating new ConfigPersistentComponent id=%d", mActivityId);
             mConfigPersistentComponent = DaggerConfigPersistentComponent.builder()
                     .applicationComponent(BoilerplateApplication.get(this).getComponent())
                     .build();
             sComponentsMap.put(mActivityId, mConfigPersistentComponent);
         } else {
-            Timber.i("Reusing ConfigPersistentComponent id=%d", mActivityId);
+            LogUtil.i("Reusing ConfigPersistentComponent id=%d", mActivityId);
             mConfigPersistentComponent = sComponentsMap.get(mActivityId);
         }
     }
@@ -55,7 +55,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         if (!isChangingConfigurations()) {
-            Timber.i("Clearing ConfigPersistentComponent id=%d", mActivityId);
+            LogUtil.i("Clearing ConfigPersistentComponent id=%d", mActivityId);
             sComponentsMap.remove(mActivityId);
         }
         super.onDestroy();
