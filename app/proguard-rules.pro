@@ -30,10 +30,12 @@
 }
 
 # Retrofit rules
+-dontwarn retrofit2.Platform$Java8
 -dontwarn retrofit.**
 -keep class retrofit.** { *; }
 -keepattributes Signature
 -keepattributes Exceptions
+-keepattributes EnclosingMethod
 
 # OkHttp rules
 -dontwarn okio.**
