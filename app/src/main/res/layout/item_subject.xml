@@ -16,18 +16,19 @@
         android:layout_height="wrap_content"
         android:padding="10dp">
 
-        <View
-            android:id="@+id/view_image"
+        <ImageView
+            android:id="@+id/iv_pic"
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:layout_marginRight="10dp"
-            android:background="@android:color/holo_blue_dark" />
+            android:background="@android:color/holo_blue_dark"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/view_image"
+            android:layout_toRightOf="@id/iv_pic"
             android:textSize="@dimen/text_body"
             tools:text="Antony Ribot" />
 
@@ -37,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text_title"
             android:layout_marginTop="5dp"
-            android:layout_toRightOf="@id/view_image"
+            android:layout_toRightOf="@id/iv_pic"
             android:textSize="@dimen/text_small_body"
             tools:text="developer" />
 

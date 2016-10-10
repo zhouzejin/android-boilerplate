@@ -20,6 +20,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import uk.co.ribot.androidboilerplate.R;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
+import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
+import uk.co.ribot.androidboilerplate.injection.module.FragmentModule;
+import uk.co.ribot.androidboilerplate.ui.base.BaseActivity;
 import uk.co.ribot.androidboilerplate.utils.factory.DialogFactory;
 
 public class MainFragment extends Fragment implements MainMvpView {
@@ -45,6 +48,11 @@ public class MainFragment extends Fragment implements MainMvpView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Inject instance for fragment
+        ((BaseActivity)getActivity()).configPersistentComponent()
+                .mainComponent(new ActivityModule(getActivity()), new FragmentModule(this))
+                .inject(this);
     }
 
     @Override

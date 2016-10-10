@@ -1,10 +1,11 @@
 package uk.co.ribot.androidboilerplate.ui.main;
 
-import android.graphics.Color;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,13 +17,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import uk.co.ribot.androidboilerplate.R;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
+import uk.co.ribot.androidboilerplate.injection.FragmentContext;
+import uk.co.ribot.androidboilerplate.utils.imageloader.ImageLoader;
 
 public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.SubjectViewHolder> {
+
+    private final Context mContext;
+    private final ImageLoader mImageLoader;
 
     private List<Subject> mSubjects;
 
     @Inject
-    public SubjectsAdapter() {
+    public SubjectsAdapter(@FragmentContext Context context, ImageLoader imageLoader) {
+        mContext = context;
+        mImageLoader = imageLoader;
+
         mSubjects = new ArrayList<>();
     }
 
@@ -40,7 +49,8 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.Subjec
     @Override
     public void onBindViewHolder(final SubjectViewHolder holder, int position) {
         Subject subject = mSubjects.get(position);
-        holder.iamgeView.setBackgroundColor(Color.parseColor("#C0FF3E"));
+        mImageLoader.displayImage(mContext, holder.imageView, subject.images().small(),
+                new ImageLoader.DisplayOption.Builder().build());
         holder.titleTextView.setText(subject.title());
         holder.genresTextView.setText(subject.genres().toString());
     }
@@ -52,9 +62,12 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.Subjec
 
     class SubjectViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.view_image) View iamgeView;
-        @BindView(R.id.text_title) TextView titleTextView;
-        @BindView(R.id.text_genres) TextView genresTextView;
+        @BindView(R.id.iv_pic)
+        ImageView imageView;
+        @BindView(R.id.text_title)
+        TextView titleTextView;
+        @BindView(R.id.text_genres)
+        TextView genresTextView;
 
         public SubjectViewHolder(View itemView) {
             super(itemView);

@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import uk.co.ribot.androidboilerplate.R;
 import uk.co.ribot.androidboilerplate.data.SyncService;
-import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
 import uk.co.ribot.androidboilerplate.ui.base.BaseActivity;
 import uk.co.ribot.androidboilerplate.utils.ActivityUtil;
 
@@ -39,8 +38,6 @@ public class MainActivity extends BaseActivity {
             ActivityUtil.addFragmentToActivity(
                     getSupportFragmentManager(), mainFragment, R.id.contentFrame);
         }
-        // Inject instance for fragment
-        configPersistentComponent().mainComponent(new ActivityModule(this)).inject(mainFragment);
 
         if (getIntent().getBooleanExtra(EXTRA_TRIGGER_SYNC_FLAG, true)) {
             startService(SyncService.getStartIntent(this));

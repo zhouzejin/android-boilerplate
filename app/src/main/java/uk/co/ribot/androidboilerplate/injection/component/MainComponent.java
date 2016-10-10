@@ -4,6 +4,7 @@ import dagger.Subcomponent;
 import uk.co.ribot.androidboilerplate.BoilerplateApplication;
 import uk.co.ribot.androidboilerplate.injection.InFragment;
 import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
+import uk.co.ribot.androidboilerplate.injection.module.FragmentModule;
 import uk.co.ribot.androidboilerplate.ui.main.MainFragment;
 
 /**
@@ -11,7 +12,7 @@ import uk.co.ribot.androidboilerplate.ui.main.MainFragment;
  * used in this application.
  */
 @InFragment
-@Subcomponent(modules = ActivityModule.class)
+@Subcomponent(modules = {ActivityModule.class, FragmentModule.class})
 public interface MainComponent {
 
     void inject(MainFragment mainFragment);
