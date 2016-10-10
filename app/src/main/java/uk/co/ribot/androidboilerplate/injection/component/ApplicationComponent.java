@@ -13,6 +13,7 @@ import uk.co.ribot.androidboilerplate.data.local.PreferencesHelper;
 import uk.co.ribot.androidboilerplate.data.remote.SubjectsService;
 import uk.co.ribot.androidboilerplate.injection.ApplicationContext;
 import uk.co.ribot.androidboilerplate.injection.module.ApplicationModule;
+import uk.co.ribot.androidboilerplate.utils.imageloader.ImageLoader;
 import uk.co.ribot.androidboilerplate.utils.singleton.RxEventBus;
 
 @Singleton
@@ -28,5 +29,6 @@ public interface ApplicationComponent {
     DatabaseHelper databaseHelper();
     DataManager dataManager();
     RxEventBus eventBus();
+    ImageLoader imageLoader();
 
 }
