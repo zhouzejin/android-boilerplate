@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import uk.co.ribot.androidboilerplate.data.remote.SubjectsService;
-import uk.co.ribot.androidboilerplate.injection.ApplicationContext;
+import uk.co.ribot.androidboilerplate.injection.qualifier.ApplicationContext;
 import uk.co.ribot.androidboilerplate.utils.imageloader.GlideImageLoader;
 import uk.co.ribot.androidboilerplate.utils.imageloader.ImageLoader;
 

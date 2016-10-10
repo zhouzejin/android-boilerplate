@@ -9,7 +9,7 @@ import dagger.Module;
 import dagger.Provides;
 import uk.co.ribot.androidboilerplate.data.DataManager;
 import uk.co.ribot.androidboilerplate.data.remote.SubjectsService;
-import uk.co.ribot.androidboilerplate.injection.ApplicationContext;
+import uk.co.ribot.androidboilerplate.injection.qualifier.ApplicationContext;
 
 import static org.mockito.Mockito.mock;
 

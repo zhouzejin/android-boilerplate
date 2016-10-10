@@ -5,7 +5,7 @@ import android.content.Context;
 
 import dagger.Module;
 import dagger.Provides;
-import uk.co.ribot.androidboilerplate.injection.ActivityContext;
+import uk.co.ribot.androidboilerplate.injection.qualifier.ActivityContext;
 
 @Module
 public class ActivityModule {

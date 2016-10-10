@@ -14,14 +14,14 @@ import uk.co.ribot.androidboilerplate.R;
 public interface ImageLoader {
 
     /**
-     * 可以使用Emun进行封装
+     * 可以使用Enum进行封装
      */
     int PIC_LARGE = 0;
     int PIC_MEDIUM = 1;
     int PIC_SMALL = 2;
 
     /**
-     * 可以使用Emun进行封装
+     * 可以使用Enum进行封装
      */
     int LOAD_STRATEGY_NORMAL = 0;
     int LOAD_STRATEGY_ONLY_WIFI = 1;
@@ -63,7 +63,7 @@ public interface ImageLoader {
             this.wifiStrategy = builder.wifiStrategy;
         }
 
-        public static class Builder {
+        public static final class Builder {
             private int type;
             private int placeHolder;
             private int wifiStrategy;

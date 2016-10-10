@@ -1,7 +1,7 @@
 package uk.co.ribot.androidboilerplate.injection.component;
 
 import dagger.Component;
-import uk.co.ribot.androidboilerplate.injection.ConfigPersistent;
+import uk.co.ribot.androidboilerplate.injection.scope.ConfigPersistent;
 import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
 import uk.co.ribot.androidboilerplate.injection.module.FragmentModule;
 import uk.co.ribot.androidboilerplate.ui.base.BaseActivity;

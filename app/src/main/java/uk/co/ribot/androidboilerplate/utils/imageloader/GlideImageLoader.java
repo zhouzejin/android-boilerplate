@@ -4,13 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.data.DataFetcher;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.model.stream.StreamModelLoader;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 import uk.co.ribot.androidboilerplate.utils.NetworkUtil;
 
@@ -58,33 +52,6 @@ public class GlideImageLoader implements ImageLoader {
     private void loadCache(Context context, ImageView imageView, String imageUrl,
                            DisplayOption option) {
         Glide.with(context)
-                .using(new StreamModelLoader<String>() {
-                    @Override
-                    public DataFetcher<InputStream> getResourceFetcher(final String model,
-                                                                       int width, int height) {
-                        return new DataFetcher<InputStream>() {
-                            @Override
-                            public InputStream loadData(Priority priority) throws Exception {
-                                throw new IOException();
-                            }
-
-                            @Override
-                            public void cleanup() {
-
-                            }
-
-                            @Override
-                            public String getId() {
-                                return model;
-                            }
-
-                            @Override
-                            public void cancel() {
-
-                            }
-                        };
-                    }
-                })
                 .load(imageUrl)
                 .placeholder(option.getPlaceHolder())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

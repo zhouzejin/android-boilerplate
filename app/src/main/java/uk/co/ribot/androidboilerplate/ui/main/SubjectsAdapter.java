@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import uk.co.ribot.androidboilerplate.R;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
-import uk.co.ribot.androidboilerplate.injection.FragmentContext;
+import uk.co.ribot.androidboilerplate.injection.qualifier.FragmentContext;
 import uk.co.ribot.androidboilerplate.utils.imageloader.ImageLoader;
 
 public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.SubjectViewHolder> {

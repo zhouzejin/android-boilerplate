@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 
 import dagger.Module;
 import dagger.Provides;
-import uk.co.ribot.androidboilerplate.injection.FragmentContext;
+import uk.co.ribot.androidboilerplate.injection.qualifier.FragmentContext;
 
 @Module
 public class FragmentModule {

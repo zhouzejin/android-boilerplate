@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
-import uk.co.ribot.androidboilerplate.injection.ApplicationContext;
+import uk.co.ribot.androidboilerplate.injection.qualifier.ApplicationContext;
 
 @Singleton
 public class DbOpenHelper extends SQLiteOpenHelper {
