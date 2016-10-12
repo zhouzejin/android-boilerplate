@@ -10,12 +10,12 @@ import rx.subjects.PublishSubject;
  * A simple event bus built with RxJava
  */
 @Singleton
-public class RxEventBus {
+public class RxBus {
 
     private final PublishSubject<Object> mBusSubject;
 
     @Inject
-    public RxEventBus() {
+    public RxBus() {
         mBusSubject = PublishSubject.create();
     }
 

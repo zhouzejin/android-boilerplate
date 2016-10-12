@@ -5,11 +5,11 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import rx.observers.TestSubscriber;
-import uk.co.ribot.androidboilerplate.utils.singleton.RxEventBus;
+import uk.co.ribot.androidboilerplate.utils.singleton.RxBus;
 
-public class RxEventBusTest {
+public class RxBusTest {
 
-    private RxEventBus mEventBus;
+    private RxBus mEventBus;
 
     @Rule
     // Must be added to every test class that targets app code that uses RxJava
@@ -17,7 +17,7 @@ public class RxEventBusTest {
 
     @Before
     public void setUp() {
-        mEventBus = new RxEventBus();
+        mEventBus = new RxBus();
     }
 
     @Test
