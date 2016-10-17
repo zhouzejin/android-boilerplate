@@ -24,7 +24,7 @@ public interface ApplicationComponent {
 
     @ApplicationContext Context context();
     Application application();
-    RetrofitService subjectsService();
+    RetrofitService retrofitService();
     PreferencesHelper preferencesHelper();
     DatabaseHelper databaseHelper();
     DataManager dataManager();

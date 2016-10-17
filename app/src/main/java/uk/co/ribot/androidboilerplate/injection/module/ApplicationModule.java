@@ -20,8 +20,6 @@ public class ApplicationModule {
 
     protected final Application mApplication;
 
-    private ImageLoader mImageLoader;
-
     public ApplicationModule(Application application) {
         mApplication = application;
     }
@@ -39,8 +37,8 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    RetrofitService provideSubjectsService() {
-        return RetrofitService.Creator.newSubjectsService();
+    RetrofitService provideRetrofitService() {
+        return RetrofitService.Creator.newRetrofitService();
     }
 
     @Provides
