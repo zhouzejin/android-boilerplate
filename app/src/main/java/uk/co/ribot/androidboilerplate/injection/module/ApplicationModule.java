@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import uk.co.ribot.androidboilerplate.data.remote.SubjectsService;
+import uk.co.ribot.androidboilerplate.data.remote.RetrofitService;
 import uk.co.ribot.androidboilerplate.injection.qualifier.ApplicationContext;
 import uk.co.ribot.androidboilerplate.utils.imageloader.GlideImageLoader;
 import uk.co.ribot.androidboilerplate.utils.imageloader.ImageLoader;
@@ -39,8 +39,8 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    SubjectsService provideSubjectsService() {
-        return SubjectsService.Creator.newSubjectsService();
+    RetrofitService provideSubjectsService() {
+        return RetrofitService.Creator.newSubjectsService();
     }
 
     @Provides

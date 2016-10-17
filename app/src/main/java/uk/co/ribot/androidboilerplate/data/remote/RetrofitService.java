@@ -16,7 +16,7 @@ import uk.co.ribot.androidboilerplate.BuildConfig;
 import uk.co.ribot.androidboilerplate.data.model.entity.InTheatersEntity;
 import uk.co.ribot.androidboilerplate.utils.factory.MyGsonTypeAdapterFactory;
 
-public interface SubjectsService {
+public interface RetrofitService {
 
     String ENDPOINT = "https://api.douban.com/v2/";
     int DEFAULT_TIMEOUT = 5;
@@ -27,7 +27,7 @@ public interface SubjectsService {
     /******** Helper class that sets up a new services *******/
     class Creator {
 
-        public static SubjectsService newSubjectsService() {
+        public static RetrofitService newSubjectsService() {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapterFactory(MyGsonTypeAdapterFactory.create())
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
@@ -38,17 +38,17 @@ public interface SubjectsService {
                 HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
                 logging.setLevel(HttpLoggingInterceptor.Level.BODY);
                 httpClientBuilder.addInterceptor(logging);
-                httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-                httpClientBuilder.readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
             }
+            httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+            httpClientBuilder.readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(SubjectsService.ENDPOINT)
+                    .baseUrl(RetrofitService.ENDPOINT)
                     .client(httpClientBuilder.build())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();
-            return retrofit.create(SubjectsService.class);
+            return retrofit.create(RetrofitService.class);
         }
     }
 }
