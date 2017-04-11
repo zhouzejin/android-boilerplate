@@ -58,7 +58,7 @@ public class DatabaseHelper {
 
     public Observable<List<Subject>> getSubjects() {
         return mDb.createQuery(Subject.TABLE_NAME,
-                Subject.SELECT_ALL)
+                Subject.FACTORY.select_all().statement)
                 .mapToList(new Func1<Cursor, Subject>() {
                     @Override
                     public Subject call(Cursor cursor) {
