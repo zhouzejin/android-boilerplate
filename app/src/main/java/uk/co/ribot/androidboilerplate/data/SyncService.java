@@ -17,6 +17,7 @@ import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.utils.AndroidComponentUtil;
 import uk.co.ribot.androidboilerplate.utils.LogUtil;
 import uk.co.ribot.androidboilerplate.utils.NetworkUtil;
+import uk.co.ribot.androidboilerplate.utils.RxUtil;
 
 public class SyncService extends Service {
 
@@ -48,7 +49,7 @@ public class SyncService extends Service {
             return START_NOT_STICKY;
         }
 
-        if (mSubscription != null && !mSubscription.isUnsubscribed()) mSubscription.unsubscribe();
+        RxUtil.unsubscribe(mSubscription);
         mSubscription = mDataManager.syncSubjects()
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Subject>() {
