@@ -4,6 +4,13 @@ import android.support.test.espresso.IdlingResource;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscription;
+import rx.functions.Func1;
+import rx.functions.Func2;
+import rx.plugins.RxJavaHooks;
+
 /**
  * Espresso Idling resource that handles waiting for RxJava Observables executions.
  * This class must be used with RxIdlingExecutionHook.
@@ -16,6 +23,10 @@ public class RxIdlingResource implements IdlingResource {
 
     private final AtomicInteger mActiveSubscriptionsCount = new AtomicInteger(0);
     private ResourceCallback mResourceCallback;
+
+    public RxIdlingResource() {
+        setupHooks();
+    }
 
     @Override
     public String getName() {
@@ -32,12 +43,38 @@ public class RxIdlingResource implements IdlingResource {
         mResourceCallback = callback;
     }
 
-    public void incrementActiveSubscriptionsCount() {
+    private void setupHooks() {
+        RxJavaHooks.setOnObservableStart(new Func2<Observable, OnSubscribe, OnSubscribe>() {
+            @Override
+            public OnSubscribe call(Observable observable, OnSubscribe onSubscribe) {
+                incrementActiveSubscriptionsCount();
+                return onSubscribe;
+            }
+        });
+
+        RxJavaHooks.setOnObservableSubscribeError(new Func1<Throwable, Throwable>() {
+            @Override
+            public Throwable call(Throwable throwable) {
+                decrementActiveSubscriptionsCount();
+                return throwable;
+            }
+        });
+
+        RxJavaHooks.setOnObservableReturn(new Func1<Subscription, Subscription>() {
+            @Override
+            public Subscription call(Subscription subscription) {
+                decrementActiveSubscriptionsCount();
+                return subscription;
+            }
+        });
+    }
+
+    private void incrementActiveSubscriptionsCount() {
         int count = mActiveSubscriptionsCount.incrementAndGet();
         LogUtil.i("Active subscriptions count increased to %d", count);
     }
 
-    public void decrementActiveSubscriptionsCount() {
+    private void decrementActiveSubscriptionsCount() {
         int count = mActiveSubscriptionsCount.decrementAndGet();
         LogUtil.i("Active subscriptions count decreased to %d", count);
         if (isIdleNow()) {
