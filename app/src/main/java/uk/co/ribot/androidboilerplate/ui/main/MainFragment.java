@@ -51,7 +51,7 @@ public class MainFragment extends Fragment implements MainMvpView {
 
         // Inject instance for fragment
         ((BaseActivity)getActivity()).configPersistentComponent()
-                .mainComponent(new ActivityModule(getActivity()), new FragmentModule(this))
+                .fragmentComponent(new ActivityModule(getActivity()), new FragmentModule(this))
                 .inject(this);
     }
 
