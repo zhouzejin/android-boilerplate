@@ -8,8 +8,10 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 import uk.co.ribot.androidboilerplate.BoilerplateApplication;
+import uk.co.ribot.androidboilerplate.injection.component.ActivityComponent;
 import uk.co.ribot.androidboilerplate.injection.component.ConfigPersistentComponent;
 import uk.co.ribot.androidboilerplate.injection.component.DaggerConfigPersistentComponent;
+import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
 import uk.co.ribot.androidboilerplate.utils.LogUtil;
 
 /**
@@ -24,6 +26,7 @@ public class BaseActivity extends AppCompatActivity {
     private static final Map<Long, ConfigPersistentComponent> sComponentsMap = new HashMap<>();
 
     private ConfigPersistentComponent mConfigPersistentComponent;
+    private ActivityComponent mActivityComponent;
     private long mActivityId;
 
     @Override
@@ -44,6 +47,7 @@ public class BaseActivity extends AppCompatActivity {
             LogUtil.i("Reusing ConfigPersistentComponent id=%d", mActivityId);
             mConfigPersistentComponent = sComponentsMap.get(mActivityId);
         }
+        mActivityComponent = mConfigPersistentComponent.activityComponent(new ActivityModule(this));
     }
 
     @Override
@@ -63,6 +67,10 @@ public class BaseActivity extends AppCompatActivity {
 
     public ConfigPersistentComponent configPersistentComponent() {
         return mConfigPersistentComponent;
+    }
+
+    public ActivityComponent activityComponent() {
+        return mActivityComponent;
     }
 
 }
