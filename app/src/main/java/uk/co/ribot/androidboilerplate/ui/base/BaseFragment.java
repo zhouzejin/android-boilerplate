@@ -19,8 +19,8 @@ import uk.co.ribot.androidboilerplate.injection.module.FragmentModule;
  */
 public abstract class BaseFragment extends Fragment {
 
-    private View rootView;
-    private Unbinder unbinder;
+    private View mRootView;
+    private Unbinder mUnbinder;
     private FragmentComponent mFragmentComponent;
 
     @Override
@@ -40,20 +40,20 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(getLayoutId(), container, false);
-        return rootView;
+        mRootView = inflater.inflate(getLayoutId(), container, false);
+        mUnbinder = ButterKnife.bind(this, mRootView);
+        return mRootView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        unbinder = ButterKnife.bind(this, view);
         initViews(savedInstanceState);
     }
 
     @Override
     public void onDestroyView() {
-        unbinder.unbind();
+        mUnbinder.unbind();
         super.onDestroyView();
     }
 
