@@ -20,7 +20,7 @@ import uk.co.ribot.androidboilerplate.utils.factory.DialogFactory;
 public class MainFragment extends BaseFragment implements MainMvvmView {
 
     @Inject
-    MainPresenter mMainPresenter;
+    MainViewModel mMainViewModel;
     @Inject
     SubjectsAdapter mSubjectsAdapter;
 
@@ -52,15 +52,15 @@ public class MainFragment extends BaseFragment implements MainMvvmView {
     public void initViews(Bundle savedInstanceState) {
         mRecyclerView.setAdapter(mSubjectsAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mMainPresenter.attachView(this);
-        mMainPresenter.loadSubjects();
+        mMainViewModel.attachView(this);
+        mMainViewModel.loadSubjects();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
 
-        mMainPresenter.detachView();
+        mMainViewModel.detachView();
     }
 
     @Override

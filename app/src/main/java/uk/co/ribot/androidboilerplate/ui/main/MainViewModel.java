@@ -11,18 +11,18 @@ import rx.schedulers.Schedulers;
 import uk.co.ribot.androidboilerplate.data.DataManager;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.injection.scope.ConfigPersistent;
-import uk.co.ribot.androidboilerplate.ui.base.BasePresenter;
+import uk.co.ribot.androidboilerplate.ui.base.BaseViewModel;
 import uk.co.ribot.androidboilerplate.utils.LogUtil;
 import uk.co.ribot.androidboilerplate.utils.RxUtil;
 
 @ConfigPersistent
-public class MainPresenter extends BasePresenter<MainMvvmView> {
+public class MainViewModel extends BaseViewModel<MainMvvmView> {
 
     private final DataManager mDataManager;
     private Subscription mSubscription;
 
     @Inject
-    public MainPresenter(DataManager dataManager) {
+    public MainViewModel(DataManager dataManager) {
         mDataManager = dataManager;
     }
 

@@ -11,7 +11,7 @@ import uk.co.ribot.androidboilerplate.ui.base.BaseActivity;
  * be destroy during configuration changes. Check {@link BaseActivity} to see how this components
  * survives configuration changes.
  * Use the {@link ConfigPersistent} scope to annotate dependencies that need to survive
- * configuration changes (for example Presenters).
+ * configuration changes (for example ViewModels).
  */
 @ConfigPersistent
 @Component(dependencies = ApplicationComponent.class)
