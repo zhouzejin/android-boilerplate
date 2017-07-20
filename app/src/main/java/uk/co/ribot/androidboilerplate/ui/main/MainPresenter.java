@@ -16,7 +16,7 @@ import uk.co.ribot.androidboilerplate.utils.LogUtil;
 import uk.co.ribot.androidboilerplate.utils.RxUtil;
 
 @ConfigPersistent
-public class MainPresenter extends BasePresenter<MainMvpView> {
+public class MainPresenter extends BasePresenter<MainMvvmView> {
 
     private final DataManager mDataManager;
     private Subscription mSubscription;
@@ -27,8 +27,8 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     }
 
     @Override
-    public void attachView(MainMvpView mvpView) {
-        super.attachView(mvpView);
+    public void attachView(MainMvvmView mvvmView) {
+        super.attachView(mvvmView);
     }
 
     @Override
@@ -51,15 +51,15 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
                     @Override
                     public void onError(Throwable e) {
                         LogUtil.e(e, "There was an error loading the subjects.");
-                        getMvpView().showError();
+                        getMvvmView().showError();
                     }
 
                     @Override
                     public void onNext(List<Subject> subjects) {
                         if (subjects.isEmpty()) {
-                            getMvpView().showSubjectsEmpty();
+                            getMvvmView().showSubjectsEmpty();
                         } else {
-                            getMvpView().showSubjects(subjects);
+                            getMvvmView().showSubjects(subjects);
                         }
                     }
                 });

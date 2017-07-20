@@ -17,7 +17,7 @@ import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.ui.base.BaseFragment;
 import uk.co.ribot.androidboilerplate.utils.factory.DialogFactory;
 
-public class MainFragment extends BaseFragment implements MainMvpView {
+public class MainFragment extends BaseFragment implements MainMvvmView {
 
     @Inject
     MainPresenter mMainPresenter;
@@ -69,7 +69,7 @@ public class MainFragment extends BaseFragment implements MainMvpView {
     }
 
     /*****
-     * MVP View methods implementation
+     * MVVM View methods implementation
      *****/
 
     @Override

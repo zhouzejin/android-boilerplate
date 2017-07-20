@@ -3,9 +3,9 @@ package uk.co.ribot.androidboilerplate.ui.main;
 import java.util.List;
 
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
-import uk.co.ribot.androidboilerplate.ui.base.MvpView;
+import uk.co.ribot.androidboilerplate.ui.base.MvvmView;
 
-public interface MainMvpView extends MvpView {
+public interface MainMvvmView extends MvvmView {
 
     void showSubjects(List<Subject> ribots);
 
