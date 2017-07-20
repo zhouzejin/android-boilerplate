@@ -92,7 +92,7 @@ android {
     }
 
     dataBinding {
-        true
+        enabled = true
     }
 }
 
