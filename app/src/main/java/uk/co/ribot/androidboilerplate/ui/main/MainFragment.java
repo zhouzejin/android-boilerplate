@@ -1,19 +1,19 @@
 package uk.co.ribot.androidboilerplate.ui.main;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
-
-import java.util.Collections;
-import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import uk.co.ribot.androidboilerplate.R;
-import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
+import uk.co.ribot.androidboilerplate.databinding.FragmentMainBinding;
+import uk.co.ribot.androidboilerplate.injection.qualifier.FragmentContext;
 import uk.co.ribot.androidboilerplate.ui.base.BaseFragment;
 import uk.co.ribot.androidboilerplate.utils.factory.DialogFactory;
 
@@ -23,9 +23,11 @@ public class MainFragment extends BaseFragment implements MainMvvmView {
     MainViewModel mMainViewModel;
     @Inject
     SubjectsAdapter mSubjectsAdapter;
+    @Inject
+    @FragmentContext
+    Context mContext;
 
-    @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+    private FragmentMainBinding mMainBinding;
 
     public MainFragment() {
         // Requires empty public constructor
@@ -43,16 +45,24 @@ public class MainFragment extends BaseFragment implements MainMvvmView {
         fragmentComponent().inject(this);
     }
 
+    @Nullable
     @Override
-    public int getLayoutId() {
-        return R.layout.fragment_main;
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        mMainBinding = FragmentMainBinding.inflate(inflater, container, false);
+
+        mMainBinding.recyclerView.setAdapter(mSubjectsAdapter);
+        mMainBinding.recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+
+        return mMainBinding.getRoot();
     }
 
     @Override
-    public void initViews(Bundle savedInstanceState) {
-        mRecyclerView.setAdapter(mSubjectsAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         mMainViewModel.attachView(this);
+        mMainBinding.setViewmodel(mMainViewModel);
         mMainViewModel.loadSubjects();
     }
 
@@ -73,22 +83,14 @@ public class MainFragment extends BaseFragment implements MainMvvmView {
      *****/
 
     @Override
-    public void showSubjects(List<Subject> subjects) {
-        mSubjectsAdapter.setSubjects(subjects);
-        mSubjectsAdapter.notifyDataSetChanged();
-    }
-
-    @Override
     public void showError() {
-        DialogFactory.createGenericErrorDialog(getContext(), getString(R.string.error_loading_subjects))
+        DialogFactory.createGenericErrorDialog(mContext, getString(R.string.error_loading_subjects))
                 .show();
     }
 
     @Override
     public void showSubjectsEmpty() {
-        mSubjectsAdapter.setSubjects(Collections.<Subject>emptyList());
-        mSubjectsAdapter.notifyDataSetChanged();
-        Toast.makeText(getContext(), R.string.empty_subjects, Toast.LENGTH_LONG).show();
+        Toast.makeText(mContext, R.string.empty_subjects, Toast.LENGTH_LONG).show();
     }
 
 }

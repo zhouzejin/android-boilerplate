@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import uk.co.ribot.androidboilerplate.injection.component.FragmentComponent;
 import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
 import uk.co.ribot.androidboilerplate.injection.module.FragmentModule;
@@ -19,8 +17,6 @@ import uk.co.ribot.androidboilerplate.injection.module.FragmentModule;
  */
 public abstract class BaseFragment extends Fragment {
 
-    private View mRootView;
-    private Unbinder mUnbinder;
     private FragmentComponent mFragmentComponent;
 
     @Override
@@ -40,20 +36,16 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mRootView = inflater.inflate(getLayoutId(), container, false);
-        mUnbinder = ButterKnife.bind(this, mRootView);
-        return mRootView;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initViews(savedInstanceState);
     }
 
     @Override
     public void onDestroyView() {
-        mUnbinder.unbind();
         super.onDestroyView();
     }
 
@@ -61,20 +53,6 @@ public abstract class BaseFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-
-    /**
-     * 获取布局文件
-     *
-     * @return 布局文件ID
-     */
-    public abstract int getLayoutId();
-
-    /**
-     * 初始化View
-     *
-     * @param savedInstanceState
-     */
-    public abstract void initViews(Bundle savedInstanceState);
 
     public FragmentComponent fragmentComponent() {
         return mFragmentComponent;
