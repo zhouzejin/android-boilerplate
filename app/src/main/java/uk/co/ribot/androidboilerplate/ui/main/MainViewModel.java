@@ -1,10 +1,8 @@
 package uk.co.ribot.androidboilerplate.ui.main;
 
-import android.databinding.BindingAdapter;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
-import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
@@ -76,17 +74,6 @@ public class MainViewModel extends BaseViewModel<MainMvvmView> {
                         }
                     }
                 });
-    }
-
-    /*****
-     * BindingAdapter
-     *****/
-
-    @BindingAdapter("items")
-    public static void setItems(RecyclerView recyclerView, List<Subject> items) {
-        SubjectsAdapter adapter = (SubjectsAdapter) recyclerView.getAdapter();
-        if (adapter != null)
-            adapter.setSubjects(items);
     }
 
     /*****
