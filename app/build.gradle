@@ -117,7 +117,7 @@ dependencies {
 
     final AUTO_VALUE_VERSION = '1.4.1'
     final AUTO_VALUE_PARCEL_VERSION = '0.2.5'
-    final AUTO_VALUE_GSON_VERSION = '0.5.0'
+    final AUTO_VALUE_GSON_VERSION = '0.4.6'
     final GSON_VERSION = '2.8.0'
 
     final GLIDE_VERSION = '3.8.0'
