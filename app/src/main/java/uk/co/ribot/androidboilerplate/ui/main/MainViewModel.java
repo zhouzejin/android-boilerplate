@@ -8,10 +8,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import uk.co.ribot.androidboilerplate.data.DataManager;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.injection.scope.ConfigPersistent;
@@ -28,7 +29,7 @@ public class MainViewModel extends BaseViewModel<MainMvvmView> {
 
     private final DataManager mDataManager;
 
-    private Subscription mSubscription;
+    private Disposable mDisposable;
 
     @Inject
     public MainViewModel(DataManager dataManager, ImageLoader imageLoader) {
@@ -44,34 +45,40 @@ public class MainViewModel extends BaseViewModel<MainMvvmView> {
     @Override
     public void detachView() {
         super.detachView();
-        if (mSubscription != null) mSubscription.unsubscribe();
+        if (mDisposable != null) mDisposable.dispose();
     }
 
     public void loadSubjects() {
         checkViewAttached();
-        RxUtil.unsubscribe(mSubscription);
-        mSubscription = mDataManager.getSubjects()
+        RxUtil.dispose(mDisposable);
+        mDataManager.getSubjects()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<List<Subject>>() {
+                .subscribe(new Observer<List<Subject>>() {
                     @Override
-                    public void onCompleted() {
+                    public void onSubscribe(@NonNull Disposable d) {
+                        mDisposable = d;
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-                        LogUtil.e(e, "There was an error loading the subjects.");
-                        getMvvmView().showError();
-                    }
-
-                    @Override
-                    public void onNext(List<Subject> subjects) {
+                    public void onNext(@NonNull List<Subject> subjects) {
                         items.clear();
                         if (subjects.isEmpty()) {
                             getMvvmView().showSubjectsEmpty();
                         } else {
                             items.addAll(subjects);
                         }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        LogUtil.e(e, "There was an error loading the subjects.");
+                        getMvvmView().showError();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }
