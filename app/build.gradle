@@ -81,11 +81,6 @@ android {
         }
     }
 
-    // Needed because of this https://github.com/square/okio/issues/58
-    lintOptions {
-        warning 'InvalidPackage'
-    }
-
     packagingOptions {
         exclude 'LICENSE'
         exclude 'README.md'
