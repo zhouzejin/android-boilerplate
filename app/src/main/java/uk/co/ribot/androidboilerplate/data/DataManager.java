@@ -13,21 +13,21 @@ import uk.co.ribot.androidboilerplate.data.local.DatabaseHelper;
 import uk.co.ribot.androidboilerplate.data.local.PreferencesHelper;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.data.model.entity.InTheatersEntity;
-import uk.co.ribot.androidboilerplate.data.remote.RetrofitService;
+import uk.co.ribot.androidboilerplate.data.remote.RetrofitHelper;
 
 @Singleton
 public class DataManager {
 
-    private final RetrofitService mRetrofitService;
-    private final DatabaseHelper mDatabaseHelper;
     private final PreferencesHelper mPreferencesHelper;
+    private final DatabaseHelper mDatabaseHelper;
+    private final RetrofitHelper mRetrofitHelper;
 
     @Inject
-    public DataManager(RetrofitService retrofitService, PreferencesHelper preferencesHelper,
-                       DatabaseHelper databaseHelper) {
-        mRetrofitService = retrofitService;
+    public DataManager(PreferencesHelper preferencesHelper, DatabaseHelper databaseHelper,
+                       RetrofitHelper retrofitHelper) {
         mPreferencesHelper = preferencesHelper;
         mDatabaseHelper = databaseHelper;
+        mRetrofitHelper = retrofitHelper;
     }
 
     public PreferencesHelper getPreferencesHelper() {
@@ -35,7 +35,8 @@ public class DataManager {
     }
 
     public Observable<Subject> syncSubjects() {
-        return mRetrofitService.getSubjects()
+        return mRetrofitHelper.getRetrofitService()
+                .getSubjects()
                 .concatMap(new Function<InTheatersEntity, ObservableSource<? extends Subject>>() {
                     @Override
                     public ObservableSource<? extends Subject> apply(@NonNull InTheatersEntity inTheatersEntity) throws Exception {
