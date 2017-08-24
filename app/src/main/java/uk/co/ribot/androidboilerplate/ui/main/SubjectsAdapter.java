@@ -14,9 +14,11 @@ import uk.co.ribot.androidboilerplate.ui.base.ViewModel;
 
 public class SubjectsAdapter extends BaseAdapter<Subject> {
 
-    @Inject
-    public SubjectsAdapter() {
+    private final MainViewModel mMainViewModel;
 
+    @Inject
+    public SubjectsAdapter(MainViewModel mainViewModel) {
+        mMainViewModel = mainViewModel;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class SubjectsAdapter extends BaseAdapter<Subject> {
 
     @Override
     public void onBindViewHolder(final BindingViewHolder holder, int position) {
-        ViewModel viewModel = new MainViewModel.SubjectViewModel(mData.get(position));
+        ViewModel viewModel = mMainViewModel.new SubjectViewModel(mData.get(position));
         holder.getBinding().setVariable(BR.viewmodel, viewModel);
         super.onBindViewHolder(holder, position);
     }
