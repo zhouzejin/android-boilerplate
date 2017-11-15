@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.0.0'
         classpath 'com.squareup.sqldelight:gradle-plugin:0.6.1'
     }
 
@@ -24,8 +24,8 @@ task clean(type: Delete) {
 }
 
 project.ext {
-    compileSdkVersion = 24
-    buildToolsVersion = "25.0.0"
+    compileSdkVersion = 26
+    buildToolsVersion = "26.0.2"
 
     applicationId = "uk.co.ribot.androidboilerplate"
     minSdkVersion = 16
