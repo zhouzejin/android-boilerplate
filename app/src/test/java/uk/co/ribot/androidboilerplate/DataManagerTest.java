@@ -10,15 +10,15 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import rx.Observable;
-import rx.functions.Func1;
-import rx.observers.TestSubscriber;
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
+import io.reactivex.observers.TestObserver;
 import uk.co.ribot.androidboilerplate.data.DataManager;
 import uk.co.ribot.androidboilerplate.data.local.DatabaseHelper;
 import uk.co.ribot.androidboilerplate.data.local.PreferencesHelper;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.data.model.entity.InTheatersEntity;
-import uk.co.ribot.androidboilerplate.data.remote.RetrofitService;
+import uk.co.ribot.androidboilerplate.data.remote.RetrofitHelper;
 import uk.co.ribot.androidboilerplate.test.common.TestDataFactory;
 
 import static org.mockito.Mockito.never;
@@ -36,18 +36,17 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class DataManagerTest {
 
-    @Mock DatabaseHelper mMockDatabaseHelper;
     @Mock PreferencesHelper mMockPreferencesHelper;
-    @Mock
-    RetrofitService mMockRetrofitService;
+    @Mock DatabaseHelper mMockDatabaseHelper;
+    @Mock RetrofitHelper mMockRetrofitHelper;
     private DataManager mDataManager;
 
     @Before
     public void setUp() {
         mDataManager = new DataManager(
-                mMockRetrofitService,
                 mMockPreferencesHelper,
-                mMockDatabaseHelper);
+                mMockDatabaseHelper,
+                mMockRetrofitHelper);
     }
 
     @Test
@@ -57,10 +56,10 @@ public class DataManagerTest {
                 TestDataFactory.makeSubject(TestDataFactory.randomUuid()));
         stubSyncSubjectsHelperCalls(subjects);
 
-        TestSubscriber<Subject> result = new TestSubscriber<>();
+        TestObserver<Subject> result = new TestObserver<>();
         mDataManager.syncSubjects().subscribe(result);
         result.assertNoErrors();
-        result.assertReceivedOnNext(subjects);
+        result.assertValueSequence(subjects);
     }
 
     @Test
@@ -72,35 +71,37 @@ public class DataManagerTest {
 
         mDataManager.syncSubjects().subscribe();
         // Verify right calls to helper methods
-        verify(mMockRetrofitService).getSubjects();
+        verify(mMockRetrofitHelper).getRetrofitService().getSubjects();
         verify(mMockDatabaseHelper).setSubjects(subjects);
     }
 
     @Test
     public void syncSubjectsDoesNotCallDatabaseWhenApiFails() {
-        when(mMockRetrofitService.getSubjects().map(new Func1<InTheatersEntity, List<Subject>>() {
-            @Override
-            public List<Subject> call(InTheatersEntity inTheatersEntity) {
-                return inTheatersEntity.subjects();
-            }
-        })).thenReturn(Observable.<List<Subject>>error(new RuntimeException()));
+        when(mMockRetrofitHelper.getRetrofitService().getSubjects()
+                .map(new Function<InTheatersEntity, List<Subject>>() {
+                    @Override
+                    public List<Subject> apply(InTheatersEntity inTheatersEntity) throws Exception {
+                        return inTheatersEntity.subjects();
+                    }
+                })).thenReturn(Observable.<List<Subject>>error(new RuntimeException()));
 
-        mDataManager.syncSubjects().subscribe(new TestSubscriber<Subject>());
+        mDataManager.syncSubjects().subscribe(new TestObserver<Subject>());
         // Verify right calls to helper methods
-        verify(mMockRetrofitService).getSubjects();
+        verify(mMockRetrofitHelper.getRetrofitService()).getSubjects();
         verify(mMockDatabaseHelper, never()).setSubjects(ArgumentMatchers.<Subject>anyList());
     }
 
     private void stubSyncSubjectsHelperCalls(List<Subject> subjects) {
         // Stub calls to the subject service and database helper.
-        when(mMockRetrofitService.getSubjects().map(new Func1<InTheatersEntity, List<Subject>>() {
-            @Override
-            public List<Subject> call(InTheatersEntity inTheatersEntity) {
-                return inTheatersEntity.subjects();
-            }
-        })).thenReturn(Observable.just(subjects));
+        when(mMockRetrofitHelper.getRetrofitService().getSubjects()
+                .map(new Function<InTheatersEntity, List<Subject>>() {
+                    @Override
+                    public List<Subject> apply(InTheatersEntity inTheatersEntity) throws Exception {
+                        return inTheatersEntity.subjects();
+                    }
+                })).thenReturn(Observable.just(subjects));
         when(mMockDatabaseHelper.setSubjects(subjects))
-                .thenReturn(Observable.from(subjects));
+                .thenReturn(Observable.fromIterable(subjects));
     }
 
 }

@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import uk.co.ribot.androidboilerplate.data.DataManager;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.injection.scope.ConfigPersistent;
@@ -19,7 +19,7 @@ import uk.co.ribot.androidboilerplate.utils.RxUtil;
 public class MainPresenter extends BasePresenter<MainMvpView> {
 
     private final DataManager mDataManager;
-    private Subscription mSubscription;
+    private Disposable mDisposable;
 
     @Inject
     public MainPresenter(DataManager dataManager) {
@@ -34,18 +34,24 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     @Override
     public void detachView() {
         super.detachView();
-        if (mSubscription != null) mSubscription.unsubscribe();
+        if (mDisposable != null) mDisposable.dispose();
     }
 
     public void loadSubjects() {
         checkViewAttached();
-        RxUtil.unsubscribe(mSubscription);
-        mSubscription = mDataManager.getSubjects()
+        RxUtil.dispose(mDisposable);
+        mDataManager.getSubjects()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<List<Subject>>() {
+                .subscribe(new Observer<List<Subject>>() {
                     @Override
-                    public void onCompleted() {
+                    public void onSubscribe(Disposable d) {
+                        mDisposable = d;
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
 
                     @Override

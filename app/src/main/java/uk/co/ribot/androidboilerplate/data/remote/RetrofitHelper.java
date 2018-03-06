@@ -20,7 +20,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import uk.co.ribot.androidboilerplate.BuildConfig;
 import uk.co.ribot.androidboilerplate.injection.qualifier.ApplicationContext;
@@ -104,7 +104,7 @@ public class RetrofitHelper {
                 .baseUrl(baseUrl)
                 .client(sHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(sGson))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
         return retrofit.create(clazz);

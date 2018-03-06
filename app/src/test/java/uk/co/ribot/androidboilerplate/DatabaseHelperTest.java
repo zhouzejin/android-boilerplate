@@ -2,6 +2,7 @@ package uk.co.ribot.androidboilerplate;
 
 import android.database.Cursor;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,7 @@ import org.robolectric.annotation.Config;
 import java.util.Arrays;
 import java.util.List;
 
-import rx.observers.TestSubscriber;
+import io.reactivex.observers.TestObserver;
 import uk.co.ribot.androidboilerplate.data.local.DatabaseHelper;
 import uk.co.ribot.androidboilerplate.data.local.DbOpenHelper;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
@@ -29,11 +30,16 @@ import static junit.framework.Assert.assertEquals;
 @Config(constants = BuildConfig.class, sdk = DefaultConfig.EMULATE_SDK)
 public class DatabaseHelperTest {
 
-    private final DatabaseHelper mDatabaseHelper =
-            new DatabaseHelper(new DbOpenHelper(RuntimeEnvironment.application));
-
     @Rule
     public final RxSchedulersOverrideRule mOverrideSchedulersRule = new RxSchedulersOverrideRule();
+
+    private DatabaseHelper mDatabaseHelper;
+
+    @Before
+    public void setup() {
+        if (mDatabaseHelper == null)
+            mDatabaseHelper = new DatabaseHelper(new DbOpenHelper(RuntimeEnvironment.application));
+    }
 
     @Test
     public void setRibots() {
@@ -41,13 +47,12 @@ public class DatabaseHelperTest {
         Subject subject2 = TestDataFactory.makeSubject(TestDataFactory.randomUuid());
         List<Subject> subjects = Arrays.asList(subject1, subject2);
 
-        TestSubscriber<Subject> result = new TestSubscriber<>();
+        TestObserver<Subject> result = new TestObserver<>();
         mDatabaseHelper.setSubjects(subjects).subscribe(result);
         result.assertNoErrors();
-        result.assertReceivedOnNext(subjects);
+        result.assertValueSequence(subjects);
 
-        Cursor cursor = mDatabaseHelper.getBriteDb()
-                .query("SELECT * FROM " + Subject.TABLE_NAME);
+        Cursor cursor = mDatabaseHelper.getBriteDb().query(Subject.FACTORY.select_all().statement);
         assertEquals(2, cursor.getCount());
         for (Subject subject : subjects) {
             cursor.moveToNext();
@@ -63,7 +68,7 @@ public class DatabaseHelperTest {
 
         mDatabaseHelper.setSubjects(subjects).subscribe();
 
-        TestSubscriber<List<Subject>> result = new TestSubscriber<>();
+        TestObserver<List<Subject>> result = new TestObserver<>();
         mDatabaseHelper.getSubjects().subscribe(result);
         result.assertNoErrors();
         result.assertValue(subjects);

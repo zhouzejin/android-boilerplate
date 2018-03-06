@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import rx.observers.TestSubscriber;
+import io.reactivex.subscribers.TestSubscriber;
 import uk.co.ribot.androidboilerplate.utils.singleton.RxBus;
 
 public class RxBusTest {
@@ -23,7 +23,7 @@ public class RxBusTest {
     @Test
     public void postedObjectsAreReceived() {
         TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
-        mEventBus.observable().subscribe(testSubscriber);
+        mEventBus.observable().subscribe();
 
         Object event1 = new Object();
         Object event2 = new Object();
@@ -36,7 +36,7 @@ public class RxBusTest {
     @Test
     public void filteredObservableOnlyReceivesSomeObjects() {
         TestSubscriber<String> testSubscriber = new TestSubscriber<>();
-        mEventBus.filteredObservable(String.class).subscribe(testSubscriber);
+        mEventBus.filteredObservable(String.class).subscribe();
 
         String stringEvent = "Event";
         Integer intEvent = 20;

@@ -1,7 +1,7 @@
 package uk.co.ribot.androidboilerplate.data.remote;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
-import rx.Observable;
 import uk.co.ribot.androidboilerplate.data.model.entity.InTheatersEntity;
 
 public interface RetrofitService {
