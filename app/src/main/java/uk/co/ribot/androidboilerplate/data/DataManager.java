@@ -1,5 +1,7 @@
 package uk.co.ribot.androidboilerplate.data;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,6 +15,7 @@ import uk.co.ribot.androidboilerplate.data.local.PreferencesHelper;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.data.model.entity.InTheatersEntity;
 import uk.co.ribot.androidboilerplate.data.remote.RetrofitHelper;
+import uk.co.ribot.androidboilerplate.data.remote.RetrofitService;
 
 @Singleton
 public class DataManager {
@@ -46,6 +49,18 @@ public class DataManager {
 
     public Observable<List<Subject>> getSubjects() {
         return mDatabaseHelper.getSubjects().distinct();
+    }
+
+    @VisibleForTesting
+    public Observable<Subject> syncSubjects(RetrofitService retrofitService) {
+        return retrofitService.getSubjects()
+                .concatMap(new Function<InTheatersEntity, ObservableSource<? extends Subject>>() {
+                    @Override
+                    public ObservableSource<? extends Subject> apply(InTheatersEntity inTheatersEntity)
+                            throws Exception {
+                        return mDatabaseHelper.setSubjects(inTheatersEntity.subjects());
+                    }
+                });
     }
 
 }

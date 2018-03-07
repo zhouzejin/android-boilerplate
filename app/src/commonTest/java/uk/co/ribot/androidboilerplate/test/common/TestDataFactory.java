@@ -27,17 +27,17 @@ public class TestDataFactory {
     public static List<Subject> makeListSubject(int number) {
         List<Subject> subjects = new ArrayList<>();
         for (int i = 0; i < number; i++) {
-            subjects.add(makeSubject(randomUuid()));
+            subjects.add(makeSubject(randomUuid(), i));
         }
         return subjects;
     }
 
-    public static Subject makeSubject(String uniqueSuffix) {
+    public static Subject makeSubject(String uniqueSuffix, int titleId) {
         return Subject.builder()
                 .id(uniqueSuffix)
                 .rating(makeRating())
                 .genres(makeGenres())
-                .title("大话西游3")
+                .title(titleId + "大话西游3")
                 .casts(makeListPerson(3))
                 .collect_count(17903)
                 .original_title("大话西游3")

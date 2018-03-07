@@ -3,6 +3,7 @@ package uk.co.ribot.androidboilerplate.data.local;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.squareup.sqlbrite2.BriteDatabase;
 import com.squareup.sqlbrite2.SqlBrite;
 
@@ -15,9 +16,9 @@ import javax.inject.Singleton;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Scheduler;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 
 @Singleton
@@ -27,8 +28,13 @@ public class DatabaseHelper {
 
     @Inject
     public DatabaseHelper(DbOpenHelper dbOpenHelper) {
+        this(dbOpenHelper, Schedulers.io());
+    }
+
+    @VisibleForTesting
+    public DatabaseHelper(DbOpenHelper dbOpenHelper, Scheduler scheduler) {
         SqlBrite sqlBrite = new SqlBrite.Builder().build();
-        mDb = sqlBrite.wrapDatabaseHelper(dbOpenHelper, Schedulers.io());
+        mDb = sqlBrite.wrapDatabaseHelper(dbOpenHelper, scheduler);
     }
 
     public BriteDatabase getBriteDb() {

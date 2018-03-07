@@ -23,7 +23,7 @@ public class RxBusTest {
     @Test
     public void postedObjectsAreReceived() {
         TestSubscriber<Object> testSubscriber = new TestSubscriber<>();
-        mEventBus.observable().subscribe();
+        mEventBus.observable().subscribe(testSubscriber);
 
         Object event1 = new Object();
         Object event2 = new Object();
@@ -36,7 +36,7 @@ public class RxBusTest {
     @Test
     public void filteredObservableOnlyReceivesSomeObjects() {
         TestSubscriber<String> testSubscriber = new TestSubscriber<>();
-        mEventBus.filteredObservable(String.class).subscribe();
+        mEventBus.filteredObservable(String.class).subscribe(testSubscriber);
 
         String stringEvent = "Event";
         Integer intEvent = 20;

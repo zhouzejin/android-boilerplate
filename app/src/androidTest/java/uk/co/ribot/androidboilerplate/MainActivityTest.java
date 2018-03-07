@@ -61,9 +61,6 @@ public class MainActivityTest {
         for (Subject subject : testDataSubjects) {
             onView(withId(R.id.recycler_view))
                     .perform(RecyclerViewActions.scrollToPosition(position));
-            String genres = subject.genres().toString();
-            onView(withText(genres))
-                    .check(matches(isDisplayed()));
             onView(withText(subject.title()))
                     .check(matches(isDisplayed()));
             position++;
