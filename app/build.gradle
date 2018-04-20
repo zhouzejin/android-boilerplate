@@ -92,7 +92,7 @@ android {
 }
 
 dependencies {
-    final SUPPORT_LIBRARY_VERSION = '25.3.1'
+    final SUPPORT_LIBRARY_VERSION = '27.1.1'
 
     final DAGGER_VERSION = '2.11'
 
@@ -143,36 +143,36 @@ dependencies {
 
 
     // App Dependencies
-    compile libSupportAppcompatV7
-    compile libSupportRecyclerviewV7
-    compile libSupportCardviewV7
-    compile libSupportAnnotations
+    implementation libSupportAppcompatV7
+    implementation libSupportRecyclerviewV7
+    implementation libSupportCardviewV7
+    implementation libSupportAnnotations
 
-    compile libDagger
+    implementation libDagger
     annotationProcessor libDaggerCompiler
     testAnnotationProcessor libDaggerCompiler
     androidTestAnnotationProcessor libDaggerCompiler
 
-    compile libRxjava
-    compile libRxandroid
+    implementation libRxjava
+    implementation libRxandroid
 
-    compile libRetrofit
-    compile libConverterGson
-    compile libAdapterRxjava
-    compile libLoggingInterceptor
+    implementation libRetrofit
+    implementation libConverterGson
+    implementation libAdapterRxjava
+    implementation libLoggingInterceptor
 
-    compile (libSqlbrite) {
+    implementation (libSqlbrite) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 
-    provided libAutoValue
+    compileOnly libAutoValue
     annotationProcessor libAutoValue
     annotationProcessor libAutoValueParcel
-    provided libAutoValueGson
+    compileOnly libAutoValueGson
     annotationProcessor libAutoValueGson
-    compile libGson
+    implementation libGson
 
-    compile libGlide
+    implementation libGlide
 
-    compile libTimber
+    implementation libTimber
 }
