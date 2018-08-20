@@ -105,26 +105,26 @@ android {
 dependencies {
     final SUPPORT_LIBRARY_VERSION = '27.1.1'
 
-    final DAGGER_VERSION = '2.11'
+    final DAGGER_VERSION = '2.17'
 
-    final RXJAVA_VERSION = '2.1.10'
-    final RXANDROID_VERISON = '2.0.2'
+    final RXJAVA_VERSION = '2.2.0'
+    final RXANDROID_VERISON = '2.1.0'
 
-    final RETROFIT_VERSION = '2.3.0'
-    final OKHTTP_VERSION = '3.8.1'
+    final RETROFIT_VERSION = '2.4.0'
+    final OKHTTP_VERSION = '3.11.0'
 
     final SQLBRITE_VERSION = '2.0.0'
 
-    final AUTO_VALUE_VERSION = '1.4.1'
-    final AUTO_VALUE_PARCEL_VERSION = '0.2.5'
-    final AUTO_VALUE_GSON_VERSION = '0.4.6'
-    final GSON_VERSION = '2.8.0'
+    final AUTO_VALUE_VERSION = '1.6.2'
+    final AUTO_VALUE_PARCEL_VERSION = '0.2.6'
+    final AUTO_VALUE_GSON_VERSION = '0.8.0'
+    final GSON_VERSION = '2.8.5'
 
     final GLIDE_VERSION = '3.8.0'
 
-    final BUTTERKNIFE_VERSION = '8.7.0'
+    final BUTTERKNIFE_VERSION = '8.8.1'
 
-    final TIMBER_VERSION = '4.5.1'
+    final TIMBER_VERSION = '4.7.1'
 
     final JUNIT_VERSION = '4.12'
     final MOCKITO_VERSION = '2.20.1'
