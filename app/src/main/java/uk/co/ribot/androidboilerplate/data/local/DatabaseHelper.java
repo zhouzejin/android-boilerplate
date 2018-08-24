@@ -2,8 +2,8 @@ package uk.co.ribot.androidboilerplate.data.local;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.VisibleForTesting;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.squareup.sqlbrite2.BriteDatabase;
 import com.squareup.sqlbrite2.SqlBrite;
 
