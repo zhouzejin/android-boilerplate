@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.squareup.sqldelight'
+apply plugin: 'kotlin-kapt'
 apply from: '../config/quality/quality.gradle'
 
 android {
@@ -140,7 +141,7 @@ dependencies {
     def libSupportCardviewV7 = "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
     def libSupportAnnotations = "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
 
-    def libKotlinStdlib = compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN_VERSION"
+    def libKotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN_VERSION"
 
     def libDagger = "com.google.dagger:dagger:$DAGGER_VERSION"
     def libDaggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
@@ -190,9 +191,9 @@ dependencies {
     implementation libKotlinStdlib
 
     implementation libDagger
-    annotationProcessor libDaggerCompiler
-    testAnnotationProcessor libDaggerCompiler
-    androidTestAnnotationProcessor libDaggerCompiler
+    kapt libDaggerCompiler
+    kaptTest libDaggerCompiler
+    kaptAndroidTest libDaggerCompiler
 
     implementation libRxjava
     implementation libRxandroid
@@ -207,16 +208,18 @@ dependencies {
     }
 
     compileOnly libAutoValue
+    kapt libAutoValue
     annotationProcessor libAutoValue
-    annotationProcessor libAutoValueParcel
+    kapt libAutoValueParcel
     compileOnly libAutoValueGson
+    kapt libAutoValueGson
     annotationProcessor libAutoValueGson
     implementation libGson
 
     implementation libGlide
 
     implementation libButterknife
-    annotationProcessor libButterknifeCompiler
+    kapt libButterknifeCompiler
 
     implementation libTimber
 

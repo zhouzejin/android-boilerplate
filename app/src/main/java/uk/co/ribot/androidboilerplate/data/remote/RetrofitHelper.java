@@ -24,7 +24,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import uk.co.ribot.androidboilerplate.BuildConfig;
 import uk.co.ribot.androidboilerplate.injection.qualifier.ApplicationContext;
-import uk.co.ribot.androidboilerplate.utils.NetworkUtil;
+import uk.co.ribot.androidboilerplate.utils.NetworkUtilKt;
 import uk.co.ribot.androidboilerplate.utils.factory.MyGsonTypeAdapterFactory;
 
 @Singleton
@@ -39,7 +39,7 @@ public class RetrofitHelper {
             .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true);
     private static Gson sGson = new GsonBuilder()
-            .registerTypeAdapterFactory(MyGsonTypeAdapterFactory.create())
+            .registerTypeAdapterFactory(MyGsonTypeAdapterFactory.Companion.create())
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
             .create();
 
@@ -65,14 +65,14 @@ public class RetrofitHelper {
                 @Override
                 public Response intercept(Chain chain) throws IOException {
                     Request request = chain.request();
-                    if (!NetworkUtil.isNetworkConnected(context)) {
+                    if (!NetworkUtilKt.isNetworkConnected(context)) {
                         request = request.newBuilder()
                                 .cacheControl(CacheControl.FORCE_CACHE)
                                 .build();
                     }
 
                     Response originalResponse = chain.proceed(request);
-                    if (NetworkUtil.isNetworkConnected(context)) {
+                    if (NetworkUtilKt.isNetworkConnected(context)) {
                         String cacheControl = request.cacheControl().toString();
                         return originalResponse.newBuilder()
                                 .header("Cache-Control", cacheControl)

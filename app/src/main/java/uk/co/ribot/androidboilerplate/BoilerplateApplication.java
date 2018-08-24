@@ -6,7 +6,7 @@ import android.content.Context;
 import uk.co.ribot.androidboilerplate.injection.component.ApplicationComponent;
 import uk.co.ribot.androidboilerplate.injection.component.DaggerApplicationComponent;
 import uk.co.ribot.androidboilerplate.injection.module.ApplicationModule;
-import uk.co.ribot.androidboilerplate.utils.LogUtil;
+import uk.co.ribot.androidboilerplate.utils.LogUtilKt;
 
 public class BoilerplateApplication extends Application  {
 
@@ -16,7 +16,7 @@ public class BoilerplateApplication extends Application  {
     public void onCreate() {
         super.onCreate();
 
-        LogUtil.initLog();
+        LogUtilKt.initLog();
     }
 
     public static BoilerplateApplication get(Context context) {

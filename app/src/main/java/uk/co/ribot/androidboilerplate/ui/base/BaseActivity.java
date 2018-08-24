@@ -11,7 +11,7 @@ import uk.co.ribot.androidboilerplate.injection.component.ActivityComponent;
 import uk.co.ribot.androidboilerplate.injection.component.ConfigPersistentComponent;
 import uk.co.ribot.androidboilerplate.injection.component.DaggerConfigPersistentComponent;
 import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
-import uk.co.ribot.androidboilerplate.utils.LogUtil;
+import uk.co.ribot.androidboilerplate.utils.LogUtilKt;
 
 /**
  * Abstract activity that every other Activity in this application must implement. It handles
@@ -39,7 +39,7 @@ public class BaseActivity extends AppCompatActivity {
                 savedInstanceState.getLong(KEY_ACTIVITY_ID) : NEXT_ID.getAndIncrement();
         mConfigPersistentComponent = sComponentsMap.get(mActivityId, null);
         if (mConfigPersistentComponent == null) {
-            LogUtil.i("Creating new ConfigPersistentComponent id=%d", mActivityId);
+            LogUtilKt.i("Creating new ConfigPersistentComponent id=%d", mActivityId);
             mConfigPersistentComponent = DaggerConfigPersistentComponent.builder()
                     .applicationComponent(BoilerplateApplication.get(this).getComponent())
                     .build();
@@ -57,7 +57,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         if (!isChangingConfigurations()) {
-            LogUtil.i("Clearing ConfigPersistentComponent id=%d", mActivityId);
+            LogUtilKt.i("Clearing ConfigPersistentComponent id=%d", mActivityId);
             sComponentsMap.remove(mActivityId);
         }
         super.onDestroy();

@@ -12,8 +12,8 @@ import uk.co.ribot.androidboilerplate.data.DataManager;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.injection.scope.ConfigPersistent;
 import uk.co.ribot.androidboilerplate.ui.base.BasePresenter;
-import uk.co.ribot.androidboilerplate.utils.LogUtil;
-import uk.co.ribot.androidboilerplate.utils.RxUtil;
+import uk.co.ribot.androidboilerplate.utils.LogUtilKt;
+import uk.co.ribot.androidboilerplate.utils.RxUtilKt;
 
 @ConfigPersistent
 public class MainPresenter extends BasePresenter<MainMvpView> {
@@ -39,7 +39,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
     public void loadSubjects() {
         checkViewAttached();
-        RxUtil.dispose(mDisposable);
+        RxUtilKt.dispose(mDisposable);
         mDataManager.getSubjects()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -56,7 +56,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtil.e(e, "There was an error loading the subjects.");
+                        LogUtilKt.e(e, "There was an error loading the subjects.");
                         getMvpView().showError();
                     }
 

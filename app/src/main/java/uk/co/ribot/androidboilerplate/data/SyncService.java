@@ -15,10 +15,10 @@ import io.reactivex.schedulers.Schedulers;
 
 import uk.co.ribot.androidboilerplate.BoilerplateApplication;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
-import uk.co.ribot.androidboilerplate.utils.AndroidComponentUtil;
-import uk.co.ribot.androidboilerplate.utils.LogUtil;
-import uk.co.ribot.androidboilerplate.utils.NetworkUtil;
-import uk.co.ribot.androidboilerplate.utils.RxUtil;
+import uk.co.ribot.androidboilerplate.utils.AndroidComponentUtilKt;
+import uk.co.ribot.androidboilerplate.utils.LogUtilKt;
+import uk.co.ribot.androidboilerplate.utils.NetworkUtilKt;
+import uk.co.ribot.androidboilerplate.utils.RxUtilKt;
 
 public class SyncService extends Service {
 
@@ -31,7 +31,7 @@ public class SyncService extends Service {
     }
 
     public static boolean isRunning(Context context) {
-        return AndroidComponentUtil.isServiceRunning(context, SyncService.class);
+        return AndroidComponentUtilKt.isServiceRunning(context, SyncService.class);
     }
 
     @Override
@@ -42,16 +42,16 @@ public class SyncService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, final int startId) {
-        LogUtil.i("Starting sync...");
+        LogUtilKt.i("Starting sync...");
 
-        if (!NetworkUtil.isNetworkConnected(this)) {
-            LogUtil.i("Sync canceled, connection not available");
-            AndroidComponentUtil.toggleComponent(this, SyncOnConnectionAvailable.class, true);
+        if (!NetworkUtilKt.isNetworkConnected(this)) {
+            LogUtilKt.i("Sync canceled, connection not available");
+            AndroidComponentUtilKt.toggleComponent(this, SyncOnConnectionAvailable.class, true);
             stopSelf(startId);
             return START_NOT_STICKY;
         }
 
-        RxUtil.dispose(mDisposable);
+        RxUtilKt.dispose(mDisposable);
         mDataManager.syncSubjects()
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Subject>() {
@@ -67,13 +67,13 @@ public class SyncService extends Service {
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtil.w(e, "Error syncing.");
+                        LogUtilKt.w(e, "Error syncing.");
                         stopSelf(startId);
                     }
 
                     @Override
                     public void onComplete() {
-                        LogUtil.i("Synced successfully!");
+                        LogUtilKt.i("Synced successfully!");
                         stopSelf(startId);
                     }
                 });
@@ -97,9 +97,9 @@ public class SyncService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)
-                    && NetworkUtil.isNetworkConnected(context)) {
-                LogUtil.i("Connection is now available, triggering sync...");
-                AndroidComponentUtil.toggleComponent(context, this.getClass(), false);
+                    && NetworkUtilKt.isNetworkConnected(context)) {
+                LogUtilKt.i("Connection is now available, triggering sync...");
+                AndroidComponentUtilKt.toggleComponent(context, this.getClass(), false);
                 context.startService(getStartIntent(context));
             }
         }

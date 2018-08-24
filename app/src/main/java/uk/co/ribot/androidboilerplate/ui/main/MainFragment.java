@@ -15,7 +15,7 @@ import butterknife.BindView;
 import uk.co.ribot.androidboilerplate.R;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.ui.base.BaseFragment;
-import uk.co.ribot.androidboilerplate.utils.factory.DialogFactory;
+import uk.co.ribot.androidboilerplate.utils.factory.DialogFactoryKt;
 
 public class MainFragment extends BaseFragment implements MainMvpView {
 
@@ -80,7 +80,7 @@ public class MainFragment extends BaseFragment implements MainMvpView {
 
     @Override
     public void showError() {
-        DialogFactory.createGenericErrorDialog(getContext(), getString(R.string.error_loading_subjects))
+        DialogFactoryKt.createGenericErrorDialog(getContext(), getString(R.string.error_loading_subjects))
                 .show();
     }
 

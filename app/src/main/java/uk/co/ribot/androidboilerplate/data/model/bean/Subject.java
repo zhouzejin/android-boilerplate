@@ -27,7 +27,7 @@ import uk.co.ribot.androidboilerplate.utils.factory.MyGsonTypeAdapterFactory;
 public abstract class Subject implements SubjectModel, Parcelable, Comparable<Subject> {
 
     private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapterFactory(MyGsonTypeAdapterFactory.create())
+            .registerTypeAdapterFactory(MyGsonTypeAdapterFactory.Companion.create())
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
             .create();
 
