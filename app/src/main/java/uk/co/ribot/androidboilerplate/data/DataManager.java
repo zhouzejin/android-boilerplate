@@ -1,6 +1,6 @@
 package uk.co.ribot.androidboilerplate.data;
 
-import com.google.common.annotations.VisibleForTesting;
+import android.support.annotation.VisibleForTesting;
 
 import java.util.List;
 
