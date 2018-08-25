@@ -153,8 +153,9 @@ dependencies {
     def libSqlbrite = "com.squareup.sqlbrite3:sqlbrite:$SQLBRITE_VERSION"
     def supportSqliteFramework = "android.arch.persistence:db-framework:$SUPPORT_SQLBRITE_VERSION"
 
-    def libAutoValueAnnotations =  "com.google.auto.value:auto-value-annotations:$AUTO_VALUE_VERSION"
+    def libAutoValueAnnotations = "com.google.auto.value:auto-value-annotations:$AUTO_VALUE_VERSION"
     def libAutoValue = "com.google.auto.value:auto-value:$AUTO_VALUE_VERSION"
+    def libAutoValueParcelAdapter = "com.ryanharter.auto.value:auto-value-parcel-adapter:$AUTO_VALUE_PARCEL_VERSION"
     def libAutoValueParcel = "com.ryanharter.auto.value:auto-value-parcel:$AUTO_VALUE_PARCEL_VERSION"
     def libAutoValueGsonAnnotations = "com.ryanharter.auto.value:auto-value-gson-annotations:$AUTO_VALUE_GSON_VERSION"
     def libAutoValueGson = "com.ryanharter.auto.value:auto-value-gson:$AUTO_VALUE_GSON_VERSION"
@@ -200,13 +201,14 @@ dependencies {
     implementation libAdapterRxjava
     implementation libLoggingInterceptor
 
-    implementation (libSqlbrite) {
+    implementation(libSqlbrite) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
     implementation supportSqliteFramework
 
     implementation libAutoValueAnnotations
     annotationProcessor libAutoValue
+    implementation libAutoValueParcelAdapter
     annotationProcessor libAutoValueParcel
     implementation libAutoValueGsonAnnotations
     annotationProcessor libAutoValueGson
@@ -245,6 +247,6 @@ dependencies {
 }
 
 // Log out test results to console
-tasks.matching {it instanceof Test}.all {
+tasks.matching { it instanceof Test }.all {
     testLogging.events = ["failed", "passed", "skipped"]
 }
