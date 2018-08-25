@@ -4,8 +4,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.VisibleForTesting;
 
-import com.squareup.sqlbrite2.BriteDatabase;
-import com.squareup.sqlbrite2.SqlBrite;
+import com.squareup.sqlbrite3.BriteDatabase;
+import com.squareup.sqlbrite3.SqlBrite;
 
 import java.util.Collection;
 import java.util.List;
@@ -34,7 +34,7 @@ public class DatabaseHelper {
     @VisibleForTesting
     public DatabaseHelper(DbOpenHelper dbOpenHelper, Scheduler scheduler) {
         SqlBrite sqlBrite = new SqlBrite.Builder().build();
-        mDb = sqlBrite.wrapDatabaseHelper(dbOpenHelper, scheduler);
+        mDb = sqlBrite.wrapDatabaseHelper(dbOpenHelper.getOpenHelper(), scheduler);
     }
 
     public BriteDatabase getBriteDb() {
@@ -44,15 +44,15 @@ public class DatabaseHelper {
     public Observable<Subject> setSubjects(final Collection<Subject> newSubjects) {
         return Observable.create(new ObservableOnSubscribe<Subject>() {
             @Override
-            public void subscribe(ObservableEmitter<Subject> emitter) throws Exception {
+            public void subscribe(ObservableEmitter<Subject> emitter) {
                 if (emitter.isDisposed()) return;
                 BriteDatabase.Transaction transaction = mDb.newTransaction();
                 try {
                     mDb.delete(Subject.TABLE_NAME, null);
                     for (Subject subject : newSubjects) {
                         long result = mDb.insert(Subject.TABLE_NAME,
-                                Subject.FACTORY.marshal(subject).asContentValues(),
-                                SQLiteDatabase.CONFLICT_REPLACE);
+                                SQLiteDatabase.CONFLICT_REPLACE,
+                                Subject.FACTORY.marshal(subject).asContentValues());
                         if (result >= 0) emitter.onNext(subject);
                     }
                     transaction.markSuccessful();
@@ -69,7 +69,7 @@ public class DatabaseHelper {
                 Subject.FACTORY.select_all().statement)
                 .mapToList(new Function<Cursor, Subject>() {
                     @Override
-                    public Subject apply(Cursor cursor) throws Exception {
+                    public Subject apply(Cursor cursor) {
                         return Subject.MAPPER.map(cursor);
                     }
                 });

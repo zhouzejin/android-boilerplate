@@ -1,46 +1,69 @@
 package uk.co.ribot.androidboilerplate.data.local;
 
+import android.arch.persistence.db.SupportSQLiteDatabase;
+import android.arch.persistence.db.SupportSQLiteOpenHelper;
+import android.arch.persistence.db.framework.FrameworkSQLiteOpenHelperFactory;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.injection.qualifier.ApplicationContext;
+import uk.co.ribot.androidboilerplate.utils.LogUtil;
 
 @Singleton
-public class DbOpenHelper extends SQLiteOpenHelper {
+public class DbOpenHelper {
 
     public static final String DATABASE_NAME = "ribots.db";
     public static final int DATABASE_VERSION = 2;
 
+    private SupportSQLiteOpenHelper mOpenHelper;
+
     @Inject
     public DbOpenHelper(@ApplicationContext Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        SupportSQLiteOpenHelper.Configuration configuration = SupportSQLiteOpenHelper.Configuration
+                .builder(context)
+                .name(DATABASE_NAME)
+                .callback(new DbCallback(DATABASE_VERSION))
+                .build();
+        FrameworkSQLiteOpenHelperFactory factory = new FrameworkSQLiteOpenHelperFactory();
+        mOpenHelper = factory.create(configuration);
     }
 
-    @Override
-    public void onConfigure(SQLiteDatabase db) {
-        super.onConfigure(db);
-        //Uncomment line below if you want to enable foreign keys
-        //db.execSQL("PRAGMA foreign_keys=ON;");
+    public SupportSQLiteOpenHelper getOpenHelper() {
+        return mOpenHelper;
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.beginTransaction();
-        try {
-            db.execSQL(Subject.CREATE_TABLE);
-            //Add other tables here
-            db.setTransactionSuccessful();
-        } finally {
-            db.endTransaction();
+    private static class DbCallback extends SupportSQLiteOpenHelper.Callback {
+        DbCallback(int version) {
+            super(version);
+        }
+
+        @Override
+        public void onConfigure(SupportSQLiteDatabase db) {
+            super.onConfigure(db);
+            //Uncomment line below if you want to enable foreign keys
+            //db.execSQL("PRAGMA foreign_keys=ON;");
+        }
+
+        @Override
+        public void onCreate(SupportSQLiteDatabase db) {
+            db.beginTransaction();
+            try {
+                db.execSQL(Subject.CREATE_TABLE);
+                //Add other tables here
+                db.setTransactionSuccessful();
+            } finally {
+                db.endTransaction();
+            }
+        }
+
+        @Override
+        public void onUpgrade(SupportSQLiteDatabase db, int oldVersion, int newVersion) {
+            LogUtil.i("升级数据库：db = [" + db.getPath() + "], " +
+                    "oldVersion = [" + oldVersion + "], currentVersion = [" + newVersion + "]");
         }
     }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { }
 
 }
