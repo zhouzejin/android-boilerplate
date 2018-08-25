@@ -40,8 +40,7 @@ public class DataManager {
         return mRetrofitHelper.getRetrofitService().getSubjects()
                 .concatMap(new Function<InTheatersEntity, ObservableSource<? extends Subject>>() {
                     @Override
-                    public ObservableSource<? extends Subject> apply(InTheatersEntity inTheatersEntity)
-                            throws Exception {
+                    public ObservableSource<? extends Subject> apply(InTheatersEntity inTheatersEntity) {
                         return mDatabaseHelper.setSubjects(inTheatersEntity.subjects());
                     }
                 });
@@ -56,8 +55,7 @@ public class DataManager {
         return retrofitService.getSubjects()
                 .concatMap(new Function<InTheatersEntity, ObservableSource<? extends Subject>>() {
                     @Override
-                    public ObservableSource<? extends Subject> apply(InTheatersEntity inTheatersEntity)
-                            throws Exception {
+                    public ObservableSource<? extends Subject> apply(InTheatersEntity inTheatersEntity) {
                         return mDatabaseHelper.setSubjects(inTheatersEntity.subjects());
                     }
                 });
