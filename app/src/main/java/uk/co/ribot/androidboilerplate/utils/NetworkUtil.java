@@ -53,6 +53,7 @@ public class NetworkUtil {
      * @param context
      * @return
      */
+    @SuppressWarnings("deprecation")
     public static int getNetWorkType(Context context) {
 
         int mNetWorkType = NETWORKTYPE_INVALID;
