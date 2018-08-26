@@ -2,8 +2,8 @@ package uk.co.ribot.androidboilerplate.data.local
 
 import android.database.sqlite.SQLiteDatabase
 import android.support.annotation.VisibleForTesting
-import com.squareup.sqlbrite2.BriteDatabase
-import com.squareup.sqlbrite2.SqlBrite
+import com.squareup.sqlbrite3.BriteDatabase
+import com.squareup.sqlbrite3.SqlBrite
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
@@ -21,7 +21,7 @@ class DatabaseHelper @VisibleForTesting constructor(dbOpenHelper: DbOpenHelper, 
 
     init {
         val sqlBrite = SqlBrite.Builder().build()
-        briteDb = sqlBrite.wrapDatabaseHelper(dbOpenHelper, scheduler)
+        briteDb = sqlBrite.wrapDatabaseHelper(dbOpenHelper.openHelper, scheduler)
     }
 
     fun setSubjects(newSubjects: Collection<Subject>): Observable<Subject> {
@@ -32,8 +32,8 @@ class DatabaseHelper @VisibleForTesting constructor(dbOpenHelper: DbOpenHelper, 
                 briteDb.delete(Subject.TABLE_NAME, null)
                 for (subject in newSubjects) {
                     val result = briteDb.insert(Subject.TABLE_NAME,
-                            Subject.FACTORY.marshal(subject).asContentValues(),
-                            SQLiteDatabase.CONFLICT_REPLACE)
+                            SQLiteDatabase.CONFLICT_REPLACE,
+                            Subject.FACTORY.marshal(subject).asContentValues())
                     if (result >= 0) emitter.onNext(subject)
                 }
                 transaction.markSuccessful()
@@ -45,7 +45,8 @@ class DatabaseHelper @VisibleForTesting constructor(dbOpenHelper: DbOpenHelper, 
     }
 
     fun getSubjects(): Observable<List<Subject>> {
-        return briteDb.createQuery(Subject.TABLE_NAME, Subject.FACTORY.select_all().statement)
+        return briteDb.createQuery(Subject.TABLE_NAME,
+                Subject.FACTORY.select_all().statement)
                 .mapToList { cursor -> Subject.MAPPER.map(cursor) }
     }
 
