@@ -157,8 +157,9 @@ dependencies {
     def libSqlbrite = "com.squareup.sqlbrite2:sqlbrite:$SQLBRITE_VERSION"
     def libSqlbriteKotlin = "com.squareup.sqlbrite2:sqlbrite-kotlin:$SQLBRITE_VERSION"
 
-    def libAutoValueAnnotations =  "com.google.auto.value:auto-value-annotations:$AUTO_VALUE_VERSION"
+    def libAutoValueAnnotations = "com.google.auto.value:auto-value-annotations:$AUTO_VALUE_VERSION"
     def libAutoValue = "com.google.auto.value:auto-value:$AUTO_VALUE_VERSION"
+    def libAutoValueParcelAdapter = "com.ryanharter.auto.value:auto-value-parcel-adapter:$AUTO_VALUE_PARCEL_VERSION"
     def libAutoValueParcel = "com.ryanharter.auto.value:auto-value-parcel:$AUTO_VALUE_PARCEL_VERSION"
     def libAutoValueGsonAnnotations = "com.ryanharter.auto.value:auto-value-gson-annotations:$AUTO_VALUE_GSON_VERSION"
     def libAutoValueGson = "com.ryanharter.auto.value:auto-value-gson:$AUTO_VALUE_GSON_VERSION"
@@ -206,15 +207,16 @@ dependencies {
     implementation libAdapterRxjava
     implementation libLoggingInterceptor
 
-    implementation (libSqlbrite) {
+    implementation(libSqlbrite) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
     implementation libSqlbriteKotlin
 
-    api libAutoValueAnnotations
+    implementation libAutoValueAnnotations
     kapt libAutoValue
+    implementation libAutoValueParcelAdapter
     kapt libAutoValueParcel
-    api libAutoValueGsonAnnotations
+    implementation libAutoValueGsonAnnotations
     kapt libAutoValueGson
     implementation libGson
 
@@ -251,6 +253,6 @@ dependencies {
 }
 
 // Log out test results to console
-tasks.matching {it instanceof Test}.all {
+tasks.matching { it instanceof Test }.all {
     testLogging.events = ["failed", "passed", "skipped"]
 }
