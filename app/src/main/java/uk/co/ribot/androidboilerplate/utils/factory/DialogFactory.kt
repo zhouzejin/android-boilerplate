@@ -1,11 +1,9 @@
 package uk.co.ribot.androidboilerplate.utils.factory
 
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.support.annotation.StringRes
 import android.support.v7.app.AlertDialog
-
 import uk.co.ribot.androidboilerplate.R
 
 fun createSimpleOkErrorDialog(context: Context, title: String, message: String): Dialog {
@@ -35,15 +33,4 @@ fun createGenericErrorDialog(context: Context, message: String): Dialog {
 
 fun createGenericErrorDialog(context: Context, @StringRes messageResource: Int): Dialog {
     return createGenericErrorDialog(context, context.getString(messageResource))
-}
-
-fun createProgressDialog(context: Context, message: String): ProgressDialog {
-    val progressDialog = ProgressDialog(context)
-    progressDialog.setMessage(message)
-    return progressDialog
-}
-
-fun createProgressDialog(context: Context,
-                         @StringRes messageResource: Int): ProgressDialog {
-    return createProgressDialog(context, context.getString(messageResource))
 }

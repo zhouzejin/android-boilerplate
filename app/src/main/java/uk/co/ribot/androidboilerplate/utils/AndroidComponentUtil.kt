@@ -16,6 +16,7 @@ fun toggleComponent(context: Context, componentClass: Class<*>, enable: Boolean)
             PackageManager.DONT_KILL_APP)
 }
 
+@Suppress("DEPRECATION")
 fun isServiceRunning(context: Context, serviceClass: Class<*>): Boolean {
     val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
     for (service in manager.getRunningServices(Integer.MAX_VALUE)) {

@@ -47,6 +47,7 @@ fun isNetworkConnected(context: Context): Boolean {
  * @param context
  * @return
  */
+@Suppress("DEPRECATION")
 fun getNetWorkType(context: Context): Int {
 
     var mNetWorkType = NETWORKTYPE_INVALID
