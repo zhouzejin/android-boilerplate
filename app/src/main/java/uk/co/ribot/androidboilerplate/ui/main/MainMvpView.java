@@ -7,7 +7,7 @@ import uk.co.ribot.androidboilerplate.ui.base.MvpView;
 
 public interface MainMvpView extends MvpView {
 
-    void showSubjects(List<Subject> ribots);
+    void showSubjects(List<Subject> subjects);
 
     void showSubjectsEmpty();
 

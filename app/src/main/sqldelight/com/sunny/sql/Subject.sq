@@ -22,6 +22,13 @@ CREATE TABLE subject (
 -- Further SQL statements are proceeded by an identifier.
 -- This will be used to name the constant in the generated Java code.
 
-select_all:
+selectAll:
 SELECT *
 FROM subject;
+
+deleteAll:
+DELETE FROM subject;
+
+insertRow:
+INSERT INTO subject
+VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);

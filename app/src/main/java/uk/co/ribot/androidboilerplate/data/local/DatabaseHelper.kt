@@ -1,9 +1,9 @@
 package uk.co.ribot.androidboilerplate.data.local
 
-import android.database.sqlite.SQLiteDatabase
 import android.support.annotation.VisibleForTesting
 import com.squareup.sqlbrite3.BriteDatabase
 import com.squareup.sqlbrite3.SqlBrite
+import com.sunny.sql.SubjectModel
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
@@ -16,12 +16,20 @@ class DatabaseHelper @VisibleForTesting constructor(dbOpenHelper: DbOpenHelper, 
 
     val briteDb: BriteDatabase
 
+    private val subjectFactory: SubjectModel.Factory<*>
+    private val subjectDeleteAll: SubjectModel.DeleteAll
+    private val subjectInsertRow: SubjectModel.InsertRow
+
     @Inject
     constructor(dbOpenHelper: DbOpenHelper) : this(dbOpenHelper, Schedulers.io())
 
     init {
         val sqlBrite = SqlBrite.Builder().build()
         briteDb = sqlBrite.wrapDatabaseHelper(dbOpenHelper.openHelper, scheduler)
+
+        subjectFactory = Subject.FACTORY
+        subjectDeleteAll = SubjectModel.DeleteAll(briteDb.writableDatabase)
+        subjectInsertRow = SubjectModel.InsertRow(briteDb.writableDatabase, Subject.FACTORY)
     }
 
     fun setSubjects(newSubjects: Collection<Subject>): Observable<Subject> {
@@ -29,12 +37,14 @@ class DatabaseHelper @VisibleForTesting constructor(dbOpenHelper: DbOpenHelper, 
             if (emitter.isDisposed) return
             val transaction = briteDb.newTransaction()
             try {
-                briteDb.delete(Subject.TABLE_NAME, null)
+                briteDb.executeUpdateDelete(subjectDeleteAll.table, subjectDeleteAll)
                 for (subject in newSubjects) {
-                    val result = briteDb.insert(Subject.TABLE_NAME,
-                            SQLiteDatabase.CONFLICT_REPLACE,
-                            Subject.FACTORY.marshal(subject).asContentValues())
-                    if (result >= 0) emitter.onNext(subject)
+                    subjectInsertRow.clearBindings()
+                    subjectInsertRow.bind(subject.id(), subject.rating(), subject.genres(),
+                            subject.title(), subject.casts(), subject.collect_count(),
+                            subject.original_title(), subject.subtype(), subject.directors(),
+                            subject.year(), subject.images(), subject.alt())
+                    briteDb.executeInsert(subjectInsertRow.table, subjectInsertRow)
                 }
                 transaction.markSuccessful()
                 emitter.onComplete()
@@ -45,8 +55,8 @@ class DatabaseHelper @VisibleForTesting constructor(dbOpenHelper: DbOpenHelper, 
     }
 
     fun getSubjects(): Observable<List<Subject>> {
-        return briteDb.createQuery(Subject.TABLE_NAME,
-                Subject.FACTORY.select_all().statement)
+        return briteDb.createQuery(subjectFactory.selectAll().tables,
+                subjectFactory.selectAll())
                 .mapToList { cursor -> Subject.MAPPER.map(cursor) }
     }
 
