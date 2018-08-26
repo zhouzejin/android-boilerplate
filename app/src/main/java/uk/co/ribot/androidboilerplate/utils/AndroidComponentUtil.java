@@ -17,6 +17,7 @@ public final class AndroidComponentUtil {
                 PackageManager.DONT_KILL_APP);
     }
 
+    @SuppressWarnings("deprecation")
     public static boolean isServiceRunning(Context context, Class serviceClass) {
         ActivityManager manager =
                 (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);

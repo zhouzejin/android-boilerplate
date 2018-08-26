@@ -31,7 +31,7 @@ public abstract class Subject implements SubjectModel, Parcelable, Comparable<Su
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
             .create();
 
-    private static final ColumnAdapter RATING_ADAPTER = new ColumnAdapter<Rating, String>() {
+    private static final ColumnAdapter<Rating, String> RATING_ADAPTER = new ColumnAdapter<Rating, String>() {
         @NonNull
         @Override
         public Rating decode(String databaseValue) {
@@ -44,7 +44,7 @@ public abstract class Subject implements SubjectModel, Parcelable, Comparable<Su
         }
     };
 
-    private static final ColumnAdapter GENRES_ADAPTER = new ColumnAdapter<List<String>, String>() {
+    private static final ColumnAdapter<List<String>, String> GENRES_ADAPTER = new ColumnAdapter<List<String>, String>() {
         @NonNull
         @Override
         public List<String> decode(String databaseValue) {
@@ -57,7 +57,7 @@ public abstract class Subject implements SubjectModel, Parcelable, Comparable<Su
         }
     };
 
-    private static final ColumnAdapter PERSONS_ADAPTER = new ColumnAdapter<List<Person>, String>() {
+    private static final ColumnAdapter<List<Person>, String> PERSONS_ADAPTER = new ColumnAdapter<List<Person>, String>() {
         @NonNull
         @Override
         public List<Person> decode(String databaseValue) {
@@ -70,7 +70,7 @@ public abstract class Subject implements SubjectModel, Parcelable, Comparable<Su
         }
     };
 
-    private static final ColumnAdapter IMAGE_ADAPTER = new ColumnAdapter<Image, String>() {
+    private static final ColumnAdapter<Image, String> IMAGE_ADAPTER = new ColumnAdapter<Image, String>() {
         @NonNull
         @Override
         public Image decode(String databaseValue) {
