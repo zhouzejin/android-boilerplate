@@ -101,6 +101,12 @@ android {
         exclude 'LICENSE'
         exclude 'README.md'
     }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {

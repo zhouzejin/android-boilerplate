@@ -20,6 +20,7 @@ public class UnlockDeviceAndroidJUnitRunner extends AndroidJUnitRunner {
 
     private PowerManager.WakeLock mWakeLock;
 
+    @SuppressWarnings("deprecation")
     @SuppressLint("MissingPermission")
     @Override
     public void onStart() {

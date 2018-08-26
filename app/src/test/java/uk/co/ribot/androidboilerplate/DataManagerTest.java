@@ -7,7 +7,6 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -50,9 +49,7 @@ public class DataManagerTest {
     @Test
     public void syncSubjectsEmitsValues() {
         InTheatersEntity inTheatersEntity = TestDataFactory.makeInTheatersEntity(10);
-        List<Subject> subjects = Arrays.asList(
-                TestDataFactory.makeSubject(TestDataFactory.randomUuid(), 0),
-                TestDataFactory.makeSubject(TestDataFactory.randomUuid(), 1));
+        List<Subject> subjects = inTheatersEntity.subjects();
         stubSyncSubjectsHelperCalls(inTheatersEntity, subjects);
 
         TestObserver<Subject> result = new TestObserver<>();
@@ -64,12 +61,10 @@ public class DataManagerTest {
     @Test
     public void syncSubjectsCallsApiAndDatabase() {
         InTheatersEntity inTheatersEntity = TestDataFactory.makeInTheatersEntity(10);
-        List<Subject> subjects = Arrays.asList(
-                TestDataFactory.makeSubject(TestDataFactory.randomUuid(), 0),
-                TestDataFactory.makeSubject(TestDataFactory.randomUuid(), 1));
+        List<Subject> subjects = inTheatersEntity.subjects();
         stubSyncSubjectsHelperCalls(inTheatersEntity, subjects);
 
-        mDataManager.syncSubjects(mMockRetrofitService).subscribe();
+        mDataManager.syncSubjects(mMockRetrofitService).subscribe(new TestObserver<Subject>());
         // Verify right calls to helper methods
         verify(mMockRetrofitService).getSubjects();
         verify(mMockDatabaseHelper).setSubjects(subjects);
