@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DatabaseHelper @VisibleForTesting constructor(dbOpenHelper: DbOpenHelper, scheduler: Scheduler) {
+open class DatabaseHelper @VisibleForTesting constructor(dbOpenHelper: DbOpenHelper, scheduler: Scheduler) {
 
     val briteDb: BriteDatabase
 
@@ -32,7 +32,7 @@ class DatabaseHelper @VisibleForTesting constructor(dbOpenHelper: DbOpenHelper, 
         subjectInsertRow = SubjectModel.InsertRow(briteDb.writableDatabase, Subject.FACTORY)
     }
 
-    fun setSubjects(newSubjects: Collection<Subject>): Observable<Subject> {
+    open fun setSubjects(newSubjects: Collection<Subject>): Observable<Subject> {
         return Observable.create(fun(emitter) {
             if (emitter.isDisposed) return
             val transaction = briteDb.newTransaction()
@@ -44,7 +44,8 @@ class DatabaseHelper @VisibleForTesting constructor(dbOpenHelper: DbOpenHelper, 
                             subject.title(), subject.casts(), subject.collect_count(),
                             subject.original_title(), subject.subtype(), subject.directors(),
                             subject.year(), subject.images(), subject.alt())
-                    briteDb.executeInsert(subjectInsertRow.table, subjectInsertRow)
+                    val result = briteDb.executeInsert(subjectInsertRow.table, subjectInsertRow)
+                    if (result >= 0) emitter.onNext(subject)
                 }
                 transaction.markSuccessful()
                 emitter.onComplete()

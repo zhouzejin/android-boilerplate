@@ -2,11 +2,10 @@ package uk.co.ribot.androidboilerplate.utils.imageloader
 
 import android.content.Context
 import android.widget.ImageView
-
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-
-import uk.co.ribot.androidboilerplate.utils.*
+import uk.co.ribot.androidboilerplate.utils.NETWORKTYPE_WIFI
+import uk.co.ribot.androidboilerplate.utils.getNetWorkType
 
 /**
  * 开源框架图片加载框架Glide的封装实现
@@ -14,7 +13,7 @@ import uk.co.ribot.androidboilerplate.utils.*
  * Created by Zhou Zejin on 2016/10/10.
  */
 
-class GlideImageLoader : ImageLoader {
+open class GlideImageLoader : ImageLoader {
 
     override fun displayImage(context: Context, imageView: ImageView, imageUrl: String,
                               option: ImageLoader.DisplayOption) {
