@@ -1,7 +1,7 @@
 package uk.co.ribot.androidboilerplate.runner;
 
 import android.os.Bundle;
-import android.support.test.espresso.Espresso;
+import android.support.test.espresso.IdlingRegistry;
 
 import io.reactivex.plugins.RxJavaPlugins;
 import uk.co.ribot.androidboilerplate.utils.RxEspressoScheduleHandler;
@@ -19,6 +19,6 @@ public class RxAndroidJUnitRunner extends UnlockDeviceAndroidJUnitRunner {
         super.onCreate(arguments);
         RxEspressoScheduleHandler rxEspressoScheduleHandler = new RxEspressoScheduleHandler();
         RxJavaPlugins.setScheduleHandler(rxEspressoScheduleHandler);
-        Espresso.registerIdlingResources(rxEspressoScheduleHandler.getIdlingResource());;
+        IdlingRegistry.getInstance().register(rxEspressoScheduleHandler.getIdlingResource());
     }
 }

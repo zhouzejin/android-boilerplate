@@ -1,7 +1,7 @@
 package uk.co.ribot.androidboilerplate.utils;
 
 import android.support.test.espresso.IdlingResource;
-import android.support.test.espresso.contrib.CountingIdlingResource;
+import android.support.test.espresso.idling.CountingIdlingResource;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
@@ -20,7 +20,7 @@ public class RxEspressoScheduleHandler implements Function<Runnable, Runnable> {
             new CountingIdlingResource("rxJava");
 
     @Override
-    public Runnable apply(@NonNull final Runnable runnable) throws Exception {
+    public Runnable apply(@NonNull final Runnable runnable) {
         return new Runnable() {
             @Override
             public void run() {
