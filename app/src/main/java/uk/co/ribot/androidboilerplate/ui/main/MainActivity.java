@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
         }
 
         if (getIntent().getBooleanExtra(EXTRA_TRIGGER_SYNC_FLAG, true)) {
-            startService(SyncService.getStartIntent(this));
+            startService(SyncService.Companion.getStartIntent(this));
         }
     }
 
