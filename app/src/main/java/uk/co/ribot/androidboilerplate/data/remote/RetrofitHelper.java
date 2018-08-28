@@ -38,10 +38,6 @@ public class RetrofitHelper {
             .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true);
-    private static Gson sGson = new GsonBuilder()
-            .registerTypeAdapterFactory(MyGsonTypeAdapterFactory.create())
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            .create();
 
     static {
         if (BuildConfig.DEBUG) {
@@ -103,7 +99,7 @@ public class RetrofitHelper {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(sHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(sGson))
+                .addConverterFactory(GsonConverterFactory.create(MyGsonTypeAdapterFactory.GSON))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 

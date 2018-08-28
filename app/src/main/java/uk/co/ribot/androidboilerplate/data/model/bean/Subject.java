@@ -1,14 +1,14 @@
 package uk.co.ribot.androidboilerplate.data.model.bean;
 
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import com.gabrielittner.auto.value.cursor.ColumnAdapter;
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
-import com.google.gson.reflect.TypeToken;
-import com.squareup.sqldelight.ColumnAdapter;
 import com.squareup.sqldelight.RowMapper;
 import com.sunny.sql.SubjectModel;
 
@@ -17,7 +17,8 @@ import java.util.List;
 import uk.co.ribot.androidboilerplate.data.model.pojo.Image;
 import uk.co.ribot.androidboilerplate.data.model.pojo.Person;
 import uk.co.ribot.androidboilerplate.data.model.pojo.Rating;
-import uk.co.ribot.androidboilerplate.utils.factory.MyGsonTypeAdapterFactory;
+import uk.co.ribot.androidboilerplate.utils.factory.MyColumnAdapterFactory;
+import uk.co.ribot.androidboilerplate.utils.factory.MyColumnTypeAdapterFactory;
 
 /**
  * Created by Zhou Zejin on 2016/9/21.
@@ -26,62 +27,57 @@ import uk.co.ribot.androidboilerplate.utils.factory.MyGsonTypeAdapterFactory;
 @AutoValue
 public abstract class Subject implements SubjectModel, Parcelable, Comparable<Subject> {
 
-    private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapterFactory(MyGsonTypeAdapterFactory.create())
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            .create();
+    @NonNull
+    @Override
+    public abstract String id();
 
-    private static final ColumnAdapter<Rating, String> RATING_ADAPTER = new ColumnAdapter<Rating, String>() {
-        @NonNull
-        @Override
-        public Rating decode(String databaseValue) {
-            return gson.fromJson(databaseValue, Rating.class);
-        }
+    @NonNull
+    @ColumnAdapter(MyColumnTypeAdapterFactory.RatingAdapter.class)
+    @Override
+    public abstract Rating rating();
 
-        @Override
-        public String encode(@NonNull Rating value) {
-            return gson.toJson(value);
-        }
-    };
+    @NonNull
+    @ColumnAdapter(MyColumnTypeAdapterFactory.ListStringAdapter.class)
+    @Override
+    public abstract List<String> genres();
 
-    private static final ColumnAdapter<List<String>, String> GENRES_ADAPTER = new ColumnAdapter<List<String>, String>() {
-        @NonNull
-        @Override
-        public List<String> decode(String databaseValue) {
-            return gson.fromJson(databaseValue, new TypeToken<List<String>>() {}.getType());
-        }
+    @NonNull
+    @Override
+    public abstract String title();
 
-        @Override
-        public String encode(@NonNull List<String> value) {
-            return gson.toJson(value);
-        }
-    };
+    @NonNull
+    @ColumnAdapter(MyColumnTypeAdapterFactory.ListPersonAdapter.class)
+    @Override
+    public abstract List<Person> casts();
 
-    private static final ColumnAdapter<List<Person>, String> PERSONS_ADAPTER = new ColumnAdapter<List<Person>, String>() {
-        @NonNull
-        @Override
-        public List<Person> decode(String databaseValue) {
-            return gson.fromJson(databaseValue, new TypeToken<List<Person>>() {}.getType());
-        }
+    @Override
+    public abstract int collect_count();
 
-        @Override
-        public String encode(@NonNull List<Person> value) {
-            return gson.toJson(value);
-        }
-    };
+    @NonNull
+    @Override
+    public abstract String original_title();
 
-    private static final ColumnAdapter<Image, String> IMAGE_ADAPTER = new ColumnAdapter<Image, String>() {
-        @NonNull
-        @Override
-        public Image decode(String databaseValue) {
-            return gson.fromJson(databaseValue, Image.class);
-        }
+    @NonNull
+    @Override
+    public abstract String subtype();
 
-        @Override
-        public String encode(@NonNull Image value) {
-            return gson.toJson(value);
-        }
-    };
+    @NonNull
+    @ColumnAdapter(MyColumnTypeAdapterFactory.ListPersonAdapter.class)
+    @Override
+    public abstract List<Person> directors();
+
+    @NonNull
+    @Override
+    public abstract String year();
+
+    @NonNull
+    @ColumnAdapter(MyColumnTypeAdapterFactory.ImageAdapter.class)
+    @Override
+    public abstract Image images();
+
+    @NonNull
+    @Override
+    public abstract String alt();
 
     public static final Factory<Subject> FACTORY = new Factory<>(
             new SubjectModel.Creator<Subject>() {
@@ -96,11 +92,11 @@ public abstract class Subject implements SubjectModel, Parcelable, Comparable<Su
                             original_title, subtype, directors, year, images, alt);
                 }
             },
-            RATING_ADAPTER,
-            GENRES_ADAPTER,
-            PERSONS_ADAPTER,
-            PERSONS_ADAPTER,
-            IMAGE_ADAPTER);
+            MyColumnAdapterFactory.RATING_ADAPTER,
+            MyColumnAdapterFactory.GENRES_ADAPTER,
+            MyColumnAdapterFactory.PERSONS_ADAPTER,
+            MyColumnAdapterFactory.PERSONS_ADAPTER,
+            MyColumnAdapterFactory.IMAGE_ADAPTER);
 
     public static final RowMapper<Subject> MAPPER = FACTORY.selectAllMapper();
 
@@ -140,6 +136,12 @@ public abstract class Subject implements SubjectModel, Parcelable, Comparable<Su
     public static TypeAdapter<Subject> typeAdapter(Gson gson) {
         return new AutoValue_Subject.GsonTypeAdapter(gson);
     }
+
+    public static Subject create(Cursor cursor) {
+        return AutoValue_Subject.createFromCursor(cursor);
+    }
+
+    public abstract ContentValues toContentValues();
 
     @Override
     public int compareTo(@NonNull Subject another) {
