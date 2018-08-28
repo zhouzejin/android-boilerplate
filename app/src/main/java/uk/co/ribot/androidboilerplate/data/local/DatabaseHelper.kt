@@ -1,5 +1,6 @@
 package uk.co.ribot.androidboilerplate.data.local
 
+import android.database.sqlite.SQLiteDatabase
 import android.support.annotation.VisibleForTesting
 import com.squareup.sqlbrite3.BriteDatabase
 import com.squareup.sqlbrite3.SqlBrite
@@ -37,14 +38,11 @@ open class DatabaseHelper @VisibleForTesting constructor(dbOpenHelper: DbOpenHel
             if (emitter.isDisposed) return
             val transaction = briteDb.newTransaction()
             try {
-                briteDb.executeUpdateDelete(subjectDeleteAll.table, subjectDeleteAll)
+                briteDb.delete(subjectDeleteAll.table, null)
                 for (subject in newSubjects) {
-                    subjectInsertRow.clearBindings()
-                    subjectInsertRow.bind(subject.id(), subject.rating(), subject.genres(),
-                            subject.title(), subject.casts(), subject.collect_count(),
-                            subject.original_title(), subject.subtype(), subject.directors(),
-                            subject.year(), subject.images(), subject.alt())
-                    val result = briteDb.executeInsert(subjectInsertRow.table, subjectInsertRow)
+                    val result = briteDb.insert(subjectInsertRow.table,
+                            SQLiteDatabase.CONFLICT_REPLACE,
+                            subject.toContentValues())
                     if (result >= 0) emitter.onNext(subject)
                 }
                 transaction.markSuccessful()

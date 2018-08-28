@@ -38,10 +38,6 @@ class RetrofitHelper @Inject constructor(@ApplicationContext context: Context) {
                 .readTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
-        private val sGson = GsonBuilder()
-                .registerTypeAdapterFactory(MyGsonTypeAdapterFactory.create())
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                .create()
 
         init {
             if (BuildConfig.DEBUG) {
@@ -98,7 +94,7 @@ class RetrofitHelper @Inject constructor(@ApplicationContext context: Context) {
             val retrofit = Retrofit.Builder()
                     .baseUrl(baseUrl)
                     .client(sHttpClient!!)
-                    .addConverterFactory(GsonConverterFactory.create(sGson))
+                    .addConverterFactory(GsonConverterFactory.create(MyGsonTypeAdapterFactory.GSON))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
 
