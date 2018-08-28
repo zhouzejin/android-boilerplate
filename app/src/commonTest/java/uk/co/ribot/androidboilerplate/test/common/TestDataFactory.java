@@ -21,7 +21,7 @@ public class TestDataFactory {
     }
 
     public static InTheatersEntity makeInTheatersEntity(int count) {
-        return InTheatersEntity.create(count, 0, 32,  "正在上映的电影-北京", makeListSubject(count));
+        return InTheatersEntity.Companion.create(count, 0, 32,  "正在上映的电影-北京", makeListSubject(count));
     }
 
     public static List<Subject> makeListSubject(int number) {
@@ -33,7 +33,7 @@ public class TestDataFactory {
     }
 
     public static Subject makeSubject(String uniqueSuffix, int titleId) {
-        return Subject.builder()
+        return Subject.Companion.builder()
                 .id(uniqueSuffix)
                 .rating(makeRating())
                 .genres(makeGenres())
@@ -50,7 +50,7 @@ public class TestDataFactory {
     }
 
     public static Rating makeRating() {
-        return Rating.create(10, 4.1, "20", 0);
+        return Rating.Companion.create(10, 4.1, "20", 0);
     }
 
     public static List<String> makeGenres() {
@@ -62,13 +62,13 @@ public class TestDataFactory {
     }
 
     public static Image makeImage() {
-        return Image.create("https://img3.doubanio.com/img/celebrity/small/14025.jpg",
+        return Image.Companion.create("https://img3.doubanio.com/img/celebrity/small/14025.jpg",
                 "https://img3.doubanio.com/img/celebrity/large/14025.jpg",
                 "https://img3.doubanio.com/img/celebrity/medium/14025.jpg");
     }
 
     public static Person makePerson() {
-        return Person.create("https://movie.douban.com/celebrity/1275667/",
+        return Person.Companion.create("https://movie.douban.com/celebrity/1275667/",
                 makeImage(), "韩庚", "1275667");
     }
 

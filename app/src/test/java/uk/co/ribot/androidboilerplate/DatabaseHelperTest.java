@@ -53,11 +53,11 @@ public class DatabaseHelperTest {
         result.assertNoErrors();
         result.assertValueSequence(subjects);
 
-        Cursor cursor = mDatabaseHelper.getBriteDb().query(Subject.FACTORY.selectAll());
+        Cursor cursor = mDatabaseHelper.getBriteDb().query(Subject.Companion.getFACTORY().selectAll());
         assertEquals(2, cursor.getCount());
         for (Subject subject : subjects) {
             cursor.moveToNext();
-            assertEquals(subject, Subject.MAPPER.map(cursor));
+            assertEquals(subject, Subject.Companion.getMAPPER().map(cursor));
         }
     }
 

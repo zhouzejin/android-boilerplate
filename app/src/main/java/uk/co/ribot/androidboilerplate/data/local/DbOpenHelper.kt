@@ -4,7 +4,7 @@ import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.db.SupportSQLiteOpenHelper
 import android.arch.persistence.db.framework.FrameworkSQLiteOpenHelperFactory
 import android.content.Context
-import uk.co.ribot.androidboilerplate.data.model.bean.Subject
+import com.sunny.sql.SubjectModel
 import uk.co.ribot.androidboilerplate.injection.qualifier.ApplicationContext
 import uk.co.ribot.androidboilerplate.utils.i
 import javax.inject.Inject
@@ -40,7 +40,7 @@ class DbOpenHelper @Inject constructor(@ApplicationContext context: Context) {
         override fun onCreate(db: SupportSQLiteDatabase) {
             db.beginTransaction()
             try {
-                db.execSQL(Subject.CREATE_TABLE)
+                db.execSQL(SubjectModel.CREATE_TABLE)
                 //Add other tables here
                 db.setTransactionSuccessful()
             } finally {
