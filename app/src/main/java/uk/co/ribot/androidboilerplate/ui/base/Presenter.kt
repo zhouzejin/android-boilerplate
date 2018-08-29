@@ -1,12 +1,12 @@
-package uk.co.ribot.androidboilerplate.ui.base;
+package uk.co.ribot.androidboilerplate.ui.base
 
 /**
  * Every presenter in the app must either implement this interface or extend BasePresenter
  * indicating the MvpView type that wants to be attached with.
  */
-public interface Presenter<V extends MvpView> {
+interface Presenter<V : MvpView> {
 
-    void attachView(V mvpView);
+    fun attachView(mvpView: V)
+    fun detachView()
 
-    void detachView();
 }
