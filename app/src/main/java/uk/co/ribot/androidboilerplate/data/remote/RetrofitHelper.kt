@@ -1,7 +1,6 @@
 package uk.co.ribot.androidboilerplate.data.remote
 
 import android.content.Context
-import com.google.gson.GsonBuilder
 import okhttp3.Cache
 import okhttp3.CacheControl
 import okhttp3.Interceptor
@@ -20,7 +19,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class RetrofitHelper @Inject constructor(@ApplicationContext context: Context) {
+open class RetrofitHelper @Inject constructor(@ApplicationContext context: Context) {
 
     val retrofitService: RetrofitService
 
