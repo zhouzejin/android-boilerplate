@@ -26,7 +26,7 @@ public class TestComponentRule implements TestRule {
 
     public TestComponentRule(Context context) {
         mContext = context;
-        BoilerplateApplication application = BoilerplateApplication.get(context);
+        BoilerplateApplication application = BoilerplateApplication.Companion.get(context);
         mTestComponent = DaggerTestComponent.builder()
                 .applicationTestModule(new ApplicationTestModule(application))
                 .build();
@@ -45,7 +45,7 @@ public class TestComponentRule implements TestRule {
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                BoilerplateApplication application = BoilerplateApplication.get(mContext);
+                BoilerplateApplication application = BoilerplateApplication.Companion.get(mContext);
                 application.setComponent(mTestComponent);
                 base.evaluate();
                 application.setComponent(null);

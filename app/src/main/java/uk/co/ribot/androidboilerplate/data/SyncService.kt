@@ -32,7 +32,7 @@ class SyncService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        BoilerplateApplication.get(this).component.inject(this)
+        BoilerplateApplication.get(this).component!!.inject(this)
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {

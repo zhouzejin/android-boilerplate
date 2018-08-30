@@ -11,7 +11,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DataManager @Inject
+open class DataManager @Inject
 constructor(val mPreferencesHelper: PreferencesHelper, private val mDatabaseHelper: DatabaseHelper,
             private val mRetrofitHelper: RetrofitHelper) {
 
