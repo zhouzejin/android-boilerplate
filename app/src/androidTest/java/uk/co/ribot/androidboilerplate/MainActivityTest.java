@@ -51,7 +51,7 @@ public class MainActivityTest {
 
     @Test
     public void listOfSubjectsShows() {
-        List<Subject> testDataSubjects = TestDataFactory.makeListSubject(20);
+        List<Subject> testDataSubjects = TestDataFactory.INSTANCE.makeListSubject(20);
         when(component.getMockDataManager().getSubjects())
                 .thenReturn(Observable.just(testDataSubjects));
 

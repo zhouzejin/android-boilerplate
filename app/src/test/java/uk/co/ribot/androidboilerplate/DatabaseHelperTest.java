@@ -44,8 +44,8 @@ public class DatabaseHelperTest {
 
     @Test
     public void setSubjects() {
-        Subject subject1 = TestDataFactory.makeSubject(TestDataFactory.randomUuid(), 0);
-        Subject subject2 = TestDataFactory.makeSubject(TestDataFactory.randomUuid(), 1);
+        Subject subject1 = TestDataFactory.INSTANCE.makeSubject(TestDataFactory.INSTANCE.randomUuid(), 0);
+        Subject subject2 = TestDataFactory.INSTANCE.makeSubject(TestDataFactory.INSTANCE.randomUuid(), 1);
         List<Subject> subjects = Arrays.asList(subject1, subject2);
 
         TestObserver<Subject> result = new TestObserver<>();
@@ -63,8 +63,8 @@ public class DatabaseHelperTest {
 
     @Test
     public void getSubjects() {
-        Subject subject1 = TestDataFactory.makeSubject(TestDataFactory.randomUuid(), 0);
-        Subject subject2 = TestDataFactory.makeSubject(TestDataFactory.randomUuid(), 1);
+        Subject subject1 = TestDataFactory.INSTANCE.makeSubject(TestDataFactory.INSTANCE.randomUuid(), 0);
+        Subject subject2 = TestDataFactory.INSTANCE.makeSubject(TestDataFactory.INSTANCE.randomUuid(), 1);
         List<Subject> subjects = Arrays.asList(subject1, subject2);
 
         mDatabaseHelper.setSubjects(subjects).subscribe();

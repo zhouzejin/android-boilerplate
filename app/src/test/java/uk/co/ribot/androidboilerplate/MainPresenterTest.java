@@ -47,7 +47,7 @@ public class MainPresenterTest {
 
     @Test
     public void loadSubjectsReturnsSubjects() {
-        List<Subject> subjects = TestDataFactory.makeListSubject(10);
+        List<Subject> subjects = TestDataFactory.INSTANCE.makeListSubject(10);
         when(mMockDataManager.getSubjects())
                 .thenReturn(Observable.just(subjects));
 

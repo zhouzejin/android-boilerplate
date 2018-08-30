@@ -22,7 +22,8 @@ constructor(val mPreferencesHelper: PreferencesHelper, private val mDatabaseHelp
                 }
     }
 
-    fun getSubjects(): Observable<List<Subject>> = mDatabaseHelper.getSubjects().distinct()
+    // final class or fun cannot be mocked
+    open fun getSubjects(): Observable<List<Subject>> = mDatabaseHelper.getSubjects().distinct()
 
     @VisibleForTesting
     fun syncSubjects(retrofitService: RetrofitService): Observable<Subject> {

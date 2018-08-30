@@ -48,7 +48,7 @@ public class DataManagerTest {
 
     @Test
     public void syncSubjectsEmitsValues() {
-        InTheatersEntity inTheatersEntity = TestDataFactory.makeInTheatersEntity(10);
+        InTheatersEntity inTheatersEntity = TestDataFactory.INSTANCE.makeInTheatersEntity(10);
         List<Subject> subjects = inTheatersEntity.subjects();
         stubSyncSubjectsHelperCalls(inTheatersEntity, subjects);
 
@@ -60,7 +60,7 @@ public class DataManagerTest {
 
     @Test
     public void syncSubjectsCallsApiAndDatabase() {
-        InTheatersEntity inTheatersEntity = TestDataFactory.makeInTheatersEntity(10);
+        InTheatersEntity inTheatersEntity = TestDataFactory.INSTANCE.makeInTheatersEntity(10);
         List<Subject> subjects = inTheatersEntity.subjects();
         stubSyncSubjectsHelperCalls(inTheatersEntity, subjects);
 
