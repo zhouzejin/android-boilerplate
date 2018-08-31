@@ -132,8 +132,10 @@ dependencies {
 
     def libSqlbrite = "com.squareup.sqlbrite2:sqlbrite:$SQLBRITE_VERSION"
 
+    def libAutoValueAnnotations =  "com.google.auto.value:auto-value-annotations:$AUTO_VALUE_VERSION"
     def libAutoValue = "com.google.auto.value:auto-value:$AUTO_VALUE_VERSION"
     def libAutoValueParcel = "com.ryanharter.auto.value:auto-value-parcel:$AUTO_VALUE_PARCEL_VERSION"
+    def libAutoValueGsonAnnotations = "com.ryanharter.auto.value:auto-value-gson-annotations:$AUTO_VALUE_GSON_VERSION"
     def libAutoValueGson = "com.ryanharter.auto.value:auto-value-gson:$AUTO_VALUE_GSON_VERSION"
     def libGson = "com.google.code.gson:gson:$GSON_VERSION"
 
@@ -165,10 +167,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 
-    compileOnly libAutoValue
+    implementation libAutoValueAnnotations
     annotationProcessor libAutoValue
     annotationProcessor libAutoValueParcel
-    compileOnly libAutoValueGson
+    implementation libAutoValueGsonAnnotations
     annotationProcessor libAutoValueGson
     implementation libGson
 
