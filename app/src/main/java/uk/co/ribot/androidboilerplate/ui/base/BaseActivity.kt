@@ -39,7 +39,7 @@ open class BaseActivity : AppCompatActivity() {
         // if this is being called after a configuration change.
         mActivityId = savedInstanceState?.getLong(KEY_ACTIVITY_ID) ?: NEXT_ID.getAndIncrement()
         mConfigPersistentComponent = sComponentsMap.get(mActivityId, null)
-        if (mConfigPersistentComponent == null) {
+        mConfigPersistentComponent ?: let {
             i("Creating new ConfigPersistentComponent id=%d", mActivityId)
             mConfigPersistentComponent = DaggerConfigPersistentComponent.builder()
                     .applicationComponent(BoilerplateApplication.get(this).component)

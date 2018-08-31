@@ -13,7 +13,7 @@ class BoilerplateApplication : Application() {
     // Needed to replace the component with a test specific one
     var component: ApplicationComponent? = null
         get() {
-            if (field == null) {
+            field ?: let {
                 field = DaggerApplicationComponent.builder()
                         .applicationModule(ApplicationModule(this))
                         .build()

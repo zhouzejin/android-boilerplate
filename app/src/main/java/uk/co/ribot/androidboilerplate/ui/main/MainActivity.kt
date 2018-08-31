@@ -32,11 +32,10 @@ class MainActivity : BaseActivity() {
 
         var mainFragment: MainFragment? = supportFragmentManager
                 .findFragmentById(R.id.contentFrame) as? MainFragment
-        if (mainFragment == null) {
+        mainFragment ?: let {
             // Create the fragment
             mainFragment = MainFragment.newInstance()
-            addFragmentToActivity(
-                    supportFragmentManager, mainFragment, R.id.contentFrame)
+            addFragmentToActivity(supportFragmentManager, mainFragment!!, R.id.contentFrame)
         }
 
         if (intent.getBooleanExtra(EXTRA_TRIGGER_SYNC_FLAG, true)) {
