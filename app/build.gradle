@@ -102,7 +102,8 @@ dependencies {
     final RETROFIT_VERSION = '2.4.0'
     final OKHTTP_VERSION = '3.11.0'
 
-    final SQLBRITE_VERSION = '2.0.0'
+    final SQLBRITE_VERSION = '3.2.0'
+    final SUPPORT_SQLBRITE_VERSION = '1.0.0'
 
     final AUTO_VALUE_VERSION = '1.6.2'
     final AUTO_VALUE_PARCEL_VERSION = '0.2.6'
@@ -130,7 +131,8 @@ dependencies {
     def libAdapterRxjava = "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
     def libLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
 
-    def libSqlbrite = "com.squareup.sqlbrite2:sqlbrite:$SQLBRITE_VERSION"
+    def libSqlbrite = "com.squareup.sqlbrite3:sqlbrite:$SQLBRITE_VERSION"
+    def supportSqliteFramework = "android.arch.persistence:db-framework:$SUPPORT_SQLBRITE_VERSION"
 
     def libAutoValueAnnotations =  "com.google.auto.value:auto-value-annotations:$AUTO_VALUE_VERSION"
     def libAutoValue = "com.google.auto.value:auto-value:$AUTO_VALUE_VERSION"
@@ -166,6 +168,7 @@ dependencies {
     implementation (libSqlbrite) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
+    implementation supportSqliteFramework
 
     implementation libAutoValueAnnotations
     annotationProcessor libAutoValue

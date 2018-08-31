@@ -3,8 +3,8 @@ package uk.co.ribot.androidboilerplate.data.local;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.squareup.sqlbrite2.BriteDatabase;
-import com.squareup.sqlbrite2.SqlBrite;
+import com.squareup.sqlbrite3.BriteDatabase;
+import com.squareup.sqlbrite3.SqlBrite;
 
 import java.util.Collection;
 import java.util.List;
@@ -28,7 +28,7 @@ public class DatabaseHelper {
     @Inject
     public DatabaseHelper(DbOpenHelper dbOpenHelper) {
         SqlBrite sqlBrite = new SqlBrite.Builder().build();
-        mDb = sqlBrite.wrapDatabaseHelper(dbOpenHelper, Schedulers.io());
+        mDb = sqlBrite.wrapDatabaseHelper(dbOpenHelper.getOpenHelper(), Schedulers.io());
     }
 
     public BriteDatabase getBriteDb() {
@@ -38,15 +38,15 @@ public class DatabaseHelper {
     public Observable<Subject> setSubjects(final Collection<Subject> newSubjects) {
         return Observable.create(new ObservableOnSubscribe<Subject>() {
             @Override
-            public void subscribe(@NonNull ObservableEmitter<Subject> e) throws Exception {
+            public void subscribe(@NonNull ObservableEmitter<Subject> e) {
                 if (e.isDisposed()) return;
                 BriteDatabase.Transaction transaction = mDb.newTransaction();
                 try {
                     mDb.delete(Subject.TABLE_NAME, null);
                     for (Subject subject : newSubjects) {
                         long result = mDb.insert(Subject.TABLE_NAME,
-                                Subject.FACTORY.marshal(subject).asContentValues(),
-                                SQLiteDatabase.CONFLICT_REPLACE);
+                                SQLiteDatabase.CONFLICT_REPLACE,
+                                Subject.FACTORY.marshal(subject).asContentValues());
                         if (result >= 0) e.onNext(subject);
                     }
                     transaction.markSuccessful();
@@ -63,7 +63,7 @@ public class DatabaseHelper {
                 Subject.FACTORY.select_all().statement)
                 .mapToList(new Function<Cursor, Subject>() {
                     @Override
-                    public Subject apply(@NonNull Cursor cursor) throws Exception {
+                    public Subject apply(@NonNull Cursor cursor) {
                         return Subject.MAPPER.map(cursor);
                     }
                 });
