@@ -66,7 +66,7 @@ public abstract class Subject implements SubjectModel, Parcelable, Comparable<Su
 
         @Override
         public String encode(@NonNull List<Person> value) {
-            return  gson.toJson(value);
+            return gson.toJson(value);
         }
     };
 
@@ -102,11 +102,7 @@ public abstract class Subject implements SubjectModel, Parcelable, Comparable<Su
             PERSONS_ADAPTER,
             IMAGE_ADAPTER);
 
-    public static final RowMapper<Subject> MAPPER = FACTORY.select_allMapper();
-
-    public static Builder builder() {
-        return new AutoValue_Subject.Builder();
-    }
+    public static final RowMapper<Subject> MAPPER = FACTORY.selectAllMapper();
 
     @AutoValue.Builder
     public abstract static class Builder {
@@ -135,6 +131,10 @@ public abstract class Subject implements SubjectModel, Parcelable, Comparable<Su
         public abstract Builder alt(String alt);
 
         public abstract Subject build();
+    }
+
+    public static Builder builder() {
+        return new AutoValue_Subject.Builder();
     }
 
     public static TypeAdapter<Subject> typeAdapter(Gson gson) {

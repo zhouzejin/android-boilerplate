@@ -1,7 +1,6 @@
 package uk.co.ribot.androidboilerplate.data.local;
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.squareup.sqlbrite3.BriteDatabase;
 import com.squareup.sqlbrite3.SqlBrite;
@@ -25,10 +24,18 @@ public class DatabaseHelper {
 
     private final BriteDatabase mDb;
 
+    private final Subject.Factory mSubjectFactory;
+    private final Subject.DeleteAll mSubjectDeleteAll;
+    private final Subject.InsertRow mSubjectInsertRow;
+
     @Inject
     public DatabaseHelper(DbOpenHelper dbOpenHelper) {
         SqlBrite sqlBrite = new SqlBrite.Builder().build();
         mDb = sqlBrite.wrapDatabaseHelper(dbOpenHelper.getOpenHelper(), Schedulers.io());
+
+        mSubjectFactory = Subject.FACTORY;
+        mSubjectDeleteAll = new Subject.DeleteAll(mDb.getWritableDatabase());
+        mSubjectInsertRow = new Subject.InsertRow(mDb.getWritableDatabase(), Subject.FACTORY);
     }
 
     public BriteDatabase getBriteDb() {
@@ -42,11 +49,14 @@ public class DatabaseHelper {
                 if (e.isDisposed()) return;
                 BriteDatabase.Transaction transaction = mDb.newTransaction();
                 try {
-                    mDb.delete(Subject.TABLE_NAME, null);
+                    mDb.executeUpdateDelete(mSubjectDeleteAll.getTable(), mSubjectDeleteAll);
                     for (Subject subject : newSubjects) {
-                        long result = mDb.insert(Subject.TABLE_NAME,
-                                SQLiteDatabase.CONFLICT_REPLACE,
-                                Subject.FACTORY.marshal(subject).asContentValues());
+                        mSubjectInsertRow.clearBindings();
+                        mSubjectInsertRow.bind(subject.id(), subject.rating(), subject.genres(),
+                                subject.title(), subject.casts(), subject.collect_count(),
+                                subject.original_title(), subject.subtype(), subject.directors(),
+                                subject.year(), subject.images(), subject.alt());
+                        long result = mDb.executeInsert(mSubjectInsertRow.getTable(), mSubjectInsertRow);
                         if (result >= 0) e.onNext(subject);
                     }
                     transaction.markSuccessful();
@@ -59,8 +69,8 @@ public class DatabaseHelper {
     }
 
     public Observable<List<Subject>> getSubjects() {
-        return mDb.createQuery(Subject.TABLE_NAME,
-                Subject.FACTORY.select_all().statement)
+        return mDb.createQuery(mSubjectFactory.selectAll().getTables(),
+                mSubjectFactory.selectAll())
                 .mapToList(new Function<Cursor, Subject>() {
                     @Override
                     public Subject apply(@NonNull Cursor cursor) {
