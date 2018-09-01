@@ -2,9 +2,6 @@ package uk.co.ribot.androidboilerplate.data.remote;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -38,10 +35,6 @@ public class RetrofitHelper {
             .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true);
-    private static Gson sGson = new GsonBuilder()
-            .registerTypeAdapterFactory(MyGsonTypeAdapterFactory.create())
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            .create();
 
     static {
         if (BuildConfig.DEBUG) {
@@ -103,7 +96,7 @@ public class RetrofitHelper {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(sHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(sGson))
+                .addConverterFactory(GsonConverterFactory.create(MyGsonTypeAdapterFactory.GSON))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 

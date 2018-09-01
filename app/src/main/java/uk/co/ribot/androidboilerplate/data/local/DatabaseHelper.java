@@ -1,6 +1,7 @@
 package uk.co.ribot.androidboilerplate.data.local;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.squareup.sqlbrite3.BriteDatabase;
 import com.squareup.sqlbrite3.SqlBrite;
@@ -49,14 +50,11 @@ public class DatabaseHelper {
                 if (e.isDisposed()) return;
                 BriteDatabase.Transaction transaction = mDb.newTransaction();
                 try {
-                    mDb.executeUpdateDelete(mSubjectDeleteAll.getTable(), mSubjectDeleteAll);
+                    mDb.delete(mSubjectDeleteAll.getTable(), null);
                     for (Subject subject : newSubjects) {
-                        mSubjectInsertRow.clearBindings();
-                        mSubjectInsertRow.bind(subject.id(), subject.rating(), subject.genres(),
-                                subject.title(), subject.casts(), subject.collect_count(),
-                                subject.original_title(), subject.subtype(), subject.directors(),
-                                subject.year(), subject.images(), subject.alt());
-                        long result = mDb.executeInsert(mSubjectInsertRow.getTable(), mSubjectInsertRow);
+                        long result = mDb.insert(mSubjectInsertRow.getTable(),
+                                SQLiteDatabase.CONFLICT_REPLACE,
+                                subject.toContentValues());
                         if (result >= 0) e.onNext(subject);
                     }
                     transaction.markSuccessful();

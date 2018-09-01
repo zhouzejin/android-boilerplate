@@ -1,13 +1,6 @@
 package uk.co.ribot.androidboilerplate.ui.base;
 
 import android.databinding.BaseObservable;
-import android.databinding.BindingAdapter;
-import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
-
-import java.util.List;
-
-import uk.co.ribot.androidboilerplate.utils.imageloader.ImageLoader;
 
 /**
  * Base class that implements the ViewModel interface and provides a base implementation for
@@ -17,8 +10,6 @@ import uk.co.ribot.androidboilerplate.utils.imageloader.ImageLoader;
 public class BaseViewModel<T extends MvvmView> extends BaseObservable implements ViewModel<T> {
 
     private T mMvvmView;
-
-    protected static ImageLoader sImageLoader;
 
     @Override
     public void attachView(T mvvmView) {
@@ -47,25 +38,6 @@ public class BaseViewModel<T extends MvvmView> extends BaseObservable implements
             super("Please call ViewModel.attachView(MvvmView) before" +
                     " requesting data to the ViewModel");
         }
-    }
-
-    /*****
-     * BindingAdapter
-     *****/
-
-    @SuppressWarnings("unchecked")
-    @BindingAdapter("items")
-    public static <T> void setItems(RecyclerView recyclerView, List<T> items) {
-        BaseAdapter<T> adapter = (BaseAdapter<T>) recyclerView.getAdapter();
-        if (adapter != null)
-            adapter.setData(items);
-    }
-
-    @BindingAdapter("imageUrl")
-    public static void setImageUrl(ImageView imageView, String imageUrl) {
-        ImageLoader.DisplayOption option = new ImageLoader.DisplayOption.Builder().build();
-        if (sImageLoader != null)
-            sImageLoader.displayImage(imageView.getContext(), imageView, imageUrl, option);
     }
 
 }

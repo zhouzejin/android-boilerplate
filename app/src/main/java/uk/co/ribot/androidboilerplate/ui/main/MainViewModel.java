@@ -19,7 +19,6 @@ import uk.co.ribot.androidboilerplate.injection.scope.ConfigPersistent;
 import uk.co.ribot.androidboilerplate.ui.base.BaseViewModel;
 import uk.co.ribot.androidboilerplate.utils.LogUtil;
 import uk.co.ribot.androidboilerplate.utils.RxUtil;
-import uk.co.ribot.androidboilerplate.utils.imageloader.ImageLoader;
 
 @ConfigPersistent
 public class MainViewModel extends BaseViewModel<MainMvvmView> {
@@ -32,8 +31,7 @@ public class MainViewModel extends BaseViewModel<MainMvvmView> {
     private Disposable mDisposable;
 
     @Inject
-    public MainViewModel(DataManager dataManager, ImageLoader imageLoader) {
-        sImageLoader = imageLoader;
+    public MainViewModel(DataManager dataManager) {
         mDataManager = dataManager;
     }
 

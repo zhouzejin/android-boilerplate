@@ -107,6 +107,7 @@ dependencies {
 
     final AUTO_VALUE_VERSION = '1.6.2'
     final AUTO_VALUE_PARCEL_VERSION = '0.2.6'
+    final AUTO_VALUE_CURSOR_VERSION = '1.1.0'
     final AUTO_VALUE_GSON_VERSION = '0.8.0'
     final GSON_VERSION = '2.8.5'
 
@@ -138,6 +139,8 @@ dependencies {
     def libAutoValue = "com.google.auto.value:auto-value:$AUTO_VALUE_VERSION"
     def libAutoValueParcelAdapter = "com.ryanharter.auto.value:auto-value-parcel-adapter:$AUTO_VALUE_PARCEL_VERSION"
     def libAutoValueParcel = "com.ryanharter.auto.value:auto-value-parcel:$AUTO_VALUE_PARCEL_VERSION"
+    def libAutoValueCursorAnnotations = "com.gabrielittner.auto.value:auto-value-cursor-annotations:$AUTO_VALUE_CURSOR_VERSION"
+    def libAutoValueCursor = "com.gabrielittner.auto.value:auto-value-cursor:$AUTO_VALUE_CURSOR_VERSION"
     def libAutoValueGsonAnnotations = "com.ryanharter.auto.value:auto-value-gson-annotations:$AUTO_VALUE_GSON_VERSION"
     def libAutoValueGson = "com.ryanharter.auto.value:auto-value-gson:$AUTO_VALUE_GSON_VERSION"
     def libGson = "com.google.code.gson:gson:$GSON_VERSION"
@@ -175,6 +178,8 @@ dependencies {
     annotationProcessor libAutoValue
     implementation libAutoValueParcelAdapter
     annotationProcessor libAutoValueParcel
+    implementation libAutoValueCursorAnnotations
+    annotationProcessor libAutoValueCursor
     implementation libAutoValueGsonAnnotations
     annotationProcessor libAutoValueGson
     implementation libGson
