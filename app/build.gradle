@@ -71,19 +71,6 @@ android {
         }
     }
 
-    sourceSets {
-        def commonTestDir = 'src/commonTest/java'
-        test {
-            java.srcDir commonTestDir
-        }
-        androidTest {
-            java.srcDir commonTestDir
-        }
-
-        // add dagger generated files (works only with debug build)
-        test.java.srcDirs += ['build/generated/source/apt/androidTest/debug']
-    }
-
     // APK Splits
     splits {
         abi {
@@ -132,14 +119,6 @@ dependencies {
 
     final TIMBER_VERSION = '4.7.1'
 
-    final JUNIT_VERSION = '4.12'
-    final MOCKITO_VERSION = '2.20.1'
-    final HAMCREST_VERSION = '1.3'
-    final ROBOLECTRIC_VERSION = '3.8'
-
-    final ESPRESSO_VERSION = '3.0.2'
-    final SUPPORT_TEST_VERSION = '1.0.2'
-
 
     def libSupportAppcompatV7 = "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
     def libSupportRecyclerviewV7 = "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
@@ -176,19 +155,6 @@ dependencies {
     def libButterknifeCompiler = "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
 
     def libTimber = "com.jakewharton.timber:timber:$TIMBER_VERSION"
-
-    def libJUnit = "junit:junit:$JUNIT_VERSION"
-    def libMockitoCore = "org.mockito:mockito-core:$MOCKITO_VERSION"
-    def libMockitoAndroid = "org.mockito:mockito-android:$MOCKITO_VERSION"
-    def libHamcrestCore = "org.hamcrest:hamcrest-core:$HAMCREST_VERSION"
-    def libHamcrestLibrary = "org.hamcrest:hamcrest-library:$HAMCREST_VERSION"
-    def libHamcrestIntegration = "org.hamcrest:hamcrest-integration:$HAMCREST_VERSION"
-    def libRobolectric = "org.robolectric:robolectric:$ROBOLECTRIC_VERSION"
-
-    def libEspressoContrib = "com.android.support.test.espresso:espresso-contrib:$ESPRESSO_VERSION"
-    def libEspressoCore = "com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION"
-    def libSupportTestRunner = "com.android.support.test:runner:$SUPPORT_TEST_VERSION"
-    def libSupportTestRules = "com.android.support.test:rules:$SUPPORT_TEST_VERSION"
 
 
     // App Dependencies
@@ -231,33 +197,4 @@ dependencies {
     annotationProcessor libButterknifeCompiler
 
     implementation libTimber
-
-
-    // Unit tests dependencies
-    testImplementation libJUnit
-    testImplementation libMockitoCore
-    testImplementation libHamcrestCore
-    testImplementation libHamcrestLibrary
-    testImplementation libHamcrestIntegration
-    testImplementation libRobolectric
-
-
-    // Instrumentation test dependencies
-    androidTestImplementation libJUnit
-    androidTestImplementation libMockitoCore
-    androidTestImplementation libMockitoAndroid
-    androidTestImplementation libSupportAnnotations
-    androidTestImplementation(libEspressoContrib) {
-        exclude group: 'com.android.support', module: 'appcompat'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'recyclerview-v7'
-    }
-    androidTestImplementation libEspressoCore
-    androidTestImplementation libSupportTestRunner
-    androidTestImplementation libSupportTestRules
-}
-
-// Log out test results to console
-tasks.matching { it instanceof Test }.all {
-    testLogging.events = ["failed", "passed", "skipped"]
 }
