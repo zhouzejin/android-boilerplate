@@ -1,0 +1,74 @@
+final SUPPORT_LIBRARY_VERSION = '27.1.1'
+
+final DAGGER_VERSION = '2.17'
+
+final RXJAVA_VERSION = '2.2.0'
+final RXANDROID_VERISON = '2.1.0'
+
+final RETROFIT_VERSION = '2.4.0'
+final OKHTTP_VERSION = '3.11.0'
+
+final SQLBRITE_VERSION = '3.2.0'
+final SUPPORT_SQLBRITE_VERSION = '1.0.0'
+
+final AUTO_VALUE_VERSION = '1.6.2'
+final AUTO_VALUE_PARCEL_VERSION = '0.2.6'
+final AUTO_VALUE_CURSOR_VERSION = '1.1.0'
+final AUTO_VALUE_GSON_VERSION = '0.8.0'
+final GSON_VERSION = '2.8.5'
+
+final GLIDE_VERSION = '3.8.0'
+
+final BUTTERKNIFE_VERSION = '8.8.1'
+
+final TIMBER_VERSION = '4.7.1'
+
+project.ext {
+    support = [
+            "appcompat-v7"       : "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION",
+            "recyclerview-v7"    : "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION",
+            "cardview-v7"        : "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION",
+            "support-annotations": "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    ]
+
+    dagger = [
+            "dagger"         : "com.google.dagger:dagger:$DAGGER_VERSION",
+            "dagger-compiler": "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    ]
+
+    rxjava2 = [
+            "rxjava"   : "io.reactivex.rxjava2:rxjava:$RXJAVA_VERSION",
+            "rxandroid": "io.reactivex.rxjava2:rxandroid:$RXANDROID_VERISON"
+    ]
+
+    retrofit2 = [
+            "retrofit"           : "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION",
+            "converter-gson"     : "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION",
+            "adapter-rxjava2"    : "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION",
+            "logging-interceptor": "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
+    ]
+
+    sqlbrite3 = [
+            "sqlbrite"    : "com.squareup.sqlbrite3:sqlbrite:$SQLBRITE_VERSION",
+            "db-framework": "android.arch.persistence:db-framework:$SUPPORT_SQLBRITE_VERSION"
+    ]
+
+    auto_value = [
+            "gson"                        : "com.google.code.gson:gson:$GSON_VERSION",
+            "auto-value"                  : "com.google.auto.value:auto-value:$AUTO_VALUE_VERSION",
+            "auto-value-annotations"      : "com.google.auto.value:auto-value-annotations:$AUTO_VALUE_VERSION",
+            "auto-value-parcel"           : "com.ryanharter.auto.value:auto-value-parcel:$AUTO_VALUE_PARCEL_VERSION",
+            "auto-value-parcel-adapter"   : "com.ryanharter.auto.value:auto-value-parcel-adapter:$AUTO_VALUE_PARCEL_VERSION",
+            "auto-value-cursor"           : "com.gabrielittner.auto.value:auto-value-cursor:$AUTO_VALUE_CURSOR_VERSION",
+            "uto-value-cursor-annotations": "com.gabrielittner.auto.value:auto-value-cursor-annotations:$AUTO_VALUE_CURSOR_VERSION",
+            "auto-value-gson"             : "com.ryanharter.auto.value:auto-value-gson:$AUTO_VALUE_GSON_VERSION",
+            "auto-value-gson-annotations" : "com.ryanharter.auto.value:auto-value-gson-annotations:$AUTO_VALUE_GSON_VERSION"
+    ]
+
+    utils = [
+            "glide"               : "com.github.bumptech.glide:glide:$GLIDE_VERSION",
+            "butterknife"         : "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION",
+            "butterknife-compiler": "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION",
+            "timber"              : "com.jakewharton.timber:timber:$TIMBER_VERSION"
+    ]
+}

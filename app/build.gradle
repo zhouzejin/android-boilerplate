@@ -14,8 +14,6 @@ android {
         versionCode rootProject.ext.versionCode
         // Major -> Millions, Minor -> Thousands, Bugfix -> Hundreds. E.g 1.3.72 == 1,003,072
         versionName rootProject.ext.versionName
-
-        testInstrumentationRunner "${applicationId}.runner.RxAndroidJUnitRunner"
     }
 
     signingConfigs {
@@ -94,107 +92,14 @@ android {
 }
 
 dependencies {
-    final SUPPORT_LIBRARY_VERSION = '27.1.1'
+    implementation project(':libraryOpenSource')
 
-    final DAGGER_VERSION = '2.17'
+    annotationProcessor rootProject.ext.dagger["dagger-compiler"]
 
-    final RXJAVA_VERSION = '2.2.0'
-    final RXANDROID_VERISON = '2.1.0'
+    annotationProcessor rootProject.ext.auto_value["auto-value"]
+    annotationProcessor rootProject.ext.auto_value["auto-value-parcel"]
+    annotationProcessor rootProject.ext.auto_value["auto-value-cursor"]
+    annotationProcessor rootProject.ext.auto_value["auto-value-gson"]
 
-    final RETROFIT_VERSION = '2.4.0'
-    final OKHTTP_VERSION = '3.11.0'
-
-    final SQLBRITE_VERSION = '3.2.0'
-    final SUPPORT_SQLBRITE_VERSION = '1.0.0'
-
-    final AUTO_VALUE_VERSION = '1.6.2'
-    final AUTO_VALUE_PARCEL_VERSION = '0.2.6'
-    final AUTO_VALUE_CURSOR_VERSION = '1.1.0'
-    final AUTO_VALUE_GSON_VERSION = '0.8.0'
-    final GSON_VERSION = '2.8.5'
-
-    final GLIDE_VERSION = '3.8.0'
-
-    final BUTTERKNIFE_VERSION = '8.8.1'
-
-    final TIMBER_VERSION = '4.7.1'
-
-
-    def libSupportAppcompatV7 = "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
-    def libSupportRecyclerviewV7 = "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
-    def libSupportCardviewV7 = "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
-    def libSupportAnnotations = "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
-
-    def libDagger = "com.google.dagger:dagger:$DAGGER_VERSION"
-    def libDaggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
-
-    def libRxjava = "io.reactivex.rxjava2:rxjava:$RXJAVA_VERSION"
-    def libRxandroid = "io.reactivex.rxjava2:rxandroid:$RXANDROID_VERISON"
-
-    def libRetrofit = "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
-    def libConverterGson = "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
-    def libAdapterRxjava = "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
-    def libLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
-
-    def libSqlbrite = "com.squareup.sqlbrite3:sqlbrite:$SQLBRITE_VERSION"
-    def supportSqliteFramework = "android.arch.persistence:db-framework:$SUPPORT_SQLBRITE_VERSION"
-
-    def libAutoValueAnnotations = "com.google.auto.value:auto-value-annotations:$AUTO_VALUE_VERSION"
-    def libAutoValue = "com.google.auto.value:auto-value:$AUTO_VALUE_VERSION"
-    def libAutoValueParcelAdapter = "com.ryanharter.auto.value:auto-value-parcel-adapter:$AUTO_VALUE_PARCEL_VERSION"
-    def libAutoValueParcel = "com.ryanharter.auto.value:auto-value-parcel:$AUTO_VALUE_PARCEL_VERSION"
-    def libAutoValueCursorAnnotations = "com.gabrielittner.auto.value:auto-value-cursor-annotations:$AUTO_VALUE_CURSOR_VERSION"
-    def libAutoValueCursor = "com.gabrielittner.auto.value:auto-value-cursor:$AUTO_VALUE_CURSOR_VERSION"
-    def libAutoValueGsonAnnotations = "com.ryanharter.auto.value:auto-value-gson-annotations:$AUTO_VALUE_GSON_VERSION"
-    def libAutoValueGson = "com.ryanharter.auto.value:auto-value-gson:$AUTO_VALUE_GSON_VERSION"
-    def libGson = "com.google.code.gson:gson:$GSON_VERSION"
-
-    def libGlide = "com.github.bumptech.glide:glide:$GLIDE_VERSION"
-
-    def libButterknife = "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
-    def libButterknifeCompiler = "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
-
-    def libTimber = "com.jakewharton.timber:timber:$TIMBER_VERSION"
-
-
-    // App Dependencies
-    implementation libSupportAppcompatV7
-    implementation libSupportRecyclerviewV7
-    implementation libSupportCardviewV7
-    implementation libSupportAnnotations
-
-    implementation libDagger
-    annotationProcessor libDaggerCompiler
-    testAnnotationProcessor libDaggerCompiler
-    androidTestAnnotationProcessor libDaggerCompiler
-
-    implementation libRxjava
-    implementation libRxandroid
-
-    implementation libRetrofit
-    implementation libConverterGson
-    implementation libAdapterRxjava
-    implementation libLoggingInterceptor
-
-    implementation(libSqlbrite) {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    implementation supportSqliteFramework
-
-    implementation libAutoValueAnnotations
-    annotationProcessor libAutoValue
-    implementation libAutoValueParcelAdapter
-    annotationProcessor libAutoValueParcel
-    implementation libAutoValueCursorAnnotations
-    annotationProcessor libAutoValueCursor
-    implementation libAutoValueGsonAnnotations
-    annotationProcessor libAutoValueGson
-    implementation libGson
-
-    implementation libGlide
-
-    implementation libButterknife
-    annotationProcessor libButterknifeCompiler
-
-    implementation libTimber
+    annotationProcessor rootProject.ext.utils["butterknife-compiler"]
 }
