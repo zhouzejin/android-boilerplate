@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.squareup.sqldelight'
 apply from: '../config/quality/quality.gradle'
 
 android {
@@ -97,11 +96,5 @@ dependencies {
     implementation project(':componentDataLayer')
 
     annotationProcessor rootProject.ext.dagger["dagger-compiler"]
-
-    annotationProcessor rootProject.ext.auto_value["auto-value"]
-    annotationProcessor rootProject.ext.auto_value["auto-value-parcel"]
-    annotationProcessor rootProject.ext.auto_value["auto-value-cursor"]
-    annotationProcessor rootProject.ext.auto_value["auto-value-gson"]
-
     annotationProcessor rootProject.ext.utils["butterknife-compiler"]
 }

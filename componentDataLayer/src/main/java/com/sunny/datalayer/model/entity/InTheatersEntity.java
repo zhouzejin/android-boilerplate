@@ -1,14 +1,13 @@
-package uk.co.ribot.androidboilerplate.data.model.entity;
+package com.sunny.datalayer.model.entity;
 
 import android.os.Parcelable;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
+import com.sunny.datalayer.model.bean.Subject;
 
 import java.util.List;
-
-import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 
 /**
  * Created by Zhou Zejin on 2016/9/12.

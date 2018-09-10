@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.data.model.bean;
+package com.sunny.datalayer.model.bean;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -10,15 +10,14 @@ import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.squareup.sqldelight.RowMapper;
+import com.sunny.datalayer.factory.MyColumnAdapterFactory;
+import com.sunny.datalayer.factory.MyColumnTypeAdapterFactory;
+import com.sunny.datalayer.model.pojo.Image;
+import com.sunny.datalayer.model.pojo.Person;
+import com.sunny.datalayer.model.pojo.Rating;
 import com.sunny.sql.SubjectModel;
 
 import java.util.List;
-
-import uk.co.ribot.androidboilerplate.data.factory.MyColumnAdapterFactory;
-import uk.co.ribot.androidboilerplate.data.factory.MyColumnTypeAdapterFactory;
-import uk.co.ribot.androidboilerplate.data.model.pojo.Image;
-import uk.co.ribot.androidboilerplate.data.model.pojo.Person;
-import uk.co.ribot.androidboilerplate.data.model.pojo.Rating;
 
 /**
  * Created by Zhou Zejin on 2016/9/21.

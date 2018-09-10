@@ -11,6 +11,7 @@ import com.sunny.commonbusiness.utils.AndroidComponentUtil;
 import com.sunny.commonbusiness.utils.LogUtil;
 import com.sunny.commonbusiness.utils.NetworkUtil;
 import com.sunny.commonbusiness.utils.RxUtil;
+import com.sunny.datalayer.model.bean.Subject;
 
 import javax.inject.Inject;
 
@@ -18,7 +19,6 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import uk.co.ribot.androidboilerplate.BoilerplateApplication;
-import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 
 public class SyncService extends Service {
 

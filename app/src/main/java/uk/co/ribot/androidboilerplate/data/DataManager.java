@@ -2,6 +2,9 @@ package uk.co.ribot.androidboilerplate.data;
 
 import android.support.annotation.VisibleForTesting;
 
+import com.sunny.datalayer.model.bean.Subject;
+import com.sunny.datalayer.model.entity.InTheatersEntity;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,8 +15,6 @@ import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
 import uk.co.ribot.androidboilerplate.data.local.DatabaseHelper;
 import uk.co.ribot.androidboilerplate.data.local.PreferencesHelper;
-import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
-import uk.co.ribot.androidboilerplate.data.model.entity.InTheatersEntity;
 import uk.co.ribot.androidboilerplate.data.remote.RetrofitHelper;
 import uk.co.ribot.androidboilerplate.data.remote.RetrofitService;
 

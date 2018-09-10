@@ -1,10 +1,9 @@
 package uk.co.ribot.androidboilerplate.ui.main;
 
 import com.sunny.commonbusiness.base.MvpView;
+import com.sunny.datalayer.model.bean.Subject;
 
 import java.util.List;
-
-import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 
 public interface MainMvpView extends MvpView {
 

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.sunny.commonbusiness.utils.factory.DialogFactory;
+import com.sunny.datalayer.model.bean.Subject;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +16,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import uk.co.ribot.androidboilerplate.R;
-import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.ui.base.MainBaseFragment;
 
 public class MainFragment extends MainBaseFragment implements MainMvpView {

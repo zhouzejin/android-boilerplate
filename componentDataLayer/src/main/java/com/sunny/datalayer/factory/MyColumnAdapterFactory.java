@@ -1,17 +1,16 @@
-package uk.co.ribot.androidboilerplate.data.factory;
+package com.sunny.datalayer.factory;
 
 import android.support.annotation.NonNull;
 
 import com.google.gson.reflect.TypeToken;
 import com.squareup.sqldelight.ColumnAdapter;
+import com.sunny.datalayer.model.pojo.Image;
+import com.sunny.datalayer.model.pojo.Person;
+import com.sunny.datalayer.model.pojo.Rating;
 
 import java.util.List;
 
-import uk.co.ribot.androidboilerplate.data.model.pojo.Image;
-import uk.co.ribot.androidboilerplate.data.model.pojo.Person;
-import uk.co.ribot.androidboilerplate.data.model.pojo.Rating;
-
-import static uk.co.ribot.androidboilerplate.data.factory.MyGsonTypeAdapterFactory.GSON;
+import static com.sunny.datalayer.factory.MyGsonTypeAdapterFactory.GSON;
 
 public class MyColumnAdapterFactory {
 

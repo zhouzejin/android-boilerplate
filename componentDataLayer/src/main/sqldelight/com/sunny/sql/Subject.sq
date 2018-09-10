@@ -1,8 +1,8 @@
 import java.lang.Integer;
 import java.util.List;
-import uk.co.ribot.androidboilerplate.data.model.pojo.Image;
-import uk.co.ribot.androidboilerplate.data.model.pojo.Person;
-import uk.co.ribot.androidboilerplate.data.model.pojo.Rating;
+import com.sunny.datalayer.model.pojo.Image;
+import com.sunny.datalayer.model.pojo.Person;
+import com.sunny.datalayer.model.pojo.Rating;
 
 CREATE TABLE subject (
     id TEXT NOT NULL PRIMARY KEY,

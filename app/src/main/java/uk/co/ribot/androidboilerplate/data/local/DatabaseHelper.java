@@ -6,6 +6,7 @@ import android.support.annotation.VisibleForTesting;
 
 import com.squareup.sqlbrite3.BriteDatabase;
 import com.squareup.sqlbrite3.SqlBrite;
+import com.sunny.datalayer.model.bean.Subject;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +20,6 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Scheduler;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 
 @Singleton
 public class DatabaseHelper {
