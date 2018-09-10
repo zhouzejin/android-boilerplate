@@ -3,13 +3,14 @@ package uk.co.ribot.androidboilerplate.injection.module;
 import android.app.Application;
 import android.content.Context;
 
+import com.sunny.commonbusiness.utils.imageloader.GlideImageLoader;
+import com.sunny.commonbusiness.utils.imageloader.ImageLoader;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import uk.co.ribot.androidboilerplate.injection.qualifier.ApplicationContext;
-import uk.co.ribot.androidboilerplate.utils.imageloader.GlideImageLoader;
-import uk.co.ribot.androidboilerplate.utils.imageloader.ImageLoader;
 
 /**
  * Provide application-level dependencies.

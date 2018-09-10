@@ -3,10 +3,11 @@ package uk.co.ribot.androidboilerplate;
 import android.app.Application;
 import android.content.Context;
 
+import com.sunny.commonbusiness.utils.LogUtil;
+
 import uk.co.ribot.androidboilerplate.injection.component.ApplicationComponent;
 import uk.co.ribot.androidboilerplate.injection.component.DaggerApplicationComponent;
 import uk.co.ribot.androidboilerplate.injection.module.ApplicationModule;
-import uk.co.ribot.androidboilerplate.utils.LogUtil;
 
 public class BoilerplateApplication extends Application  {
 

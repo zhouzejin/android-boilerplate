@@ -14,11 +14,11 @@ import com.sunny.sql.SubjectModel;
 
 import java.util.List;
 
+import uk.co.ribot.androidboilerplate.data.factory.MyColumnAdapterFactory;
+import uk.co.ribot.androidboilerplate.data.factory.MyColumnTypeAdapterFactory;
 import uk.co.ribot.androidboilerplate.data.model.pojo.Image;
 import uk.co.ribot.androidboilerplate.data.model.pojo.Person;
 import uk.co.ribot.androidboilerplate.data.model.pojo.Rating;
-import uk.co.ribot.androidboilerplate.utils.factory.MyColumnAdapterFactory;
-import uk.co.ribot.androidboilerplate.utils.factory.MyColumnTypeAdapterFactory;
 
 /**
  * Created by Zhou Zejin on 2016/9/21.

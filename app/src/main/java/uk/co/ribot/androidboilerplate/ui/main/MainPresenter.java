@@ -1,5 +1,12 @@
 package uk.co.ribot.androidboilerplate.ui.main;
 
+import uk.co.ribot.androidboilerplate.data.DataManager;
+import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
+
+import com.sunny.commonbusiness.base.BasePresenter;
+import com.sunny.commonbusiness.utils.LogUtil;
+import com.sunny.commonbusiness.utils.RxUtil;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,12 +15,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import uk.co.ribot.androidboilerplate.data.DataManager;
-import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
 import uk.co.ribot.androidboilerplate.injection.scope.ConfigPersistent;
-import uk.co.ribot.androidboilerplate.ui.base.BasePresenter;
-import uk.co.ribot.androidboilerplate.utils.LogUtil;
-import uk.co.ribot.androidboilerplate.utils.RxUtil;
 
 @ConfigPersistent
 public class MainPresenter extends BasePresenter<MainMvpView> {

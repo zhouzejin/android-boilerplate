@@ -7,18 +7,18 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 
+import com.sunny.commonbusiness.utils.AndroidComponentUtil;
+import com.sunny.commonbusiness.utils.LogUtil;
+import com.sunny.commonbusiness.utils.NetworkUtil;
+import com.sunny.commonbusiness.utils.RxUtil;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-
 import uk.co.ribot.androidboilerplate.BoilerplateApplication;
 import uk.co.ribot.androidboilerplate.data.model.bean.Subject;
-import uk.co.ribot.androidboilerplate.utils.AndroidComponentUtil;
-import uk.co.ribot.androidboilerplate.utils.LogUtil;
-import uk.co.ribot.androidboilerplate.utils.NetworkUtil;
-import uk.co.ribot.androidboilerplate.utils.RxUtil;
 
 public class SyncService extends Service {
 

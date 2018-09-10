@@ -1,11 +1,11 @@
-package uk.co.ribot.androidboilerplate.utils.factory;
+package com.sunny.commonbusiness.utils.factory;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 
-import uk.co.ribot.androidboilerplate.R;
+import com.sunny.commonbusiness.R;
 
 public final class DialogFactory {
 

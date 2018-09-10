@@ -1,9 +1,9 @@
-package uk.co.ribot.androidboilerplate.utils.imageloader;
+package com.sunny.commonbusiness.utils.imageloader;
 
 import android.content.Context;
 import android.widget.ImageView;
 
-import uk.co.ribot.androidboilerplate.R;
+import com.sunny.commonbusiness.R;
 
 /**
  * 图片加载功能抽象类
@@ -70,7 +70,7 @@ public interface ImageLoader {
 
             public Builder() {
                 this.type = PIC_SMALL;
-                this.placeHolder = R.mipmap.ic_launcher;
+                this.placeHolder = R.drawable.ic_imageloader_default;
                 this.wifiStrategy = LOAD_STRATEGY_NORMAL;
             }
 

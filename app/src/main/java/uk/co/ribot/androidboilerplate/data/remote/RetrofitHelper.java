@@ -2,8 +2,7 @@ package uk.co.ribot.androidboilerplate.data.remote;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.sunny.commonbusiness.utils.NetworkUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,9 +22,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import uk.co.ribot.androidboilerplate.BuildConfig;
+import uk.co.ribot.androidboilerplate.data.factory.MyGsonTypeAdapterFactory;
 import uk.co.ribot.androidboilerplate.injection.qualifier.ApplicationContext;
-import uk.co.ribot.androidboilerplate.utils.NetworkUtil;
-import uk.co.ribot.androidboilerplate.utils.factory.MyGsonTypeAdapterFactory;
 
 @Singleton
 public class RetrofitHelper {

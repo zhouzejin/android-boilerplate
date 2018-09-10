@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.ui.base;
+package com.sunny.commonbusiness.base;
 
 /**
  * Every presenter in the app must either implement this interface or extend BasePresenter

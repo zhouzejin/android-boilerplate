@@ -1,12 +1,11 @@
-package uk.co.ribot.androidboilerplate.utils.imageloader;
+package com.sunny.commonbusiness.utils.imageloader;
 
 import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import uk.co.ribot.androidboilerplate.utils.NetworkUtil;
+import com.sunny.commonbusiness.utils.NetworkUtil;
 
 /**
  * 开源框架图片加载框架Glide的封装实现

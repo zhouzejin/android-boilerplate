@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.co.ribot.androidboilerplate.utils;
+package com.sunny.commonbusiness.utils;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;

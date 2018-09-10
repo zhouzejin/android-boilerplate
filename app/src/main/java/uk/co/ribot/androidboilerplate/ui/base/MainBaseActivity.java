@@ -2,7 +2,9 @@ package uk.co.ribot.androidboilerplate.ui.base;
 
 import android.os.Bundle;
 import android.support.v4.util.LongSparseArray;
-import android.support.v7.app.AppCompatActivity;
+
+import com.sunny.commonbusiness.base.BaseActivity;
+import com.sunny.commonbusiness.utils.LogUtil;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -11,14 +13,13 @@ import uk.co.ribot.androidboilerplate.injection.component.ActivityComponent;
 import uk.co.ribot.androidboilerplate.injection.component.ConfigPersistentComponent;
 import uk.co.ribot.androidboilerplate.injection.component.DaggerConfigPersistentComponent;
 import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
-import uk.co.ribot.androidboilerplate.utils.LogUtil;
 
 /**
  * Abstract activity that every other Activity in this application must implement. It handles
  * creation of Dagger components and makes sure that instances of ConfigPersistentComponent survive
  * across configuration changes.
  */
-public class BaseActivity extends AppCompatActivity {
+public class MainBaseActivity extends BaseActivity {
 
     private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
     private static final AtomicLong NEXT_ID = new AtomicLong(0);

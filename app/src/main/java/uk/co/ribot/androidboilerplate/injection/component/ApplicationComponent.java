@@ -3,6 +3,9 @@ package uk.co.ribot.androidboilerplate.injection.component;
 import android.app.Application;
 import android.content.Context;
 
+import com.sunny.commonbusiness.utils.imageloader.ImageLoader;
+import com.sunny.commonbusiness.utils.singleton.RxBus;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -13,8 +16,6 @@ import uk.co.ribot.androidboilerplate.data.local.PreferencesHelper;
 import uk.co.ribot.androidboilerplate.data.remote.RetrofitHelper;
 import uk.co.ribot.androidboilerplate.injection.module.ApplicationModule;
 import uk.co.ribot.androidboilerplate.injection.qualifier.ApplicationContext;
-import uk.co.ribot.androidboilerplate.utils.imageloader.ImageLoader;
-import uk.co.ribot.androidboilerplate.utils.singleton.RxBus;
 
 @Singleton
 @Component(modules = ApplicationModule.class)

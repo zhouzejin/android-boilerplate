@@ -4,12 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.sunny.commonbusiness.utils.ActivityUtil;
+
 import uk.co.ribot.androidboilerplate.R;
 import uk.co.ribot.androidboilerplate.data.SyncService;
-import uk.co.ribot.androidboilerplate.ui.base.BaseActivity;
-import uk.co.ribot.androidboilerplate.utils.ActivityUtil;
+import uk.co.ribot.androidboilerplate.ui.base.MainBaseActivity;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends MainBaseActivity {
 
     private static final String EXTRA_TRIGGER_SYNC_FLAG =
             "uk.co.ribot.androidboilerplate.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";

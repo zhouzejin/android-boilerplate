@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.ui.base;
+package com.sunny.commonbusiness.base;
 
 /**
  * Base class that implements the Presenter interface and provides a base implementation for

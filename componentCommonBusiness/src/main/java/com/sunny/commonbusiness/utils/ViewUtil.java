@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.utils;
+package com.sunny.commonbusiness.utils;
 
 import android.app.Activity;
 import android.content.Context;

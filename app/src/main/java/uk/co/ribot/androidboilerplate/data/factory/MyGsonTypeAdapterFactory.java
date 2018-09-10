@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.utils.factory;
+package uk.co.ribot.androidboilerplate.data.factory;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

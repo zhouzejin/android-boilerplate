@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.utils.factory;
+package uk.co.ribot.androidboilerplate.data.factory;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -12,7 +12,7 @@ import uk.co.ribot.androidboilerplate.data.model.pojo.Image;
 import uk.co.ribot.androidboilerplate.data.model.pojo.Person;
 import uk.co.ribot.androidboilerplate.data.model.pojo.Rating;
 
-import static uk.co.ribot.androidboilerplate.utils.factory.MyGsonTypeAdapterFactory.GSON;
+import static uk.co.ribot.androidboilerplate.data.factory.MyGsonTypeAdapterFactory.GSON;
 
 public class MyColumnTypeAdapterFactory {
 

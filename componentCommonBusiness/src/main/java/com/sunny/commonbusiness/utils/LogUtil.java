@@ -1,7 +1,8 @@
-package uk.co.ribot.androidboilerplate.utils;
+package com.sunny.commonbusiness.utils;
+
+import com.sunny.commonbusiness.BuildConfig;
 
 import timber.log.Timber;
-import uk.co.ribot.androidboilerplate.BuildConfig;
 
 /**
  * Created by Zhou Zejin on 2016/10/9.
