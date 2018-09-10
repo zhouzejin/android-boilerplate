@@ -94,6 +94,7 @@ android {
 dependencies {
     implementation project(':libraryOpenSource')
     implementation project(':componentCommonBusiness')
+    implementation project(':componentDataLayer')
 
     annotationProcessor rootProject.ext.dagger["dagger-compiler"]
 
