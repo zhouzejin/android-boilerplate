@@ -1,11 +1,11 @@
-package uk.co.ribot.androidboilerplate.data.remote;
+package com.sunny.datalayer.remote;
 
 import com.sunny.datalayer.model.entity.InTheatersEntity;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 
-public interface RetrofitService {
+public interface MainRetrofitService {
 
     String ENDPOINT = "https://api.douban.com/v2/";
 

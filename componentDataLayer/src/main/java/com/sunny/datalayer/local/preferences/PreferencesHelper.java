@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.data.local;
+package com.sunny.datalayer.local.preferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;

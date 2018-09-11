@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.data.local;
+package com.sunny.datalayer.local.db;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

@@ -1,9 +1,10 @@
-package uk.co.ribot.androidboilerplate.data.remote;
+package com.sunny.datalayer.remote;
 
 import android.content.Context;
 
 import com.sunny.common.injection.qualifier.ApplicationContext;
 import com.sunny.common.utils.NetworkUtil;
+import com.sunny.datalayer.BuildConfig;
 import com.sunny.datalayer.factory.MyGsonTypeAdapterFactory;
 
 import java.io.File;
@@ -23,7 +24,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import uk.co.ribot.androidboilerplate.BuildConfig;
 
 @Singleton
 public class RetrofitHelper {
@@ -104,15 +104,15 @@ public class RetrofitHelper {
         return retrofit.create(clazz);
     }
 
-    private RetrofitService mRetrofitService;
+    private MainRetrofitService mMainRetrofitService;
 
     @Inject
     public RetrofitHelper(@ApplicationContext Context context) {
-        mRetrofitService = createApiService(context, RetrofitService.class, RetrofitService.ENDPOINT);
+        mMainRetrofitService = createApiService(context, MainRetrofitService.class, MainRetrofitService.ENDPOINT);
     }
 
-    public RetrofitService getRetrofitService() {
-        return mRetrofitService;
+    public MainRetrofitService getMainRetrofitService() {
+        return mMainRetrofitService;
     }
 
 }

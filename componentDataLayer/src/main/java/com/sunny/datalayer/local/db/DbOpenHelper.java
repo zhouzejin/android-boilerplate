@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.data.local;
+package com.sunny.datalayer.local.db;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.db.SupportSQLiteOpenHelper;

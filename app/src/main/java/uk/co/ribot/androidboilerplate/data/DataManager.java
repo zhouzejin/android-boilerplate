@@ -2,8 +2,12 @@ package uk.co.ribot.androidboilerplate.data;
 
 import android.support.annotation.VisibleForTesting;
 
+import com.sunny.datalayer.local.db.DatabaseHelper;
+import com.sunny.datalayer.local.preferences.PreferencesHelper;
 import com.sunny.datalayer.model.bean.Subject;
 import com.sunny.datalayer.model.entity.InTheatersEntity;
+import com.sunny.datalayer.remote.MainRetrofitService;
+import com.sunny.datalayer.remote.RetrofitHelper;
 
 import java.util.List;
 
@@ -13,10 +17,6 @@ import javax.inject.Singleton;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
-import uk.co.ribot.androidboilerplate.data.local.DatabaseHelper;
-import uk.co.ribot.androidboilerplate.data.local.PreferencesHelper;
-import uk.co.ribot.androidboilerplate.data.remote.RetrofitHelper;
-import uk.co.ribot.androidboilerplate.data.remote.RetrofitService;
 
 @Singleton
 public class DataManager {
@@ -38,11 +38,10 @@ public class DataManager {
     }
 
     public Observable<Subject> syncSubjects() {
-        return mRetrofitHelper.getRetrofitService().getSubjects()
+        return mRetrofitHelper.getMainRetrofitService().getSubjects()
                 .concatMap(new Function<InTheatersEntity, ObservableSource<? extends Subject>>() {
                     @Override
-                    public ObservableSource<? extends Subject> apply(InTheatersEntity inTheatersEntity)
-                            throws Exception {
+                    public ObservableSource<? extends Subject> apply(InTheatersEntity inTheatersEntity) {
                         return mDatabaseHelper.setSubjects(inTheatersEntity.subjects());
                     }
                 });
@@ -53,12 +52,11 @@ public class DataManager {
     }
 
     @VisibleForTesting
-    public Observable<Subject> syncSubjects(RetrofitService retrofitService) {
-        return retrofitService.getSubjects()
+    public Observable<Subject> syncSubjects(MainRetrofitService mainRetrofitService) {
+        return mainRetrofitService.getSubjects()
                 .concatMap(new Function<InTheatersEntity, ObservableSource<? extends Subject>>() {
                     @Override
-                    public ObservableSource<? extends Subject> apply(InTheatersEntity inTheatersEntity)
-                            throws Exception {
+                    public ObservableSource<? extends Subject> apply(InTheatersEntity inTheatersEntity) {
                         return mDatabaseHelper.setSubjects(inTheatersEntity.subjects());
                     }
                 });
