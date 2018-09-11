@@ -1,4 +1,4 @@
-package com.sunny.commonbusiness.utils;
+package com.sunny.common.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

@@ -3,8 +3,8 @@ package uk.co.ribot.androidboilerplate.ui.base;
 import android.os.Bundle;
 import android.support.v4.util.LongSparseArray;
 
+import com.sunny.common.utils.LogUtil;
 import com.sunny.commonbusiness.base.BaseActivity;
-import com.sunny.commonbusiness.utils.LogUtil;
 
 import java.util.concurrent.atomic.AtomicLong;
 

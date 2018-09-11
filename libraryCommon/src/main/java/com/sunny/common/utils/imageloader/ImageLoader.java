@@ -1,9 +1,9 @@
-package com.sunny.commonbusiness.utils.imageloader;
+package com.sunny.common.utils.imageloader;
 
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.sunny.commonbusiness.R;
+import com.sunny.common.R;
 
 /**
  * 图片加载功能抽象类

@@ -3,9 +3,10 @@ package uk.co.ribot.androidboilerplate.injection.module;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
+import com.sunny.common.injection.qualifier.FragmentContext;
+
 import dagger.Module;
 import dagger.Provides;
-import uk.co.ribot.androidboilerplate.injection.qualifier.FragmentContext;
 
 @Module
 public class FragmentModule {

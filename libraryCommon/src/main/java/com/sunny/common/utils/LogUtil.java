@@ -1,6 +1,6 @@
-package com.sunny.commonbusiness.utils;
+package com.sunny.common.utils;
 
-import com.sunny.commonbusiness.BuildConfig;
+import com.sunny.common.BuildConfig;
 
 import timber.log.Timber;
 

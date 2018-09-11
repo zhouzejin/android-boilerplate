@@ -1,15 +1,13 @@
-package uk.co.ribot.androidboilerplate.injection.scope;
+package com.sunny.common.injection.scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 import javax.inject.Scope;
 
-import uk.co.ribot.androidboilerplate.injection.component.ConfigPersistentComponent;
-
 /**
  * A scoping annotation to permit dependencies conform to the life of the
- * {@link ConfigPersistentComponent}
+ * {ConfigPersistentComponent}
  */
 @Scope
 @Retention(RetentionPolicy.RUNTIME)

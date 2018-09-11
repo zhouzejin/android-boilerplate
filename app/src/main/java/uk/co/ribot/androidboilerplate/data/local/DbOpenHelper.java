@@ -5,13 +5,12 @@ import android.arch.persistence.db.SupportSQLiteOpenHelper;
 import android.arch.persistence.db.framework.FrameworkSQLiteOpenHelperFactory;
 import android.content.Context;
 
-import com.sunny.commonbusiness.utils.LogUtil;
+import com.sunny.common.injection.qualifier.ApplicationContext;
+import com.sunny.common.utils.LogUtil;
 import com.sunny.datalayer.model.bean.Subject;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import uk.co.ribot.androidboilerplate.injection.qualifier.ApplicationContext;
 
 @Singleton
 public class DbOpenHelper {

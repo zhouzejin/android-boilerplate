@@ -1,4 +1,4 @@
-package com.sunny.commonbusiness.utils;
+package com.sunny.common.utils;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;

@@ -1,9 +1,10 @@
 package uk.co.ribot.androidboilerplate.injection.component;
 
+import com.sunny.common.injection.scope.InActivity;
+
 import dagger.Subcomponent;
 import uk.co.ribot.androidboilerplate.BoilerplateApplication;
 import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
-import uk.co.ribot.androidboilerplate.injection.scope.InActivity;
 
 /**
  * This is a Dagger component. Refer to {@link BoilerplateApplication} for the list of Dagger components

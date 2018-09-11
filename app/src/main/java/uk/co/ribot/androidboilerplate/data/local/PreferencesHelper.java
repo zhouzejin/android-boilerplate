@@ -3,10 +3,10 @@ package uk.co.ribot.androidboilerplate.data.local;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.sunny.common.injection.qualifier.ApplicationContext;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import uk.co.ribot.androidboilerplate.injection.qualifier.ApplicationContext;
 
 @Singleton
 public class PreferencesHelper {

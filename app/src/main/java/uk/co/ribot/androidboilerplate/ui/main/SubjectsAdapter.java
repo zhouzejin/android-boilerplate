@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sunny.commonbusiness.utils.imageloader.ImageLoader;
+import com.sunny.common.injection.qualifier.FragmentContext;
+import com.sunny.common.utils.imageloader.ImageLoader;
 import com.sunny.datalayer.model.bean.Subject;
 
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import uk.co.ribot.androidboilerplate.R;
-import uk.co.ribot.androidboilerplate.injection.qualifier.FragmentContext;
 
 public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.SubjectViewHolder> {
 

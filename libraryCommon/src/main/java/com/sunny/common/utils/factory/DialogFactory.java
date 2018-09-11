@@ -1,11 +1,11 @@
-package com.sunny.commonbusiness.utils.factory;
+package com.sunny.common.utils.factory;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 
-import com.sunny.commonbusiness.R;
+import com.sunny.common.R;
 
 public final class DialogFactory {
 

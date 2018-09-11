@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sunny.commonbusiness.utils;
+package com.sunny.common.utils;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;

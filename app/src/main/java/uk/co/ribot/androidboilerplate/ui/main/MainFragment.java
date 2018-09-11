@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.sunny.commonbusiness.utils.factory.DialogFactory;
+import com.sunny.common.utils.factory.DialogFactory;
 import com.sunny.datalayer.model.bean.Subject;
 
 import java.util.Collections;

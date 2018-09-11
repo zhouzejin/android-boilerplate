@@ -7,10 +7,10 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 
-import com.sunny.commonbusiness.utils.AndroidComponentUtil;
-import com.sunny.commonbusiness.utils.LogUtil;
-import com.sunny.commonbusiness.utils.NetworkUtil;
-import com.sunny.commonbusiness.utils.RxUtil;
+import com.sunny.common.utils.AndroidComponentUtil;
+import com.sunny.common.utils.LogUtil;
+import com.sunny.common.utils.NetworkUtil;
+import com.sunny.common.utils.RxUtil;
 import com.sunny.datalayer.model.bean.Subject;
 
 import javax.inject.Inject;

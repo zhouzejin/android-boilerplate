@@ -1,4 +1,4 @@
-package com.sunny.commonbusiness.utils.singleton;
+package com.sunny.common.utils.singleton;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
