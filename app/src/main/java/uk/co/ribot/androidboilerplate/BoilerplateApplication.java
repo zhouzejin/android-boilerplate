@@ -1,16 +1,12 @@
 package uk.co.ribot.androidboilerplate;
 
-import android.app.Application;
+import com.sunny.commonbusiness.base.BaseApplication;
 
-import com.sunny.common.utils.LogUtil;
-
-public class BoilerplateApplication extends Application  {
+public class BoilerplateApplication extends BaseApplication {
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-        LogUtil.initLog();
     }
 
 }

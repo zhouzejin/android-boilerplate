@@ -41,7 +41,7 @@ public class MainBaseActivity extends BaseActivity {
         if (mConfigPersistentComponent == null) {
             LogUtil.i("Creating new ConfigPersistentComponent id=%d", mActivityId);
             mConfigPersistentComponent = DaggerConfigPersistentComponent.builder()
-                    .applicationComponent(MainApplication.get(this).getComponent())
+                    .applicationComponent(MainApplication.getComponent())
                     .build();
             sComponentsMap.put(mActivityId, mConfigPersistentComponent);
         }

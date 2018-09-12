@@ -37,7 +37,7 @@ public class SyncService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        MainApplication.get(this).getComponent().inject(this);
+        MainApplication.getComponent().inject(this);
     }
 
     @Override
