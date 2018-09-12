@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.data;
+package com.sunny.main.data;
 
 import android.support.annotation.VisibleForTesting;
 

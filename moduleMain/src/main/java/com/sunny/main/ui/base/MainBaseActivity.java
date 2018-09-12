@@ -1,18 +1,17 @@
-package uk.co.ribot.androidboilerplate.ui.base;
+package com.sunny.main.ui.base;
 
 import android.os.Bundle;
 import android.support.v4.util.LongSparseArray;
 
 import com.sunny.common.utils.LogUtil;
 import com.sunny.commonbusiness.base.BaseActivity;
+import com.sunny.main.MainApplication;
+import com.sunny.main.injection.component.ActivityComponent;
+import com.sunny.main.injection.component.ConfigPersistentComponent;
+import com.sunny.main.injection.component.DaggerConfigPersistentComponent;
+import com.sunny.main.injection.module.ActivityModule;
 
 import java.util.concurrent.atomic.AtomicLong;
-
-import uk.co.ribot.androidboilerplate.BoilerplateApplication;
-import uk.co.ribot.androidboilerplate.injection.component.ActivityComponent;
-import uk.co.ribot.androidboilerplate.injection.component.ConfigPersistentComponent;
-import uk.co.ribot.androidboilerplate.injection.component.DaggerConfigPersistentComponent;
-import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
 
 /**
  * Abstract activity that every other Activity in this application must implement. It handles
@@ -42,7 +41,7 @@ public class MainBaseActivity extends BaseActivity {
         if (mConfigPersistentComponent == null) {
             LogUtil.i("Creating new ConfigPersistentComponent id=%d", mActivityId);
             mConfigPersistentComponent = DaggerConfigPersistentComponent.builder()
-                    .applicationComponent(BoilerplateApplication.get(this).getComponent())
+                    .applicationComponent(MainApplication.get(this).getComponent())
                     .build();
             sComponentsMap.put(mActivityId, mConfigPersistentComponent);
         }

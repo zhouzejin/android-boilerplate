@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.data;
+package com.sunny.main.data;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -12,13 +12,13 @@ import com.sunny.common.utils.LogUtil;
 import com.sunny.common.utils.NetworkUtil;
 import com.sunny.common.utils.RxUtil;
 import com.sunny.datalayer.model.bean.Subject;
+import com.sunny.main.MainApplication;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import uk.co.ribot.androidboilerplate.BoilerplateApplication;
 
 public class SyncService extends Service {
 
@@ -37,7 +37,7 @@ public class SyncService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        BoilerplateApplication.get(this).getComponent().inject(this);
+        MainApplication.get(this).getComponent().inject(this);
     }
 
     @Override

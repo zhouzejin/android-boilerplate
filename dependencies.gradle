@@ -19,7 +19,7 @@ final GSON_VERSION = '2.8.5'
 
 final GLIDE_VERSION = '3.8.0'
 
-final BUTTERKNIFE_VERSION = '8.8.1'
+final BUTTERKNIFE_VERSION = '8.4.0'
 
 final TIMBER_VERSION = '4.7.1'
 

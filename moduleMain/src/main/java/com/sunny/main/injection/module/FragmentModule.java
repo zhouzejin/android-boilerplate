@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.injection.module;
+package com.sunny.main.injection.module;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

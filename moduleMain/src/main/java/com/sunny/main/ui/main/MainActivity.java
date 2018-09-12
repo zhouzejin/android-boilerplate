@@ -1,14 +1,13 @@
-package uk.co.ribot.androidboilerplate.ui.main;
+package com.sunny.main.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.sunny.common.utils.ActivityUtil;
-
-import uk.co.ribot.androidboilerplate.R;
-import uk.co.ribot.androidboilerplate.data.SyncService;
-import uk.co.ribot.androidboilerplate.ui.base.MainBaseActivity;
+import com.sunny.main.R;
+import com.sunny.main.data.SyncService;
+import com.sunny.main.ui.base.MainBaseActivity;
 
 public class MainActivity extends MainBaseActivity {
 

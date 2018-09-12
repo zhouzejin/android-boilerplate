@@ -1,13 +1,12 @@
-package uk.co.ribot.androidboilerplate.ui.base;
+package com.sunny.main.ui.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.sunny.commonbusiness.base.BaseFragment;
-
-import uk.co.ribot.androidboilerplate.injection.component.FragmentComponent;
-import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
-import uk.co.ribot.androidboilerplate.injection.module.FragmentModule;
+import com.sunny.main.injection.component.FragmentComponent;
+import com.sunny.main.injection.module.ActivityModule;
+import com.sunny.main.injection.module.FragmentModule;
 
 /**
  * Abstract fragment that every other Fragment in this application must implement.

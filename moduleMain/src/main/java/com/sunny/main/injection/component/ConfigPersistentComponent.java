@@ -1,11 +1,11 @@
-package uk.co.ribot.androidboilerplate.injection.component;
+package com.sunny.main.injection.component;
 
 import com.sunny.common.injection.scope.ConfigPersistent;
+import com.sunny.main.injection.module.ActivityModule;
+import com.sunny.main.injection.module.FragmentModule;
+import com.sunny.main.ui.base.MainBaseActivity;
 
 import dagger.Component;
-import uk.co.ribot.androidboilerplate.injection.module.ActivityModule;
-import uk.co.ribot.androidboilerplate.injection.module.FragmentModule;
-import uk.co.ribot.androidboilerplate.ui.base.MainBaseActivity;
 
 /**
  * A dagger component that will live during the lifecycle of an Activity but it won't

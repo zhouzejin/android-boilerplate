@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.ui.main;
+package com.sunny.main.ui.main;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.sunny.common.injection.qualifier.FragmentContext;
 import com.sunny.common.utils.imageloader.ImageLoader;
 import com.sunny.datalayer.model.bean.Subject;
+import com.sunny.main.R;
+import com.sunny.main.R2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import uk.co.ribot.androidboilerplate.R;
 
 public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.SubjectViewHolder> {
 
@@ -63,11 +64,11 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.Subjec
 
     class SubjectViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.iv_pic)
+        @BindView(R2.id.iv_pic)
         ImageView imageView;
-        @BindView(R.id.text_title)
+        @BindView(R2.id.text_title)
         TextView titleTextView;
-        @BindView(R.id.text_genres)
+        @BindView(R2.id.text_genres)
         TextView genresTextView;
 
         public SubjectViewHolder(View itemView) {

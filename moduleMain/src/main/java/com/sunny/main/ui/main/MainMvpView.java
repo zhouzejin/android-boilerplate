@@ -1,4 +1,4 @@
-package uk.co.ribot.androidboilerplate.ui.main;
+package com.sunny.main.ui.main;
 
 import com.sunny.commonbusiness.base.MvpView;
 import com.sunny.datalayer.model.bean.Subject;

@@ -91,13 +91,9 @@ android {
 }
 
 dependencies {
-    // TODO 模块化完成后要去掉
     implementation project(':libraryOpenSource')
     implementation project(':libraryCommon')
-
     implementation project(':componentCommonBusiness')
-    implementation project(':componentDataLayer')
 
-    annotationProcessor rootProject.ext.dagger["dagger-compiler"]
     annotationProcessor rootProject.ext.utils["butterknife-compiler"]
 }

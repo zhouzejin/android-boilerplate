@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -24,4 +25,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':libraryOpenSource')
+    implementation project(':libraryCommon')
+    implementation project(':componentCommonBusiness')
+    implementation project(':componentDataLayer')
+
+    annotationProcessor rootProject.ext.dagger["dagger-compiler"]
+    annotationProcessor rootProject.ext.utils["butterknife-compiler"]
 }

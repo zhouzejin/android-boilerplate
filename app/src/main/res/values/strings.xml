@@ -4,7 +4,4 @@
     <string name="action_settings">Settings</string>
     
     <string name="goto_main_module">跳转到主模块</string>
-
-    <string name="empty_subjects">There aren\'t any subjects</string>
-    <string name="error_loading_subjects">There was a problem loading the subjects</string>
 </resources>
