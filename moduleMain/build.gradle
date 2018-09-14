@@ -26,8 +26,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(':libraryOpenSource')
-    implementation project(':libraryCommon')
     implementation project(':componentCommonBusiness')
     implementation project(':componentDataLayer')
 

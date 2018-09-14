@@ -17,7 +17,7 @@ public class MainApplication extends BaseApplication {
     public static ApplicationComponent getComponent() {
         if (sApplicationComponent == null) {
             sApplicationComponent = DaggerApplicationComponent.builder()
-                    .applicationModule(new ApplicationModule(BaseApplication.getApplication()))
+                    .applicationModule(new ApplicationModule(getApplication()))
                     .build();
         }
         return sApplicationComponent;
