@@ -47,10 +47,11 @@ dependencies {
     api rootProject.ext.auto_value["gson"]
     api rootProject.ext.auto_value["auto-value-annotations"]
     api rootProject.ext.auto_value["auto-value-parcel-adapter"]
-    api rootProject.ext.auto_value["uto-value-cursor-annotations"]
+    api rootProject.ext.auto_value["auto-value-cursor-annotations"]
     api rootProject.ext.auto_value["auto-value-gson-annotations"]
 
     api rootProject.ext.utils["glide"]
     api rootProject.ext.utils["butterknife"]
     api rootProject.ext.utils["timber"]
+    api rootProject.ext.utils["arouter-api"]
 }

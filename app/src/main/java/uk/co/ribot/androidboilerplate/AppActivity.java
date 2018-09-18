@@ -1,10 +1,9 @@
 package uk.co.ribot.androidboilerplate;
 
-import android.content.Intent;
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.sunny.commonbusiness.base.BaseActivity;
-import com.sunny.main.ui.main.MainActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -23,7 +22,7 @@ public class AppActivity extends BaseActivity {
 
     @OnClick(R.id.btn_goto_main)
     void gotoMain() {
-        startActivity(new Intent(AppActivity.this, MainActivity.class));
+        ARouter.getInstance().build("/main/MainActivity").navigation();
     }
 
     @Override

@@ -23,6 +23,8 @@ final BUTTERKNIFE_VERSION = '8.4.0'
 
 final TIMBER_VERSION = '4.7.1'
 
+final AROUTER_VERSION = '1.2.0'
+
 project.ext {
     support = [
             "appcompat-v7"       : "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION",
@@ -54,21 +56,23 @@ project.ext {
     ]
 
     auto_value = [
-            "gson"                        : "com.google.code.gson:gson:$GSON_VERSION",
-            "auto-value"                  : "com.google.auto.value:auto-value:$AUTO_VALUE_VERSION",
-            "auto-value-annotations"      : "com.google.auto.value:auto-value-annotations:$AUTO_VALUE_VERSION",
-            "auto-value-parcel"           : "com.ryanharter.auto.value:auto-value-parcel:$AUTO_VALUE_PARCEL_VERSION",
-            "auto-value-parcel-adapter"   : "com.ryanharter.auto.value:auto-value-parcel-adapter:$AUTO_VALUE_PARCEL_VERSION",
-            "auto-value-cursor"           : "com.gabrielittner.auto.value:auto-value-cursor:$AUTO_VALUE_CURSOR_VERSION",
-            "uto-value-cursor-annotations": "com.gabrielittner.auto.value:auto-value-cursor-annotations:$AUTO_VALUE_CURSOR_VERSION",
-            "auto-value-gson"             : "com.ryanharter.auto.value:auto-value-gson:$AUTO_VALUE_GSON_VERSION",
-            "auto-value-gson-annotations" : "com.ryanharter.auto.value:auto-value-gson-annotations:$AUTO_VALUE_GSON_VERSION"
+            "gson"                         : "com.google.code.gson:gson:$GSON_VERSION",
+            "auto-value"                   : "com.google.auto.value:auto-value:$AUTO_VALUE_VERSION",
+            "auto-value-annotations"       : "com.google.auto.value:auto-value-annotations:$AUTO_VALUE_VERSION",
+            "auto-value-parcel"            : "com.ryanharter.auto.value:auto-value-parcel:$AUTO_VALUE_PARCEL_VERSION",
+            "auto-value-parcel-adapter"    : "com.ryanharter.auto.value:auto-value-parcel-adapter:$AUTO_VALUE_PARCEL_VERSION",
+            "auto-value-cursor"            : "com.gabrielittner.auto.value:auto-value-cursor:$AUTO_VALUE_CURSOR_VERSION",
+            "auto-value-cursor-annotations": "com.gabrielittner.auto.value:auto-value-cursor-annotations:$AUTO_VALUE_CURSOR_VERSION",
+            "auto-value-gson"              : "com.ryanharter.auto.value:auto-value-gson:$AUTO_VALUE_GSON_VERSION",
+            "auto-value-gson-annotations"  : "com.ryanharter.auto.value:auto-value-gson-annotations:$AUTO_VALUE_GSON_VERSION"
     ]
 
     utils = [
             "glide"               : "com.github.bumptech.glide:glide:$GLIDE_VERSION",
             "butterknife"         : "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION",
             "butterknife-compiler": "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION",
-            "timber"              : "com.jakewharton.timber:timber:$TIMBER_VERSION"
+            "timber"              : "com.jakewharton.timber:timber:$TIMBER_VERSION",
+            "arouter-api"         : "com.alibaba:arouter-api:$AROUTER_VERSION",
+            "arouter-compiler"    : "com.alibaba:arouter-compiler:$AROUTER_VERSION"
     ]
 }

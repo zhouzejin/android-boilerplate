@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.sunny.common.utils.ActivityUtil;
 import com.sunny.main.R;
 import com.sunny.main.data.SyncService;
 import com.sunny.main.ui.base.MainBaseActivity;
 
+@Route(path = "/main/MainActivity")
 public class MainActivity extends MainBaseActivity {
 
     private static final String EXTRA_TRIGGER_SYNC_FLAG =
