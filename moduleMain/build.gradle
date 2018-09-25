@@ -1,5 +1,8 @@
-apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
+if (isModule.toBoolean()) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -27,6 +30,14 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            if (isModule.toBoolean()) {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            }
+        }
+    }
+
 }
 
 dependencies {
@@ -36,6 +47,5 @@ dependencies {
     implementation project(':componentDataLayer')
 
     annotationProcessor rootProject.ext.dagger["dagger-compiler"]
-    annotationProcessor rootProject.ext.utils["butterknife-compiler"]
     annotationProcessor rootProject.ext.utils["arouter-compiler"]
 }

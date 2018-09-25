@@ -4,20 +4,18 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.sunny.common.utils.factory.DialogFactory;
 import com.sunny.datalayer.model.bean.Subject;
 import com.sunny.main.R;
-import com.sunny.main.R2;
 import com.sunny.main.ui.base.MainBaseFragment;
 
 import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
 
 public class MainFragment extends MainBaseFragment implements MainMvpView {
 
@@ -26,7 +24,6 @@ public class MainFragment extends MainBaseFragment implements MainMvpView {
     @Inject
     SubjectsAdapter mSubjectsAdapter;
 
-    @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
 
     public MainFragment() {
@@ -51,7 +48,8 @@ public class MainFragment extends MainBaseFragment implements MainMvpView {
     }
 
     @Override
-    public void initViews(Bundle savedInstanceState) {
+    public void initViews(View view, Bundle savedInstanceState) {
+        mRecyclerView = view.findViewById(R.id.recycler_view);
         mRecyclerView.setAdapter(mSubjectsAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mMainPresenter.attachView(this);

@@ -41,7 +41,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initViews(savedInstanceState);
+        initViews(view, savedInstanceState);
     }
 
     @Override
@@ -65,8 +65,9 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 初始化View
      *
-     * @param savedInstanceState
+     * @param view 填充的视图
+     * @param savedInstanceState 需要还原的数据
      */
-    public abstract void initViews(Bundle savedInstanceState);
+    public abstract void initViews(View view, Bundle savedInstanceState);
 
 }

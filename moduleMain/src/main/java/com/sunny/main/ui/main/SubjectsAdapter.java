@@ -12,15 +12,11 @@ import com.sunny.common.injection.qualifier.FragmentContext;
 import com.sunny.common.utils.imageloader.ImageLoader;
 import com.sunny.datalayer.model.bean.Subject;
 import com.sunny.main.R;
-import com.sunny.main.R2;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.SubjectViewHolder> {
 
@@ -64,16 +60,15 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.Subjec
 
     class SubjectViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R2.id.iv_pic)
         ImageView imageView;
-        @BindView(R2.id.text_title)
         TextView titleTextView;
-        @BindView(R2.id.text_genres)
         TextView genresTextView;
 
         public SubjectViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            imageView = itemView.findViewById(R.id.iv_pic);
+            titleTextView = itemView.findViewById(R.id.text_title);
+            genresTextView = itemView.findViewById(R.id.text_genres);
         }
     }
 }
