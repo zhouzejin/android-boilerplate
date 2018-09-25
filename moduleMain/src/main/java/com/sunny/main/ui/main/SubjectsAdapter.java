@@ -40,7 +40,7 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.Subjec
     @Override
     public SubjectViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_subject, parent, false);
+                .inflate(R.layout.main_item_subject, parent, false);
         return new SubjectViewHolder(itemView);
     }
 

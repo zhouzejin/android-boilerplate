@@ -44,7 +44,7 @@ public class MainFragment extends MainBaseFragment implements MainMvpView {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_main;
+        return R.layout.main_fragment_main;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class MainFragment extends MainBaseFragment implements MainMvpView {
 
     @Override
     public void showError() {
-        DialogFactory.createGenericErrorDialog(getContext(), getString(R.string.error_loading_subjects))
+        DialogFactory.createGenericErrorDialog(getContext(), getString(R.string.main_error_loading_subjects))
                 .show();
     }
 
@@ -88,7 +88,7 @@ public class MainFragment extends MainBaseFragment implements MainMvpView {
     public void showSubjectsEmpty() {
         mSubjectsAdapter.setSubjects(Collections.<Subject>emptyList());
         mSubjectsAdapter.notifyDataSetChanged();
-        Toast.makeText(getContext(), R.string.empty_subjects, Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), R.string.main_empty_subjects, Toast.LENGTH_LONG).show();
     }
 
 }
