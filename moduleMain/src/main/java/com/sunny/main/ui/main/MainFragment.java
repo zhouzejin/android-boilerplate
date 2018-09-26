@@ -9,7 +9,6 @@ import android.widget.Toast;
 import com.sunny.common.utils.factory.DialogFactory;
 import com.sunny.datalayer.model.bean.Subject;
 import com.sunny.main.R;
-import com.sunny.main.R2;
 import com.sunny.main.ui.base.MainBaseFragment;
 
 import java.util.Collections;
@@ -26,7 +25,7 @@ public class MainFragment extends MainBaseFragment implements MainMvpView {
     @Inject
     SubjectsAdapter mSubjectsAdapter;
 
-    @BindView(R2.id.recycler_view)
+    @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
     public MainFragment() {

@@ -93,7 +93,5 @@ android {
 dependencies {
     implementation project(':componentCommonBusiness')
 
-    implementation project(':moduleMain')
-
     annotationProcessor rootProject.ext.utils["butterknife-compiler"]
 }

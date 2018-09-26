@@ -12,7 +12,6 @@ import com.sunny.common.injection.qualifier.FragmentContext;
 import com.sunny.common.utils.imageloader.ImageLoader;
 import com.sunny.datalayer.model.bean.Subject;
 import com.sunny.main.R;
-import com.sunny.main.R2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +63,11 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.Subjec
 
     class SubjectViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R2.id.iv_pic)
+        @BindView(R.id.iv_pic)
         ImageView imageView;
-        @BindView(R2.id.text_title)
+        @BindView(R.id.text_title)
         TextView titleTextView;
-        @BindView(R2.id.text_genres)
+        @BindView(R.id.text_genres)
         TextView genresTextView;
 
         public SubjectViewHolder(View itemView) {
