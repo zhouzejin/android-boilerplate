@@ -23,7 +23,7 @@ final BUTTERKNIFE_VERSION = '8.4.0'
 
 final TIMBER_VERSION = '4.7.1'
 
-final REPLUGIN_VERSION = '2.2.4'
+final REPLUGIN_VERSION = '2.3.0'
 
 project.ext {
     support = [
@@ -72,6 +72,7 @@ project.ext {
             "butterknife"         : "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION",
             "butterknife-compiler": "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION",
             "timber"              : "com.jakewharton.timber:timber:$TIMBER_VERSION",
-            "replugin-plugin-lib" : "com.qihoo360.replugin:replugin-plugin-lib:$REPLUGIN_VERSION"
+            "replugin-plugin-lib" : "com.qihoo360.replugin:replugin-plugin-lib:$REPLUGIN_VERSION",
+            "replugin-host-lib"   : "com.qihoo360.replugin:replugin-host-lib:$REPLUGIN_VERSION"
     ]
 }

@@ -6,7 +6,8 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId rootProject.ext.applicationId
+        applicationId "uk.co.ribot.androidboilerplate"
+
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
 
@@ -69,14 +70,14 @@ android {
     }
 
     // APK Splits
-    splits {
+    /*splits {
         abi {
             enable true
             reset()
             include 'armeabi', 'x86' // 'x86', 'armeabi-v7a', 'mips'
             universalApk true
         }
-    }
+    }*/
 
     packagingOptions {
         exclude 'LICENSE'
@@ -90,8 +91,16 @@ android {
     }
 }
 
+apply plugin: 'replugin-host-gradle'
+
+repluginHostConfig {
+    useAppCompat = true
+}
+
 dependencies {
     implementation project(':componentCommonBusiness')
 
     annotationProcessor rootProject.ext.utils["butterknife-compiler"]
+
+    implementation rootProject.ext.utils["replugin-host-lib"]
 }

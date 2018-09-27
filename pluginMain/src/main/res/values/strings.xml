@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ModuleMain</string>
+    <string name="app_name">PluginMain</string>
 
     <string name="empty_subjects">There aren\'t any subjects</string>
     <string name="error_loading_subjects">There was a problem loading the subjects</string>
