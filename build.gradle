@@ -1,11 +1,5 @@
 buildscript {
     repositories {
-        jcenter {
-            url "http://jcenter.bintray.com/"
-        }
-        maven {
-            url 'https://maven.google.com'
-        }
         mavenCentral()
         jcenter()
         google()
@@ -14,16 +8,11 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
         classpath 'com.squareup.sqldelight:gradle-plugin:0.7.0'
+        classpath 'com.qihoo360.replugin:replugin-plugin-gradle:2.2.4'
     }
 
     allprojects {
         repositories {
-            jcenter {
-                url "http://jcenter.bintray.com/"
-            }
-            maven {
-                url 'https://maven.google.com'
-            }
             mavenCentral()
             jcenter()
             google()
