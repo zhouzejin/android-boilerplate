@@ -3,4 +3,4 @@ include ':app',
         ':libraryCommon',
         ':componentCommonBusiness',
         ':componentDataLayer',
-        ':moduleMain'
+        ':pluginMain'
