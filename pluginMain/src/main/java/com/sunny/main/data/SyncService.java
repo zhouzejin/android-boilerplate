@@ -46,7 +46,8 @@ public class SyncService extends Service {
 
         if (!NetworkUtil.isNetworkConnected(this)) {
             LogUtil.i("Sync canceled, connection not available");
-            AndroidComponentUtil.toggleComponent(this, SyncOnConnectionAvailable.class, true);
+            // RePlugin暂不支持PackageManager#setComponentEnabledSetting方法开启或关闭组件
+            // AndroidComponentUtil.toggleComponent(this, SyncOnConnectionAvailable.class, true);
             stopSelf(startId);
             return START_NOT_STICKY;
         }
@@ -99,7 +100,8 @@ public class SyncService extends Service {
             if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)
                     && NetworkUtil.isNetworkConnected(context)) {
                 LogUtil.i("Connection is now available, triggering sync...");
-                AndroidComponentUtil.toggleComponent(context, this.getClass(), false);
+                // RePlugin暂不支持PackageManager#setComponentEnabledSetting方法开启或关闭组件
+                // AndroidComponentUtil.toggleComponent(context, this.getClass(), false);
                 context.startService(getStartIntent(context));
             }
         }

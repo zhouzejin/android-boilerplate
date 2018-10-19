@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 
 import com.qihoo360.replugin.RePlugin;
+import com.qihoo360.replugin.RePluginConfig;
 import com.sunny.commonbusiness.base.BaseApplication;
 
 public class BoilerplateApplication extends BaseApplication {
@@ -12,7 +13,10 @@ public class BoilerplateApplication extends BaseApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
 
-        RePlugin.App.attachBaseContext(this);
+        RePluginConfig rePluginConfig = new RePluginConfig()
+                .setMoveFileWhenInstalling(false)
+                .setVerifySign(!BuildConfig.DEBUG);
+        RePlugin.App.attachBaseContext(this, rePluginConfig);
     }
 
     @Override

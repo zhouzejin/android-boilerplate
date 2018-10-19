@@ -6,8 +6,20 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/btn_install_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/install_main_plugin" />
+
+    <Button
         android:id="@+id/btn_goto_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/goto_main_module" />
+        android:text="@string/goto_main_plugin" />
+
+    <Button
+        android:id="@+id/btn_uninstall_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/uninstall_main_plugin" />
 </LinearLayout>

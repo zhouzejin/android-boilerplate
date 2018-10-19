@@ -2,6 +2,8 @@
     <string name="app_name">AndroidBoilerPlate</string>
 
     <string name="action_settings">Settings</string>
-    
-    <string name="goto_main_module">跳转到主模块</string>
+
+    <string name="install_main_plugin">安装主插件</string>
+    <string name="goto_main_plugin">跳转到主插件</string>
+    <string name="uninstall_main_plugin">卸载到主插件</string>
 </resources>
