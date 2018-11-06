@@ -13,6 +13,9 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
         classpath 'com.squareup.sqldelight:gradle-plugin:0.7.0'
+        classpath ('com.tencent.tinker:tinker-patch-gradle-plugin:1.9.9') {
+            exclude group: 'com.android.tools.build', module: 'gradle'
+        }
     }
 
     allprojects {

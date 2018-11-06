@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.squareup.sqldelight'
-apply from: '../config/quality/quality.gradle'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -16,6 +15,15 @@ android {
         versionName rootProject.ext.versionName
 
         testInstrumentationRunner "${applicationId}.runner.RxAndroidJUnitRunner"
+
+        // You can use multiDex and install it in your ApplicationLifeCycle implement
+        multiDexEnabled true
+    }
+
+    // Tinker Recommend
+    dexOptions {
+        // 支持大工程模式
+        jumboMode = true
     }
 
     signingConfigs {
@@ -132,6 +140,9 @@ dependencies {
 
     final TIMBER_VERSION = '4.7.1'
 
+    final TINKER_VERSION = '1.9.9'
+    final MULTIDEX_VERSION = '1.0.1'
+
     final JUNIT_VERSION = '4.12'
     final MOCKITO_VERSION = '2.20.1'
     final HAMCREST_VERSION = '1.3'
@@ -176,6 +187,10 @@ dependencies {
     def libButterknifeCompiler = "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
 
     def libTimber = "com.jakewharton.timber:timber:$TIMBER_VERSION"
+
+    def libTinker = "com.tencent.tinker:tinker-android-lib:$TINKER_VERSION"
+    def libTinkerAnno = "com.tencent.tinker:tinker-android-anno:$TINKER_VERSION"
+    def libMultidex = "com.android.support:multidex:$MULTIDEX_VERSION"
 
     def libJUnit = "junit:junit:$JUNIT_VERSION"
     def libMockitoCore = "org.mockito:mockito-core:$MOCKITO_VERSION"
@@ -232,6 +247,14 @@ dependencies {
 
     implementation libTimber
 
+    // Tinker的核心库
+    implementation libTinker
+    // 可选，用于生成Application类
+    compileOnly libTinkerAnno
+    annotationProcessor libTinkerAnno
+    // Tinker需要使用到MulitDex
+    implementation libMultidex
+
 
     // Unit tests dependencies
     testImplementation libJUnit
@@ -256,6 +279,9 @@ dependencies {
     androidTestImplementation libSupportTestRunner
     androidTestImplementation libSupportTestRules
 }
+
+apply from: '../config/quality/quality.gradle'
+apply from: 'tinker.gradle'
 
 // Log out test results to console
 tasks.matching { it instanceof Test }.all {
