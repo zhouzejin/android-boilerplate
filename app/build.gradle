@@ -18,6 +18,15 @@ android {
 
         // You can use multiDex and install it in your ApplicationLifeCycle implement
         multiDexEnabled true
+
+        buildConfigField "String", "MESSAGE", "\"I am the base apk\""
+//        buildConfigField "String", "MESSAGE", "\"I am the patch apk\""
+        /**
+         * client version would update with patch
+         * so we can get the newly git version easily!
+         */
+        buildConfigField "String", "TINKER_ID", "\"${getTinkerIdValue()}\""
+        buildConfigField "String", "PLATFORM", "\"all\""
     }
 
     // Tinker Recommend
@@ -281,6 +290,10 @@ dependencies {
 }
 
 apply from: '../config/quality/quality.gradle'
+
+def getTinkerIdValue() {
+    return hasProperty("TINKER_ID") ? TINKER_ID : rootProject.ext.versionName
+}
 apply from: 'tinker.gradle'
 
 // Log out test results to console

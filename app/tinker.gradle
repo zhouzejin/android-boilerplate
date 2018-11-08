@@ -24,6 +24,15 @@ ext {
     tinkerBuildFlavorDirectory = "${bakPath}/app-flavor"
 }
 
+/**
+ * app的生成目录是：主Module（一般是名为app）/build/bakApk文件夹。
+ * 补丁包的生成路径：主Module（一般是名为app）/build/outputs/apk/tinkerPatch/debug/patch_signed_7zip.apk。
+ * 基础包的名字：old-app.apk，放于bakApk文件夹下。
+ * 基础包的mapping.txt和R.txt文件一般在编译release签名的apk时才会用到。
+ * 在用到mapping.txt文件时，需要重命名为old-app-mapping.txt，放于bakApk文件夹下。
+ * 在用到R.txt文件时，需要重命名为old-app-R.txt，放于bakApk文件夹
+ */
+
 def buildWithTinker() {
     return hasProperty("TINKER_ENABLE") ? Boolean.parseBoolean(TINKER_ENABLE) : ext.tinkerEnabled
 }
@@ -38,10 +47,6 @@ def getApplyMappingPath() {
 
 def getApplyResourceMappingPath() {
     return hasProperty("APPLY_RESOURCE") ? APPLY_RESOURCE : ext.tinkerApplyResourcePath
-}
-
-def getTinkerIdValue() {
-    return hasProperty("TINKER_ID") ? TINKER_ID : rootProject.ext.versionName
 }
 
 def getTinkerBuildFlavorDirectory() {
