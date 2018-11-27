@@ -75,8 +75,8 @@ public class MyPatchListener extends DefaultPatchListener {
         }
 
         if (returnCode == ShareConstants.ERROR_PATCH_OK) {
-            SharedPreferences sp = context.getSharedPreferences(ShareConstants.TINKER_SHARE_PREFERENCE_CONFIG, Context.MODE_MULTI_PROCESS);
-            //optional, only disable this patch file with md5
+            SharedPreferences sp = context.getSharedPreferences(ShareConstants.TINKER_SHARE_PREFERENCE_CONFIG, Context.MODE_PRIVATE);
+            // optional, only disable this patch file with md5
             int fastCrashCount = sp.getInt(patchMd5, 0);
             if (fastCrashCount >= MyUncaughtExceptionHandler.MAX_CRASH_COUNT) {
                 returnCode = TinkerUtils.ERROR_PATCH_CRASH_LIMIT;

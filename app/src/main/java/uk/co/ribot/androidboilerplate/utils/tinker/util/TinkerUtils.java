@@ -101,8 +101,8 @@ public class TinkerUtils {
         try {
             File data = Environment.getDataDirectory();
             StatFs sf = new StatFs(data.getPath());
-            availableSize = (long) sf.getAvailableBlocks() * (long) sf.getBlockSize();
-            allSize = (long) sf.getBlockCount() * (long) sf.getBlockSize();
+            availableSize = sf.getAvailableBlocksLong() * sf.getBlockSizeLong();
+            allSize = sf.getBlockCountLong() * sf.getBlockSizeLong();
         } catch (Exception e) {
             allSize = 0;
         }

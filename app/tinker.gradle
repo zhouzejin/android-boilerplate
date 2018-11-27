@@ -178,7 +178,10 @@ if (buildWithTinker()) {
              * own tinkerLoader, and the classes you use in them
              *
              */
-            loader = []
+            loader = [
+                    // use sample, let BaseBuildInfo unchangeable with tinker
+                    "uk.co.ribot.androidboilerplate.utils.tinker.BaseBuildInfo"
+            ]
         }
 
         // lib相关的配置项

@@ -52,7 +52,7 @@ project.ext {
     buildToolsVersion = "27.0.3"
 
     applicationId = "uk.co.ribot.androidboilerplate"
-    minSdkVersion = 16
+    minSdkVersion = 21
     targetSdkVersion = 27
     versionCode = 1000
     versionName = "0.1.0"

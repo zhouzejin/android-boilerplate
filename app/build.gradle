@@ -102,14 +102,14 @@ android {
     }
 
     // APK Splits
-    splits {
+    /*splits {
         abi {
             enable true
             reset()
             include 'armeabi', 'x86' // 'x86', 'armeabi-v7a', 'mips'
             universalApk true
         }
-    }
+    }*/
 
     packagingOptions {
         exclude 'LICENSE'
@@ -198,7 +198,6 @@ dependencies {
     def libTimber = "com.jakewharton.timber:timber:$TIMBER_VERSION"
 
     def libTinker = "com.tencent.tinker:tinker-android-lib:$TINKER_VERSION"
-    def libTinkerAnno = "com.tencent.tinker:tinker-android-anno:$TINKER_VERSION"
     def libMultidex = "com.android.support:multidex:$MULTIDEX_VERSION"
 
     def libJUnit = "junit:junit:$JUNIT_VERSION"
@@ -258,10 +257,7 @@ dependencies {
 
     // Tinker的核心库
     implementation libTinker
-    // 可选，用于生成Application类
-    compileOnly libTinkerAnno
-    annotationProcessor libTinkerAnno
-    // Tinker需要使用到MulitDex
+    // Tinker需要使用到MultiDex
     implementation libMultidex
 
 

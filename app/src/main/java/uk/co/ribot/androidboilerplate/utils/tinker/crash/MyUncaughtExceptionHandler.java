@@ -134,7 +134,7 @@ public class MyUncaughtExceptionHandler implements Thread.UncaughtExceptionHandl
                 return false;
             }
 
-            SharedPreferences sp = applicationLike.getApplication().getSharedPreferences(ShareConstants.TINKER_SHARE_PREFERENCE_CONFIG, Context.MODE_MULTI_PROCESS);
+            SharedPreferences sp = applicationLike.getApplication().getSharedPreferences(ShareConstants.TINKER_SHARE_PREFERENCE_CONFIG, Context.MODE_PRIVATE);
             int fastCrashCount = sp.getInt(currentVersion, 0) + 1;
             if (fastCrashCount >= MAX_CRASH_COUNT) {
                 MyTinkerReport.onFastCrashProtect();
