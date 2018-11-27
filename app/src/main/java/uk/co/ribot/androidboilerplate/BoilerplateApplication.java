@@ -1,9 +1,14 @@
 package uk.co.ribot.androidboilerplate;
 
 import android.content.Context;
+import android.os.Environment;
+import android.widget.Toast;
 
+import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.tencent.tinker.loader.app.TinkerApplication;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
+
+import java.io.File;
 
 import uk.co.ribot.androidboilerplate.injection.component.ApplicationComponent;
 import uk.co.ribot.androidboilerplate.injection.component.DaggerApplicationComponent;
@@ -28,6 +33,22 @@ public class BoilerplateApplication extends TinkerApplication {
         super.onCreate();
 
         LogUtil.initLog();
+        loadPatch();
+    }
+
+    private void loadPatch() {
+        String patchPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/com.sunny.hotfix/patch_signed_7zip.apk";
+        File patchFile = new File(patchPath);
+        if (!patchFile.exists()) {
+            Toast.makeText(this, "Has no patch!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (!patchFile.canRead()) {
+            Toast.makeText(this, "Has no read permission!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        TinkerInstaller.onReceiveUpgradePatch(this, patchPath);
+        Toast.makeText(this, "Load patch over!", Toast.LENGTH_LONG).show();
     }
 
     public static BoilerplateApplication get(Context context) {
