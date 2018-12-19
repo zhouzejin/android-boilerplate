@@ -1,6 +1,7 @@
 include ':app',
         ':libraryOpenSource',
         ':libraryCommon',
+        ':libraryCordova',
         ':componentCommonBusiness',
         ':componentDataLayer',
         ':moduleMain'
