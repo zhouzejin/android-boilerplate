@@ -1,7 +1,7 @@
 include ':app',
         ':libraryOpenSource',
         ':libraryCommon',
-        ':libraryHybrid',
         ':componentCommonBusiness',
         ':componentDataLayer',
+        ':componentHybrid',
         ':moduleMain'
