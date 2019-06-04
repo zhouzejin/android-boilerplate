@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 
 public interface MainRetrofitService {
 
-    String ENDPOINT = "https://api.douban.com/v2/";
+    String ENDPOINT = "https://douban.uieee.com/v2/";
 
     @GET("movie/in_theaters")
     Observable<InTheatersEntity> getSubjects();
