@@ -1,4 +1,4 @@
-package com.sunny.commonbusiness.base;
+package com.sunny.common.base;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 /**
  * Abstract activity that every other Activity in this application must implement.
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

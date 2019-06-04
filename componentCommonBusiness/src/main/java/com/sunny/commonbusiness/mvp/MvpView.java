@@ -1,4 +1,4 @@
-package com.sunny.commonbusiness.base;
+package com.sunny.commonbusiness.mvp;
 
 
 /**

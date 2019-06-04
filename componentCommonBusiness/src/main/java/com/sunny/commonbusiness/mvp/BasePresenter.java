@@ -1,4 +1,4 @@
-package com.sunny.commonbusiness.base;
+package com.sunny.commonbusiness.mvp;
 
 /**
  * Base class that implements the Presenter interface and provides a base implementation for

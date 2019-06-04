@@ -1,6 +1,6 @@
 package com.sunny.main.ui.main;
 
-import com.sunny.commonbusiness.base.MvpView;
+import com.sunny.commonbusiness.mvp.MvpView;
 import com.sunny.datalayer.model.bean.Subject;
 
 import java.util.List;

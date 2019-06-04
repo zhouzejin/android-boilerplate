@@ -3,7 +3,7 @@ package uk.co.ribot.androidboilerplate;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.sunny.commonbusiness.base.BaseActivity;
+import com.sunny.common.base.BaseActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

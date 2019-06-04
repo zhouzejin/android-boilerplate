@@ -3,7 +3,7 @@ package com.sunny.main.ui.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.sunny.commonbusiness.base.BaseFragment;
+import com.sunny.common.base.BaseFragment;
 import com.sunny.main.injection.component.FragmentComponent;
 import com.sunny.main.injection.module.ActivityModule;
 import com.sunny.main.injection.module.FragmentModule;

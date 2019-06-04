@@ -3,7 +3,7 @@ package com.sunny.main.ui.main;
 import com.sunny.common.injection.scope.ConfigPersistent;
 import com.sunny.common.utils.LogUtil;
 import com.sunny.common.utils.RxUtil;
-import com.sunny.commonbusiness.base.BasePresenter;
+import com.sunny.commonbusiness.mvp.BasePresenter;
 import com.sunny.datalayer.model.bean.Subject;
 import com.sunny.main.data.DataManager;
 

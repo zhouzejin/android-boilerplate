@@ -1,10 +1,9 @@
-package com.sunny.commonbusiness.base;
+package com.sunny.commonbusiness;
 
 import android.app.Application;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.sunny.common.utils.LogUtil;
-import com.sunny.commonbusiness.BuildConfig;
 
 public class BaseApplication extends Application {
 

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v4.util.LongSparseArray;
 
 import com.sunny.common.utils.LogUtil;
-import com.sunny.commonbusiness.base.BaseActivity;
+import com.sunny.common.base.BaseActivity;
 import com.sunny.main.MainApplication;
 import com.sunny.main.injection.component.ActivityComponent;
 import com.sunny.main.injection.component.ConfigPersistentComponent;
@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * creation of Dagger components and makes sure that instances of ConfigPersistentComponent survive
  * across configuration changes.
  */
-public class MainBaseActivity extends BaseActivity {
+public abstract class MainBaseActivity extends BaseActivity {
 
     private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
     private static final AtomicLong NEXT_ID = new AtomicLong(0);

@@ -1,6 +1,6 @@
 package com.sunny.main;
 
-import com.sunny.commonbusiness.base.BaseApplication;
+import com.sunny.commonbusiness.BaseApplication;
 import com.sunny.main.injection.component.ApplicationComponent;
 import com.sunny.main.injection.component.DaggerApplicationComponent;
 import com.sunny.main.injection.module.ApplicationModule;

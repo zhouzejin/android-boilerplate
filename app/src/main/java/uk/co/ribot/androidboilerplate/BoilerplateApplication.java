@@ -1,6 +1,6 @@
 package uk.co.ribot.androidboilerplate;
 
-import com.sunny.commonbusiness.base.BaseApplication;
+import com.sunny.commonbusiness.BaseApplication;
 
 public class BoilerplateApplication extends BaseApplication {
 

@@ -1,4 +1,4 @@
-package com.sunny.commonbusiness.base;
+package com.sunny.common.base;
 
 import android.content.Context;
 import android.os.Bundle;
