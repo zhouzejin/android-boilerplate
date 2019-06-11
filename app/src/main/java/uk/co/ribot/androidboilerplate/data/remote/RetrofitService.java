@@ -6,7 +6,7 @@ import uk.co.ribot.androidboilerplate.data.model.entity.InTheatersEntity;
 
 public interface RetrofitService {
 
-    String ENDPOINT = "https://api.douban.com/v2/";
+    String ENDPOINT = "https://douban.uieee.com/v2/";
 
     @GET("movie/in_theaters")
     Observable<InTheatersEntity> getSubjects();

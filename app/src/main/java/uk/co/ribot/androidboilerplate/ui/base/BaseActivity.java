@@ -31,8 +31,6 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         // Create the ConfigPersistentComponent and reuses cached ConfigPersistentComponent
         // if this is being called after a configuration change.
         mActivityId = savedInstanceState != null ?
@@ -46,12 +44,14 @@ public class BaseActivity extends AppCompatActivity {
             sComponentsMap.put(mActivityId, mConfigPersistentComponent);
         }
         mActivityComponent = mConfigPersistentComponent.activityComponent(new ActivityModule(this));
+
+        super.onCreate(savedInstanceState);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
         outState.putLong(KEY_ACTIVITY_ID, mActivityId);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
