@@ -1,2 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sunny.hybrid" />
+          package="com.sunny.hybrid">
+
+    <application>
+
+        <activity android:name=".HybridActivity"/>
+
+    </application>
+
+</manifest>

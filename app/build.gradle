@@ -92,6 +92,7 @@ android {
 
 dependencies {
     implementation project(':componentCommonBusiness')
+    implementation project(':componentHybrid')
 
     if (isModule.toBoolean()) {
         implementation project(':moduleMain')
