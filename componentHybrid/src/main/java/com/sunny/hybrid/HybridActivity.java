@@ -1,7 +1,6 @@
 package com.sunny.hybrid;
 
 import android.os.Bundle;
-import android.os.Handler;
 
 import com.sunny.hybrid.cordova.HybridCordovaActivity;
 
@@ -11,8 +10,6 @@ import org.apache.cordova.engine.SystemWebView;
 import org.apache.cordova.engine.SystemWebViewEngine;
 
 public class HybridActivity extends HybridCordovaActivity {
-
-    private Handler mHandler = new Handler();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
