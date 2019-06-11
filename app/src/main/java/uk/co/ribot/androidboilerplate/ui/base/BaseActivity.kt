@@ -4,15 +4,13 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.util.LongSparseArray
 import android.support.v7.app.AppCompatActivity
-
-import java.util.concurrent.atomic.AtomicLong
-
 import uk.co.ribot.androidboilerplate.BoilerplateApplication
 import uk.co.ribot.androidboilerplate.injection.component.ActivityComponent
 import uk.co.ribot.androidboilerplate.injection.component.ConfigPersistentComponent
 import uk.co.ribot.androidboilerplate.injection.component.DaggerConfigPersistentComponent
 import uk.co.ribot.androidboilerplate.injection.module.ActivityModule
-import uk.co.ribot.androidboilerplate.utils.*
+import uk.co.ribot.androidboilerplate.utils.i
+import java.util.concurrent.atomic.AtomicLong
 
 /**
  * Abstract activity that every other Activity in this application must implement. It handles
@@ -33,8 +31,6 @@ open class BaseActivity : AppCompatActivity() {
     private var mActivityId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
         // Create the ConfigPersistentComponent and reuses cached ConfigPersistentComponent
         // if this is being called after a configuration change.
         mActivityId = savedInstanceState?.getLong(KEY_ACTIVITY_ID) ?: NEXT_ID.getAndIncrement()
@@ -47,11 +43,13 @@ open class BaseActivity : AppCompatActivity() {
             sComponentsMap.put(mActivityId, mConfigPersistentComponent)
         }
         mActivityComponent = mConfigPersistentComponent!!.activityComponent(ActivityModule(this))
+
+        super.onCreate(savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
         outState.putLong(KEY_ACTIVITY_ID, mActivityId)
+        super.onSaveInstanceState(outState)
     }
 
     override fun onDestroy() {

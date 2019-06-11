@@ -7,7 +7,7 @@ import uk.co.ribot.androidboilerplate.data.model.entity.InTheatersEntity
 interface RetrofitService {
 
     companion object {
-        const val ENDPOINT = "https://api.douban.com/v2/"
+        const val ENDPOINT = "https://douban.uieee.com/v2/"
     }
 
     @get:GET("movie/in_theaters")
